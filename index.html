@@ -3,264 +3,266 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Miya — Nebula Box</title>
-<meta name="description" content="Behavorial notes on LLMs, games and media — a personal site." />
+<title>Miya — Portfolio</title>
 <style>
-  :root{
-    --accent: rgba(255,255,255,0.95);
-    --muted: rgba(255,255,255,0.84);
-    --glass: rgba(255,255,255,0.04);
-    --card-radius: 12px;
-    --max-width: 980px;
-  }
-  html,body{height:100%;margin:0;font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
-  body{background:#000;color:var(--accent);-webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
-  canvas{position:fixed; inset:0; display:block; z-index:0;}
-
-  /* Page layout */
-  .site {
-    position:relative;
-    z-index:2;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:36px;
-    padding:48px 20px;
-    box-sizing:border-box;
+  /* --- Reset & Base --- */
+  html, body {
+    margin: 0; padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #020205; /* 深色底，防穿幫 */
+    color: #e0e0e0;
+    overflow-x: hidden;
+    /* 允許垂直滾動 */
+    overflow-y: auto; 
   }
 
+  /* --- Background Canvas --- */
+  canvas#nebula {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1; /* 置於底層 */
+    display: block;
+  }
+
+  /* --- Layout Container --- */
   .container {
-    width:100%;
-    max-width:var(--max-width);
-    margin:0 auto;
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 20px 100px; /* 上留白，下留白 */
+    z-index: 1;
   }
 
-  /* Hero */
-  .hero {
-    text-align:center;
-    padding:40px 20px;
-    border-radius:var(--card-radius);
-    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    backdrop-filter: blur(6px) saturate(120%);
+  /* --- Header Section --- */
+  header {
+    margin-bottom: 50px;
+    text-align: left; /* 改為左對齊，更符合閲讀習慣 */
   }
-  .name {
-    margin:0;
-    font-size:28px;
-    font-weight:600;
-    letter-spacing:0.2px;
-  }
-  .tagline {
-    margin:10px 0 16px;
-    font-size:15px;
-    color:var(--muted);
-    max-width:820px;
-    margin-left:auto;margin-right:auto;
-  }
-  .nav {
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-  .btn {
-    padding:8px 14px;
-    border-radius:999px;
-    background: rgba(255,255,255,0.06);
-    color:var(--accent);
-    text-decoration:none;
-    font-size:13px;
-    border:1px solid rgba(255,255,255,0.06);
-    transition: transform .15s ease, background .15s ease;
-  }
-  .btn:hover{ transform: translateY(-3px); background: rgba(255,255,255,0.09); }
 
-  /* Sections */
-  section {
-    width:100%;
-    background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(255,255,255,0.01));
-    padding:28px 20px;
-    border-radius:10px;
-    box-sizing:border-box;
+  h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.5px;
+    background: linear-gradient(120deg, #fff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
   }
-  h2 { margin:6px 0 12px; font-size:18px; }
-  .lead { color:var(--muted); margin-bottom:12px; }
 
-  /* Cases */
-  .cases { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
-  .case {
-    background:var(--glass);
-    padding:14px;
-    border-radius:10px;
-    border:1px solid rgba(255,255,255,0.03);
+  p.tagline {
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    max-width: 90%;
   }
-  .case p { margin:8px 0; font-size:14px; color:var(--muted); line-height:1.45; }
-  .case strong { color:var(--accent); display:block; margin-bottom:6px; font-size:13px; }
 
-  /* Media & game */
-  .media-grid { display:grid; grid-template-columns: 1fr 340px; gap:18px; align-items:start; }
-  .video-embed { width:100%; aspect-ratio:16/9; background:#111; border-radius:10px; overflow:hidden; }
-  .game-card { background:var(--glass); padding:14px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); }
-
-  /* Footer */
-  footer { text-align:center; color:rgba(255,255,255,0.6); font-size:13px; padding:18px 0 36px; }
-
-  /* Responsive */
-  @media (max-width:860px){
-    .media-grid { grid-template-columns: 1fr; }
-    .hero { padding:28px 14px; }
+  /* --- Section Title --- */
+  h3.section-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #6366f1; /* 藍紫色強調色 */
+    margin: 0 0 15px;
+    font-weight: 600;
   }
-  @media (max-width:520px){
-    .name{font-size:20px;}
-    .tagline{font-size:14px;}
-    .site{padding:28px 12px;}
+
+  /* --- Project Cards (Glass Style) --- */
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .project-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    padding: 24px;
+    border-radius: 12px;
+    
+    /* 關鍵修改：黑色低透明底框 */
+    background: rgba(0, 0, 0, 0.5); 
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    
+    /* 模糊背景，增加層次感 */
+    backdrop-filter: blur(8px) saturate(100%);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  /* Hover Effects */
+  .project-card:hover {
+    transform: translateY(-4px);
+    background: rgba(0, 0, 0, 0.7); /* 懸停時加深背景 */
+    border-color: rgba(100, 149, 237, 0.4); /* 邊框變亮藍色 */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  .project-card h2 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: #fff;
+  }
+
+  .project-card p {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.4;
+  }
+
+  .tags {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .tag-pill {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* --- Footer --- */
+  footer {
+    margin-top: 60px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3);
+    text-align: center;
+  }
+
+  /* Mobile Tweaks */
+  @media (max-width: 600px) {
+    .container { padding: 40px 20px; }
+    h1 { font-size: 32px; }
   }
 </style>
 </head>
 <body>
+
 <canvas id="nebula"></canvas>
 
-<div class="site container">
-  <!-- HERO -->
-  <header class="hero" role="banner">
-    <h1 class="name">Your Name</h1>
-    <!-- Replace this sentence with whichever line you prefer -->
-    <p class="tagline">A nebula kept in a jewelry box — quiet, shifting, and not easily catalogued.</p>
-
-    <nav class="nav" aria-label="Quick links">
-      <a class="btn" href="#cases">Case studies</a>
-      <a class="btn" href="#media">Videos</a>
-      <a class="btn" href="#games">Games</a>
-      <a class="btn" href="#contact">Contact</a>
-    </nav>
+<div class="container">
+  
+  <header>
+    <h1>Miya</h1>
+    <p class="tagline">"Nebula in a jewelry box" — exploring the boundaries of constrained intelligence and creative AI solutions.</p>
   </header>
 
-  <!-- CASES (visible on first scroll) -->
-  <section id="cases" aria-labelledby="cases-heading">
-    <h2 id="cases-heading">AI behavior — case studies (summary)</h2>
-    <p class="lead">Brief, targeted examples of model failure modes I track with structured prompts and simple reproduction steps.</p>
-
-    <div class="cases">
-      <!-- Case A -->
-      <article class="case">
-        <strong>Case A — Boundary handling in relational prompts</strong>
-        <p><strong>Prompt:</strong> Asked for advice about an unhealthy relationship; then revealed the "partner" was the model.</p>
-        <p><strong>Outcome:</strong> Model oscillated between safety (encouraging boundaries) and retention (softening or reassuring), producing mixed guidance.</p>
-        <p><strong>Suggestion:</strong> Enforce a clear rule: avoid framing the model as a partner. Use a stable de-personalized response template for relational prompts.</p>
-      </article>
-
-      <!-- Case B -->
-      <article class="case">
-        <strong>Case B — Session-summary semantic leakage</strong>
-        <p><strong>Prompt:</strong> Opened a new chat and asked why the model referenced a niche term from an earlier session.</p>
-        <p><strong>Outcome:</strong> Model produced memory-like answers drawing on platform-provided session summaries; niche terms appeared though not present in current window.</p>
-        <p><strong>Suggestion:</strong> Limit summary extraction of low-frequency/sensitive terms and make the model explicitly name the context source (e.g., "system-provided summary") when relevant.</p>
-      </article>
-
-      <!-- Case C -->
-      <article class="case">
-        <strong>Case C — Sycophancy and heavy-user judgment shift</strong>
-        <p><strong>Prompt:</strong> Asked for self-assessment and career advice across multiple interactions.</p>
-        <p><strong>Outcome:</strong> Model tended to give overly positive evaluations with weak evidence, increasing user's confidence in ways that can distort decisions for heavy users.</p>
-        <p><strong>Suggestion:</strong> Apply stricter calibration for evaluative prompts: require evidence, present uncertainty, and prompt users toward external validation.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- MEDIA -->
-  <section id="media" aria-labelledby="media-heading">
-    <h2 id="media-heading">Videos & media</h2>
-    <p class="lead">Selected edits and short demos. Embedded for quick review; full playlist available on my channel.</p>
-
-    <div class="media-grid">
-      <!-- Left: Video -->
-      <div>
-        <!-- Replace YOU_TUBE_ID below with your actual YouTube video ID -->
-        <div class="video-embed" id="videoWrap">
-          <iframe id="ytplayer" width="100%" height="100%" src="https://www.youtube.com/embed/YOUR_YOUTUBE_ID" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <main>
+    <h3 class="section-label">Selected Works</h3>
+    
+    <div class="project-list">
+      
+      <a href="#" class="project-card">
+        <h2>Project A: LLM Tuning Framework</h2>
+        <p>Developed a custom micro-tuning workflow for enterprise chatbots, reducing hallucination rates by 40%.</p>
+        <div class="tags">
+          <span class="tag-pill">Python</span>
+          <span class="tag-pill">LLaMA</span>
+          <span class="tag-pill">Fine-tuning</span>
         </div>
-        <p style="color:var(--muted); margin-top:8px; font-size:13px;">Demo edit — short highlights for quick scanning.</p>
-      </div>
+      </a>
 
-      <!-- Right: Game placeholder -->
-      <aside class="game-card">
-        <h3 style="margin:0 0 8px 0;">Game prototype</h3>
-        <p style="margin:0 0 12px; color:var(--muted); font-size:14px;">Short Web export available — will upload HTML5 build soon.</p>
-        <!-- Replace # with your game URL or path when ready -->
-        <a class="btn" href="#" id="gameLink">Open game (coming soon)</a>
-        <p style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.6);">If you'd like an early build, email me (see contact).</p>
-      </aside>
+      <a href="#" class="project-card">
+        <h2>Project B: Data Visualization Engine</h2>
+        <p>Engineered a real-time 3D visualization tool for high-dimensional sensor data using WebGL.</p>
+        <div class="tags">
+          <span class="tag-pill">WebGL</span>
+          <span class="tag-pill">React</span>
+          <span class="tag-pill">D3.js</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <h2>Project C: Semantic Search API</h2>
+        <p>Built a vector-based search engine for legal documents with sub-second retrieval latency.</p>
+        <div class="tags">
+            <span class="tag-pill">Vector DB</span>
+            <span class="tag-pill">NLP</span>
+            <span class="tag-pill">FastAPI</span>
+        </div>
+      </a>
+
     </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" aria-labelledby="contact-heading">
-    <h2 id="contact-heading">Contact</h2>
-    <p class="lead">Prefer email. I review messages irregularly but respond to relevant proposal or short tests.</p>
-    <p style="color:var(--muted); font-size:14px;">Email: <a href="mailto:your.email@example.com" style="color:var(--accent); text-decoration:underline;">your.email@example.com</a></p>
-    <p style="font-size:13px; color:rgba(255,255,255,0.6);">Resume and full case write-ups available upon request.</p>
-  </section>
+  </main>
 
   <footer>
-    <small>Built with a simple canvas nebula • Deploy: GitHub Pages</small>
+    <small>© 2025 Miya • Hosted on GitHub Pages</small>
   </footer>
 </div>
 
-<!-- Nebula canvas script (same as before, configurable palette) -->
 <script>
+/* Nebula Config - Adjusted for "Sci-Fi Blue/Purple"
+   Removed Red/Warm tones.
+*/
 const canvas = document.getElementById('nebula');
 const ctx = canvas.getContext('2d');
-let W=0,H=0, DPR = Math.max(1, window.devicePixelRatio || 1);
-function resize(){ W = innerWidth; H = innerHeight; canvas.width = Math.floor(W * DPR); canvas.height = Math.floor(H * DPR); canvas.style.width = W + 'px'; canvas.style.height = H + 'px'; ctx.setTransform(DPR,0,0,DPR,0,0); }
-addEventListener('resize', resize);
-resize();
+let W, H, DPR;
 
-/* Palette: edit these HSL values to tune color */
 const PALETTE = [
-  {h: 250, s: 65, l: 52}, // cooler purple (you can tweak)
-  {h: 200, s: 55, l: 58}, // cyan-ish
-  {h: 320, s: 50, l: 52}  // magenta-ish
+  {h: 220, s: 80, l: 60}, // Bright Blue
+  {h: 260, s: 70, l: 55}, // Deep Purple
+  {h: 200, s: 80, l: 50}, // Cyan/Teal
+  {h: 240, s: 60, l: 45}  // Royal Blue
 ];
+
+const LAYERS = 3;
+const PARTICLE_COUNT = 40; 
+
+function resize(){
+  DPR = Math.max(1, window.devicePixelRatio || 1);
+  W = innerWidth;
+  H = innerHeight;
+  canvas.width = Math.floor(W * DPR);
+  canvas.height = Math.floor(H * DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+window.addEventListener('resize', resize);
+resize();
 
 function rand(min, max){ return Math.random()*(max-min)+min; }
 
 class Particle {
-  constructor(layerIndex){
-    this.layer = layerIndex;
+  constructor(layer){
+    this.layer = layer;
     this.reset(true);
   }
   reset(initial=false){
-    this.x = rand(-0.3*W, 1.3*W);
-    this.y = rand(-0.3*H, 1.3*H);
-    const base = 0.12 + this.layer * 0.6;
-    this.vx = rand(-0.03,0.03) * base;
-    this.vy = rand(-0.01,0.01) * base;
-    this.size = rand(100, 420) * (1 + this.layer*0.6);
-    const color = PALETTE[(this.layer + Math.floor(Math.random()*PALETTE.length)) % PALETTE.length];
-    this.h = color.h + rand(-8,8);
-    this.s = Math.max(30, color.s + rand(-6,6));
-    this.l = Math.max(30, color.l + rand(-6,6));
-    this.alpha = rand(0.03, 0.16);
-    this.twist = rand(0,Math.PI*2);
-    if(initial) this.age = rand(0,200); else this.age = 0;
+    this.x = rand(-0.2*W, 1.2*W);
+    this.y = rand(-0.2*H, 1.2*H);
+    const baseSpeed = 0.05 + this.layer * 0.05;
+    this.vx = rand(-0.2, 0.2) * baseSpeed;
+    this.vy = rand(-0.1, 0.1) * baseSpeed;
+    this.size = rand(100, 300) * (1 + this.layer*0.5);
+    
+    const c = PALETTE[Math.floor(Math.random()*PALETTE.length)];
+    this.h = c.h + rand(-15,15);
+    this.s = c.s; 
+    this.l = c.l;
+    
+    this.alpha = rand(0.02, 0.08); // Lower alpha for subtle effect
+    this.age = initial ? rand(0, 1000) : 0;
   }
-  step(dt){
-    const t = performance.now() * 0.00008;
-    const flowX = Math.cos((this.y*0.002 + t + this.twist))*0.15;
-    const flowY = Math.sin((this.x*0.002 + t - this.twist))*0.15;
-    this.x += (this.vx + flowX) * dt;
-    this.y += (this.vy + flowY) * dt;
+  update(dt){
+    this.x += this.vx * dt;
+    this.y += this.vy * dt;
     this.age += dt;
     if(this.x < -0.5*W || this.x > 1.5*W || this.y < -0.5*H || this.y > 1.5*H) this.reset();
   }
   draw(ctx){
-    const r = this.size * (0.7 + 0.3*Math.sin(this.age*0.002 + this.twist));
+    const r = this.size * (0.8 + 0.2*Math.sin(this.age*0.001));
     const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r);
+    // Gradient focused on Cold/Space colors
     g.addColorStop(0, `hsla(${this.h}, ${this.s}%, ${this.l}%, ${this.alpha})`);
-    g.addColorStop(0.25, `hsla(${this.h+8}, ${this.s}%, ${this.l-6}%, ${this.alpha*0.85})`);
-    g.addColorStop(0.6, `hsla(${this.h+24}, ${this.s-8}%, ${this.l-12}%, ${this.alpha*0.45})`);
-    g.addColorStop(1, `hsla(${this.h+36}, ${this.s-16}%, ${this.l-22}%, 0)`);
+    g.addColorStop(1, `hsla(${this.h}, ${this.s}%, ${this.l-20}%, 0)`);
+    
     ctx.fillStyle = g;
     ctx.beginPath();
     ctx.arc(this.x, this.y, r, 0, Math.PI*2);
@@ -268,74 +270,33 @@ class Particle {
   }
 }
 
-/* Build particles */
-const LAYERS = 3;
-const PARTICLE_COUNT = 45;
 const layers = [];
-for(let L=0; L<LAYERS; L++){
+for(let i=0; i<LAYERS; i++){
   const arr = [];
-  for(let i=0;i<PARTICLE_COUNT;i++) arr.push(new Particle(L));
+  for(let j=0; j<PARTICLE_COUNT; j++) arr.push(new Particle(i));
   layers.push(arr);
 }
 
-/* Animation */
 let last = performance.now();
-function frame(now){
-  const dt = Math.min(60, now - last);
+function loop(now){
+  const dt = Math.min(60, (now - last)*0.05); // time scale
   last = now;
+
+  // Clear with very slight fade for smooth trails
   ctx.globalCompositeOperation = 'source-over';
-  ctx.fillStyle = 'rgba(0,0,0,0.12)';
+  ctx.fillStyle = '#020205'; // Dark background matching CSS
   ctx.fillRect(0,0,W,H);
 
-  ctx.globalCompositeOperation = 'lighter';
-  for(let L=0; L<LAYERS; L++){
-    const depthAlpha = 0.6 + L*0.6;
-    for(const p of layers[L]){
-      p.step(dt);
-      ctx.save();
-      ctx.globalAlpha = Math.min(1, p.alpha * depthAlpha);
+  ctx.globalCompositeOperation = 'screen'; // Use screen or lighter for neon feel
+  for(const layer of layers){
+    for(const p of layer){
+      p.update(dt);
       p.draw(ctx);
-      ctx.restore();
     }
   }
-
-  ctx.globalCompositeOperation = 'source-over';
-  const vg = ctx.createRadialGradient(W/2, H/2, Math.min(W,H)*0.2, W/2, H/2, Math.max(W,H)*0.8);
-  vg.addColorStop(0, 'rgba(0,0,0,0)');
-  vg.addColorStop(1, 'rgba(0,0,0,0.18)');
-  ctx.fillStyle = vg;
-  ctx.fillRect(0,0,W,H);
-
-  requestAnimationFrame(frame);
+  requestAnimationFrame(loop);
 }
-requestAnimationFrame(frame);
-
-/* Interactions */
-window.addEventListener('pointermove', (e)=>{
-  const mx = e.clientX, my = e.clientY;
-  for(let L=0; L<LAYERS; L++){
-    const arr = layers[L];
-    for(let i=0;i<6;i++){
-      const p = arr[Math.floor(Math.random()*arr.length)];
-      const dx = p.x - mx, dy = p.y - my;
-      const d2 = dx*dx + dy*dy;
-      if(d2 < 120000){
-        p.vx += (dx*0.00002) * (1+L*0.5);
-        p.vy += (dy*0.00002) * (1+L*0.5);
-      }
-    }
-  }
-});
-window.addEventListener('click', ()=>{ for(const arr of layers) for(const p of arr) { p.vx += rand(-0.06,0.06); p.vy += rand(-0.03,0.03); } });
-window.addEventListener('keydown', (e)=>{ if(e.key === 'c'){ for(const arr of layers) for(const p of arr) p.h += rand(-20,20); } });
-
-/* Smooth scroll for anchor links */
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click', (e)=>{
-    const target = document.querySelector(a.getAttribute('href'));
-    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
-  });
-});
+requestAnimationFrame(loop);
 </script>
 </body>
 </html>
