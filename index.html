@@ -5,340 +5,86 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Miya's Portfolio</title>
 <style>
-  /* --- Reset & Layout --- */
-  html, body {
-    margin: 0; padding: 0;
-    height: 100%;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: #000; 
-    color: #e0e0e0;
-    overflow-x: hidden;
-    overflow-y: auto; 
-  }
-
-  /* --- Nebula Canvas --- */
-  canvas#nebula {
-    position: fixed; 
-    inset: 0;
-    display: block;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  /* --- Main Container --- */
-  .container {
-    position: relative;
-    z-index: 1;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 80px 24px 120px; 
-  }
-
-  /* --- Header --- */
-  header {
-    margin-bottom: 60px;
-  }
-  
-  h1 {
-    font-size: 60px;
-    font-weight: 700;
-    margin: 0 0 12px;
-    letter-spacing: -0.5px;
-    color: #fff;
-    text-shadow: 0 0 20px rgba(100, 200, 255, 0.3); 
-  }
-
-  p.tagline {
-    font-size: 16px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-  }
-
-  /* --- Section Label --- */
-  .section-title {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #818cf8;
-    margin-bottom: 20px;
-    font-weight: 600;
-    opacity: 0.9;
-  }
-
-  /* --- Project List --- */
-  .project-list {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  /* --- Case Study Card (Black Glass) --- */
-  .case-card {
-    display: block;
-    text-decoration: none;
-    padding: 24px;
-    border-radius: 12px;
-    color: #fff;
-    
-    background: rgba(0, 0, 0, 0.4); 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-  }
-
-  .case-card:hover {
-    transform: translateY(-2px);
-    background: rgba(0, 0, 15, 0.6);
-    border-color: rgba(165,180,252,0.7);
-    box-shadow:
-      0 0 12px rgba(140,120,255,0.4),
-      0 0 24px rgba(120,160,255,0.25);
-  }
-
-  .case-card h2 {
-    margin: 0 0 8px;
-    font-size: 18px;
-    font-weight: 600;
-  }
-
-  .case-card p {
-    margin: 0 0 16px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .meta-tags {
-    display: flex;
-    gap: 12px;
-    font-size: 12px;
-    font-family: monospace; 
-    color: #a5b4fc; 
-  }
-
-  .meta-item {
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  .meta-item::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-    margin-right: 6px;
-    opacity: 0.6;
-  }
-
-  footer {
-    margin-top: 80px;
-    text-align: center;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  @media (max-width: 600px) {
-    .container { padding: 40px 20px; }
-    h1 { font-size: 28px; }
-  }
+html, body { margin:0; padding:0; height:100%; font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; background:#000; color:#e0e0e0; overflow-x:hidden; overflow-y:auto; }
+canvas#nebula { position:fixed; inset:0; display:block; z-index:0; pointer-events:none; }
+.container { position:relative; z-index:1; max-width:680px; margin:0 auto; padding:80px 24px 120px; }
+header { margin-bottom:60px; }
+h1 { font-size:60px; font-weight:700; margin:0 0 12px; letter-spacing:-0.5px; color:#fff; text-shadow:0 0 20px rgba(100,200,255,0.3); }
+p.tagline { font-size:12px; line-height:1.6; color:rgba(255,255,255,0.85); margin:0; }
+.section-title { font-size:11px; text-transform:uppercase; letter-spacing:2px; color:#818cf8; margin-bottom:20px; font-weight:600; opacity:0.9; }
+.project-list { display:flex; flex-direction:column; gap:24px; }
+.case-card { display:block; text-decoration:none; padding:24px; border-radius:12px; color:#fff; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); transition:transform 0.2s ease,background 0.2s ease,border-color 0.2s ease; }
+.case-card:hover { transform:translateY(-2px); background:rgba(0,0,15,0.6); border-color:rgba(165,180,252,0.7); box-shadow:0 0 12px rgba(140,120,255,0.4),0 0 24px rgba(120,160,255,0.25); }
+.case-card h2 { margin:0 0 8px; font-size:18px; font-weight:600; }
+.case-card p { margin:0; font-size:14px; line-height:1.5; color:rgba(255,255,255,0.7); }
+footer { margin-top:80px; text-align:center; font-size:12px; color:rgba(255,255,255,0.4); }
+@media (max-width:600px){ .container{padding:40px 20px;} h1{font-size:28px;} }
 </style>
 </head>
 <body>
-
 <canvas id="nebula"></canvas>
-
 <div class="container">
-  
   <header>
     <h1>Miya</h1>
     <p class="tagline">"Nebula in a jewelry box" as a metaphor for constrained intelligence.</p>
   </header>
-
   <main>
     <div class="section-title">Research & Case Studies</div>
-    
     <div class="project-list">
-      
       <a href="#" class="case-card">
         <h2>Adversarial Robustness Evaluation</h2>
         <p>Designed a multi-turn red teaming framework to detect "Jailbreak" vulnerabilities in large language models before deployment.</p>
-        <div class="meta-tags">
-          <span class="meta-item">Red Teaming</span>
-          <span class="meta-item">Safety Benchmarks</span>
-        </div>
       </a>
-
       <a href="#" class="case-card">
         <h2>Automated Hallucination Detection</h2>
         <p>Built an eval pipeline using reference-free metrics to quantify factual inconsistencies in RAG-based systems.</p>
-        <div class="meta-tags">
-          <span class="meta-item">Model Eval</span>
-          <span class="meta-item">Factuality</span>
-        </div>
       </a>
-
       <a href="#" class="case-card">
         <h2>Constitutional AI Alignment</h2>
         <p>Experimented with RLAIF (Reinforcement Learning from AI Feedback) to align models with specific safety principles without heavy human labeling.</p>
-        <div class="meta-tags">
-          <span class="meta-item">Alignment Research</span>
-          <span class="meta-item">RLAIF</span>
-        </div>
       </a>
-
+    </div>
+    <div class="section-title" style="margin-top:60px;">Video</div>
+    <div class="project-list">
+      <a href="https://youtu.be/UcC7yw_qFa0" class="case-card" target="_blank">
+        <h2>Video Editing</h2>
+        <p>A short walkthrough of my research workflow and experimental setups.</p>
+      </a>
+    </div>
+    <div class="section-title" style="margin-top:60px;">Game</div>
+    <div class="project-list">
+      <a href="game/index.html" class="case-card" target="_blank">
+        <h2>Game Design</h2>
+        <p>An interactive experiment exploring agent behavior and constraint learning.</p>
+      </a>
     </div>
   </main>
-
-  <footer>
-    <small>© 2025 Miya • AI Safety Research</small>
-  </footer>
+  <footer><small>© 2025 Miya • AI Safety Research</small></footer>
 </div>
-
 <script>
-
-
-const canvas = document.getElementById('nebula');
-const ctx = canvas.getContext('2d');
-let W=0,H=0, DPR = Math.max(1, window.devicePixelRatio || 1);
-
-function resize(){
-  W = innerWidth;
-  H = innerHeight;
-  canvas.width = Math.floor(W * DPR);
-  canvas.height = Math.floor(H * DPR);
-  canvas.style.width = W + 'px';
-  canvas.style.height = H + 'px';
-  ctx.setTransform(DPR,0,0,DPR,0,0);
-}
-addEventListener('resize', resize);
-resize();
-
-/* Config */
-const LAYERS = 3;
-const PARTICLE_COUNT = 45; 
-
-const PALETTE = [
-  {h: 250, s: 80, l: 60}, // Deep Purple
-  {h: 210, s: 80, l: 60}, // Electric Blue
-  {h: 200, s: 85, l: 45}, // Cyan/Teal
-  {h: 270, s: 65, l: 50}  // Violet
-];
-
-function rand(min, max){ return Math.random()*(max-min)+min; }
-
-class Particle {
-  constructor(layerIndex){
-    this.layer = layerIndex;
-    this.reset(true);
-  }
-  reset(initial=false){
-    this.x = rand(-0.3*W, 1.3*W);
-    this.y = rand(-0.3*H, 1.3*H);
-    const base = 0.1 + this.layer * 0.6; 
-    this.vx = rand(-0.03,0.03) * base;
-    this.vy = rand(-0.01,0.01) * base;
-    this.size = rand(120, 420) * (1 + this.layer*0.6);
-    
-    const color = PALETTE[(this.layer + Math.floor(Math.random()*PALETTE.length)) % PALETTE.length];
-    
-    // Hue variation
-    this.h = color.h + rand(-15,15); 
-    this.s = color.s + rand(-6,6);
-    this.l = color.l + rand(-6,6);
-    
-    this.alpha = rand(0.035, 0.18);
-    this.twist = rand(0,Math.PI*2);
-    if(initial) this.age = rand(0,200);
-    else this.age = 0;
-  }
-  step(dt){
-    const t = performance.now() * 0.00008;
-    const flowX = Math.cos((this.y*0.002 + t + this.twist))*0.15;
-    const flowY = Math.sin((this.x*0.002 + t - this.twist))*0.15;
-    this.x += (this.vx + flowX) * dt;
-    this.y += (this.vy + flowY) * dt;
-    this.age += dt;
-    if(this.x < -0.5*W || this.x > 1.5*W || this.y < -0.5*H || this.y > 1.5*H) this.reset();
-  }
-  draw(ctx){
-    const r = this.size * (0.7 + 0.3*Math.sin(this.age*0.002 + this.twist));
-    const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r);
-    g.addColorStop(0, `hsla(${this.h}, ${this.s}%, ${this.l}%, ${this.alpha})`);
-    g.addColorStop(0.25, `hsla(${this.h+10}, ${this.s}%, ${this.l-6}%, ${this.alpha*0.85})`);
-    g.addColorStop(0.6, `hsla(${this.h+30}, ${this.s-10}%, ${this.l-12}%, ${this.alpha*0.45})`);
-    g.addColorStop(1, `hsla(${this.h+40}, ${this.s-20}%, ${this.l-20}%, 0)`);
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, r, 0, Math.PI*2);
-    ctx.fill();
-  }
-}
-
-const layers = [];
-for(let L=0; L<LAYERS; L++){
-  const arr = [];
-  for(let i=0;i<PARTICLE_COUNT;i++) arr.push(new Particle(L));
-  layers.push(arr);
-}
-
-let last = performance.now();
-function frame(now){
-  const dt = Math.min(60, now - last); 
-  last = now;
-  
-  ctx.globalCompositeOperation = 'source-over';
-  ctx.fillStyle = 'rgba(0,0,0,0.12)';
-  ctx.fillRect(0,0,W,H);
-
-  ctx.globalCompositeOperation = 'lighter';
-  for(let L=0; L<LAYERS; L++){
-    const depthAlpha = 0.6 + L*0.6; 
-    for(const p of layers[L]){
-      p.step(dt);
-      ctx.save();
-      ctx.globalAlpha = Math.min(1, p.alpha * depthAlpha);
-      p.draw(ctx);
-      ctx.restore();
-    }
-  }
-
-  // Vignette (Original Logic)
-  ctx.globalCompositeOperation = 'source-over';
-  const vg = ctx.createRadialGradient(W/2, H/2, Math.min(W,H)*0.2, W/2, H/2, Math.max(W,H)*0.8);
-  vg.addColorStop(0, 'rgba(0,0,0,0)');
-  vg.addColorStop(1, 'rgba(0,0,0,0.18)');
-  ctx.fillStyle = vg;
-  ctx.fillRect(0,0,W,H);
-
-  requestAnimationFrame(frame);
-}
-requestAnimationFrame(frame);
-
-/* Interactive handlers */
-window.addEventListener('pointermove', (e)=>{
-  const mx = e.clientX, my = e.clientY;
-  for(let L=0; L<LAYERS; L++){
-    const arr = layers[L];
-    for(let i=0;i<6;i++){
-      const p = arr[Math.floor(Math.random()*arr.length)];
-      const dx = p.x - mx, dy = p.y - my;
-      const d2 = dx*dx + dy*dy;
-      if(d2 < 120000){
-        p.vx += (dx*0.00002) * (1+L*0.5);
-        p.vy += (dy*0.00002) * (1+L*0.5);
-      }
-    }
-  }
-});
-window.addEventListener('click', ()=>{ 
-  for(const arr of layers) for(const p of arr) { p.vx += rand(-0.06,0.06); p.vy += rand(-0.03,0.03); }
-});
+const canvas=document.getElementById('nebula'),ctx=canvas.getContext('2d');let W=0,H=0,DPR=Math.max(1,window.devicePixelRatio||1);
+function resize(){W=innerWidth;H=innerHeight;canvas.width=Math.floor(W*DPR);canvas.height=Math.floor(H*DPR);canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(DPR,0,0,DPR,0,0);}
+addEventListener('resize',resize);resize();
+const LAYERS=3,PARTICLE_COUNT=45,PALETTE=[{h:250,s:80,l:60},{h:210,s:80,l:60},{h:200,s:85,l:45},{h:270,s:65,l:50}];
+function rand(min,max){return Math.random()*(max-min)+min;}
+class Particle{constructor(layerIndex){this.layer=layerIndex;this.reset(true);}
+reset(initial=false){this.x=rand(-0.3*W,1.3*W);this.y=rand(-0.3*H,1.3*H);const base=0.1+this.layer*0.6;this.vx=rand(-0.03,0.03)*base;this.vy=rand(-0.01,0.01)*base;this.size=rand(120,420)*(1+this.layer*0.6);
+const color=PALETTE[(this.layer+Math.floor(Math.random()*PALETTE.length))%PALETTE.length];this.h=color.h+rand(-15,15);this.s=color.s+rand(-6,6);this.l=color.l+rand(-6,6);this.alpha=rand(0.035,0.18);this.twist=rand(0,Math.PI*2);
+if(initial)this.age=rand(0,200);else this.age=0;}
+step(dt){const t=performance.now()*0.00008,flowX=Math.cos((this.y*0.002+t+this.twist))*0.15,flowY=Math.sin((this.x*0.002+t-this.twist))*0.15;this.x+=(this.vx+flowX)*dt;this.y+=(this.vy+flowY)*dt;this.age+=dt;
+if(this.x<-0.5*W||this.x>1.5*W||this.y<-0.5*H||this.y>1.5*H)this.reset();}
+draw(ctx){const r=this.size*(0.7+0.3*Math.sin(this.age*0.002+this.twist)),g=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,r);
+g.addColorStop(0,`hsla(${this.h},${this.s}%,${this.l}%,${this.alpha})`);g.addColorStop(0.25,`hsla(${this.h+10},${this.s}%,${this.l-6}%,${this.alpha*0.85})`);
+g.addColorStop(0.6,`hsla(${this.h+30},${this.s-10}%,${this.l-12}%,${this.alpha*0.45})`);g.addColorStop(1,`hsla(${this.h+40},${this.s-20}%,${this.l-20}%,0)`);
+ctx.fillStyle=g;ctx.beginPath();ctx.arc(this.x,this.y,r,0,Math.PI*2);ctx.fill();}}
+const layers=[];for(let L=0;L<LAYERS;L++){const arr=[];for(let i=0;i<PARTICLE_COUNT;i++)arr.push(new Particle(L));layers.push(arr);}
+let last=performance.now();function frame(now){const dt=Math.min(60,now-last);last=now;ctx.globalCompositeOperation='source-over';ctx.fillStyle='rgba(0,0,0,0.12)';ctx.fillRect(0,0,W,H);
+ctx.globalCompositeOperation='lighter';for(let L=0;L<LAYERS;L++){const depthAlpha=0.6+L*0.6;for(const p of layers[L]){p.step(dt);ctx.save();ctx.globalAlpha=Math.min(1,p.alpha*depthAlpha);p.draw(ctx);ctx.restore();}}
+ctx.globalCompositeOperation='source-over';const vg=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*0.2,W/2,H/2,Math.max(W,H)*0.8);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,0.18)');ctx.fillStyle=vg;ctx.fillRect(0,0,W,H);
+requestAnimationFrame(frame);}requestAnimationFrame(frame);
+window.addEventListener('pointermove',(e)=>{const mx=e.clientX,my=e.clientY;for(let L=0;L<LAYERS;L++){const arr=layers[L];for(let i=0;i<6;i++){const p=arr[Math.floor(Math.random()*arr.length)];const dx=p.x-mx,dy=p.y-my,d2=dx*dx+dy*dy;
+if(d2<120000){p.vx+=(dx*0.00002)*(1+L*0.5);p.vy+=(dy*0.00002)*(1+L*0.5);}}}});
+window.addEventListener('click',()=>{for(const arr of layers)for(const p of arr){p.vx+=rand(-0.06,0.06);p.vy+=rand(-0.03,0.03);}});
 </script>
 </body>
 </html>
