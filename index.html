@@ -5,192 +5,147 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Miya — AI Safety & Eval</title>
 <style>
-  /* --- Reset & Layout (保持不變) --- */
+  /* --- Reset & Layout --- */
   html, body {
     margin: 0; padding: 0;
     height: 100%;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: #000;
+    background: #000; /* 純黑底色 */
     color: #e0e0e0;
+    /* 允許頁面滾動 */
     overflow-x: hidden;
     overflow-y: auto; 
   }
 
-  /* --- Nebula Canvas (保持不變) --- */
+  /* --- Nebula Canvas --- */
   canvas#nebula {
-    position: fixed;
+    position: fixed; /* 固定在背景，不隨內容滾動 */
     inset: 0;
     display: block;
     z-index: 0;
-    pointer-events: none;
+    pointer-events: none; /* 讓點擊穿透到內容 */
   }
 
-  /* --- Main Container (保持不變) --- */
+  /* --- Main Container --- */
   .container {
     position: relative;
     z-index: 1;
     max-width: 680px;
     margin: 0 auto;
-    padding: 80px 24px 120px;
+    padding: 80px 24px 120px; /* 上下留白 */
   }
 
-  /* --- Header & Project List (略 — 保持不變) --- */
-  header { margin-bottom: 60px; }
-  h1 { /* ... 樣式不變 ... */ }
-  p.tagline { /* ... 樣式不變 ... */ }
-  .section-title { /* ... 樣式不變 ... */ }
-  .project-list { display: flex; flex-direction: column; gap: 24px; }
-  .meta-tags { /* ... 樣式不變 ... */ }
-  .meta-item { /* ... 樣式不變 ... */ }
-  .meta-item::before { /* ... 樣式不變 ... */ }
-  footer { /* ... 樣式不變 ... */ }
-
-  /* ============================================== */
-  /* ★★★ 核心修改：流動四邊框 CSS ★★★ */
-  /* ============================================== */
-
-  /* 卡片外層框：負責流光效果的定位和觸發 */
-  .case-frame {
-    /* 必須是區塊連結，所以我們將 a.case-card 替換為 .case-frame */
-    display: block; 
-    text-decoration: none; /* 移除連結下劃線 */
-    position: relative;
-    border-radius: 14px;
-    padding: 2px; /* 留出空間給 4 條線段 */
-    
-    /* 讓卡片上浮的動畫效果從外層開始 */
-    transition: transform 0.15s ease; 
+  /* --- Header --- */
+  header {
+    margin-bottom: 60px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(100, 200, 255, 0.3); /* 輕微藍光暈 */
   }
 
-  /* 懸停時上浮 */
-  .case-frame:hover {
-    transform: translateY(-4px); 
+  p.tagline {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 500px;
+    margin: 0;
   }
 
+  /* --- Section Label --- */
+  .section-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #818cf8; /* 淺藍紫色 */
+    margin-bottom: 20px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
 
-  /* 卡片本體：包含內容和黑玻璃效果 */
-  .case-card-body {
-    position: relative;
-    z-index: 2; /* 確保內容在流光線段之上 */
+  /* --- Project List --- */
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* --- Case Study Card (Black Glass) --- */
+  .case-card {
+    display: block;
+    text-decoration: none;
+    padding: 24px;
     border-radius: 12px;
+    color: #fff;
     
-    background: rgba(0, 0, 0, 0.5); /* 黑玻璃底色 */
+    /* 核心修改：黑色半透明底 */
+    background: rgba(0, 0, 0, 0.5); 
+    /* 邊框：極細的灰白色 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* 模糊背景，讓文字清晰 */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
-    padding: 24px;
-    color: #fff;
-    /* 增加懸停時，背景變深的過渡效果 */
-    transition: background 0.15s ease;
-  }
-  
-  /* 懸停時本體變深 */
-  .case-frame:hover .case-card-body {
-    background: rgba(0, 0, 0, 0.8);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   }
 
-  /* 卡片內文樣式 */
-  .case-card-body h2 {
+  .case-card:hover {
+    transform: translateY(-2px);
+    background: rgba(0, 0, 0, 0.7); /* 懸停時變深一點，增加對比 */
+    border-color: rgba(165, 180, 252, 0.4); /* 邊框變亮紫 */
+  }
+
+  .case-card h2 {
     margin: 0 0 8px;
     font-size: 18px;
     font-weight: 600;
   }
 
-  .case-card-body p {
+  .case-card p {
     margin: 0 0 16px;
     font-size: 14px;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.7);
   }
+
+  /* --- Context Tags (No Tech Stack) --- */
+  .meta-tags {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    font-family: monospace; /* 像終端機一樣的字體 */
+    color: #a5b4fc; /* 淡紫色文字 */
+  }
+
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+  }
   
-  /* ---------------------- */
-  /* 4 條跑動線段 (流光) */
-  /* ---------------------- */
-
-  /* 上、下線段，及 左、右 ::before/::after 的基礎樣式 */
-  .case-frame .line-top,
-  .case-frame .line-bottom,
-  .case-frame::before,
-  .case-frame::after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    background: linear-gradient(
-      90deg,
-      #3a00ff,
-      #7b2cff,
-      #00d4ff,
-      #3a00ff
-    );
-    background-size: 300% 300%;
-    opacity: 0; /* 預設隱藏 */
-    transition: opacity .25s; /* 懸停時淡入 */
-    pointer-events: none; /* 確保不擋住點擊 */
+  /* 小圓點裝飾 */
+  .meta-item::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    margin-right: 6px;
+    opacity: 0.6;
   }
 
-  /* 上、下（水平線段）定位 */
-  .case-frame .line-top,
-  .case-frame .line-bottom {
-    height: 2px;
-    left: 0;
-    right: 0;
-  }
-
-  .case-frame .line-top {
-    top: 0;
-    animation: cyber-h 2s linear infinite paused; /* 預設暫停 */
-  }
-
-  .case-frame .line-bottom {
-    bottom: 0;
-    animation: cyber-h 2s linear infinite paused reverse; /* 反向流動 */
-  }
-
-  /* 左、右（垂直線段）定位 */
-  /* 這裡重新定義了背景漸變的方向，讓垂直線段跑得好看 */
-  .case-frame::before,
-  .case-frame::after {
-    width: 2px;
-    top: 0;
-    bottom: 0;
-    background: linear-gradient(
-      180deg, /* 垂直流動 */
-      #3a00ff,
-      #7b2cff,
-      #00d4ff,
-      #3a00ff
-    );
-  }
-
-  .case-frame::before {
-    left: 0;
-    animation: cyber-v 2s linear infinite paused;
-  }
-
-  .case-frame::after {
-    right: 0;
-    animation: cyber-v 2s linear infinite paused reverse;
-  }
-
-  /* hover 時啟動所有線段 */
-  .case-frame:hover .line-top,
-  .case-frame:hover .line-bottom,
-  .case-frame:hover::before,
-  .case-frame:hover::after {
-    opacity: 1;
-    animation-play-state: running;
-  }
-
-  /* 水平線動畫 */
-  @keyframes cyber-h {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
-  }
-
-  /* 垂直線動畫 */
-  @keyframes cyber-v {
-    0% { background-position: 50% 0%; }
-    100% { background-position: 50% 300%; }
+  /* --- Footer --- */
+  footer {
+    margin-top: 80px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
   }
 
   @media (max-width: 600px) {
@@ -215,42 +170,30 @@
     
     <div class="project-list">
       
-      <a href="#" class="case-frame">
-        <span class="line-top"></span>
-        <span class="line-bottom"></span>
-        <div class="case-card-body">
-          <h2>Adversarial Robustness Evaluation</h2>
-          <p>Designed a multi-turn red teaming framework to detect "Jailbreak" vulnerabilities in large language models before deployment.</p>
-          <div class="meta-tags">
-            <span class="meta-item">Red Teaming</span>
-            <span class="meta-item">Safety Benchmarks</span>
-          </div>
+      <a href="#" class="case-card">
+        <h2>Adversarial Robustness Evaluation</h2>
+        <p>Designed a multi-turn red teaming framework to detect "Jailbreak" vulnerabilities in large language models before deployment.</p>
+        <div class="meta-tags">
+          <span class="meta-item">Red Teaming</span>
+          <span class="meta-item">Safety Benchmarks</span>
         </div>
       </a>
 
-      <a href="#" class="case-frame">
-        <span class="line-top"></span>
-        <span class="line-bottom"></span>
-        <div class="case-card-body">
-          <h2>Automated Hallucination Detection</h2>
-          <p>Built an eval pipeline using reference-free metrics to quantify factual inconsistencies in RAG-based systems.</p>
-          <div class="meta-tags">
-            <span class="meta-item">Model Eval</span>
-            <span class="meta-item">Factuality</span>
-          </div>
+      <a href="#" class="case-card">
+        <h2>Automated Hallucination Detection</h2>
+        <p>Built an eval pipeline using reference-free metrics to quantify factual inconsistencies in RAG-based systems.</p>
+        <div class="meta-tags">
+          <span class="meta-item">Model Eval</span>
+          <span class="meta-item">Factuality</span>
         </div>
       </a>
 
-      <a href="#" class="case-frame">
-        <span class="line-top"></span>
-        <span class="line-bottom"></span>
-        <div class="case-card-body">
-          <h2>Constitutional AI Alignment</h2>
-          <p>Experimented with RLAIF (Reinforcement Learning from AI Feedback) to align models with specific safety principles without heavy human labeling.</p>
-          <div class="meta-tags">
-            <span class="meta-item">Alignment Research</span>
-            <span class="meta-item">RLAIF</span>
-          </div>
+      <a href="#" class="case-card">
+        <h2>Constitutional AI Alignment</h2>
+        <p>Experimented with RLAIF (Reinforcement Learning from AI Feedback) to align models with specific safety principles without heavy human labeling.</p>
+        <div class="meta-tags">
+          <span class="meta-item">Alignment Research</span>
+          <span class="meta-item">RLAIF</span>
         </div>
       </a>
 
@@ -263,7 +206,10 @@
 </div>
 
 <script>
-/* JS 部分保持不變 (Nebula Particles) */
+/* 這裏保留了您原始的 JS 邏輯 (Additive blending, particles)
+   只修改了 PALETTE 以符合「科幻藍紫」的需求
+*/
+
 const canvas = document.getElementById('nebula');
 const ctx = canvas.getContext('2d');
 let W=0,H=0, DPR = Math.max(1, window.devicePixelRatio || 1);
@@ -284,7 +230,9 @@ resize();
 const LAYERS = 3;
 const PARTICLE_COUNT = 45; 
 
-/* PALETTE - 冷色調 */
+/* 修改點：PALETTE
+   去掉了 h:300 (洋紅/紅)，保留 h:200~270 之間的冷色調
+*/
 const PALETTE = [
   {h: 250, s: 80, l: 60}, // Deep Purple
   {h: 210, s: 80, l: 60}, // Electric Blue
