@@ -3,144 +3,154 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Miya — Portfolio</title>
+<title>Miya — AI Safety & Eval</title>
 <style>
-  /* --- Reset & Base --- */
+  /* --- Reset & Layout --- */
   html, body {
     margin: 0; padding: 0;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: #020205; /* 深色底，防穿幫 */
+    height: 100%;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #000; /* 純黑底色 */
     color: #e0e0e0;
+    /* 允許頁面滾動 */
     overflow-x: hidden;
-    /* 允許垂直滾動 */
     overflow-y: auto; 
   }
 
-  /* --- Background Canvas --- */
+  /* --- Nebula Canvas --- */
   canvas#nebula {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1; /* 置於底層 */
+    position: fixed; /* 固定在背景，不隨內容滾動 */
+    inset: 0;
     display: block;
+    z-index: 0;
+    pointer-events: none; /* 讓點擊穿透到內容 */
   }
 
-  /* --- Layout Container --- */
+  /* --- Main Container --- */
   .container {
     position: relative;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 60px 20px 100px; /* 上留白，下留白 */
     z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 24px 120px; /* 上下留白 */
   }
 
-  /* --- Header Section --- */
+  /* --- Header --- */
   header {
-    margin-bottom: 50px;
-    text-align: left; /* 改為左對齊，更符合閲讀習慣 */
+    margin-bottom: 60px;
   }
-
+  
   h1 {
-    font-size: 42px;
+    font-size: 36px;
     font-weight: 700;
-    margin: 0 0 10px;
+    margin: 0 0 12px;
     letter-spacing: -0.5px;
-    background: linear-gradient(120deg, #fff, #a5b4fc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(100, 200, 255, 0.3); /* 輕微藍光暈 */
   }
 
   p.tagline {
     font-size: 16px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 500px;
     margin: 0;
-    max-width: 90%;
   }
 
-  /* --- Section Title --- */
-  h3.section-label {
-    font-size: 12px;
+  /* --- Section Label --- */
+  .section-title {
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #6366f1; /* 藍紫色強調色 */
-    margin: 0 0 15px;
+    color: #818cf8; /* 淺藍紫色 */
+    margin-bottom: 20px;
     font-weight: 600;
+    opacity: 0.9;
   }
 
-  /* --- Project Cards (Glass Style) --- */
+  /* --- Project List --- */
   .project-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
   }
 
-  .project-card {
+  /* --- Case Study Card (Black Glass) --- */
+  .case-card {
     display: block;
     text-decoration: none;
-    color: inherit;
-    position: relative;
     padding: 24px;
     border-radius: 12px;
+    color: #fff;
     
-    /* 關鍵修改：黑色低透明底框 */
+    /* 核心修改：黑色半透明底 */
     background: rgba(0, 0, 0, 0.5); 
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* 邊框：極細的灰白色 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     
-    /* 模糊背景，增加層次感 */
-    backdrop-filter: blur(8px) saturate(100%);
-    -webkit-backdrop-filter: blur(8px);
+    /* 模糊背景，讓文字清晰 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   }
 
-  /* Hover Effects */
-  .project-card:hover {
-    transform: translateY(-4px);
-    background: rgba(0, 0, 0, 0.7); /* 懸停時加深背景 */
-    border-color: rgba(100, 149, 237, 0.4); /* 邊框變亮藍色 */
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  .case-card:hover {
+    transform: translateY(-2px);
+    background: rgba(0, 0, 0, 0.7); /* 懸停時變深一點，增加對比 */
+    border-color: rgba(165, 180, 252, 0.4); /* 邊框變亮紫 */
   }
 
-  .project-card h2 {
+  .case-card h2 {
     margin: 0 0 8px;
     font-size: 18px;
-    color: #fff;
+    font-weight: 600;
   }
 
-  .project-card p {
-    margin: 0;
+  .case-card p {
+    margin: 0 0 16px;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.4;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
   }
 
-  .tags {
-    margin-top: 12px;
+  /* --- Context Tags (No Tech Stack) --- */
+  .meta-tags {
     display: flex;
-    gap: 8px;
+    gap: 12px;
+    font-size: 12px;
+    font-family: monospace; /* 像終端機一樣的字體 */
+    color: #a5b4fc; /* 淡紫色文字 */
+  }
+
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
   }
   
-  .tag-pill {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.8);
+  /* 小圓點裝飾 */
+  .meta-item::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    margin-right: 6px;
+    opacity: 0.6;
   }
 
   /* --- Footer --- */
   footer {
-    margin-top: 60px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.3);
+    margin-top: 80px;
     text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
   }
 
-  /* Mobile Tweaks */
   @media (max-width: 600px) {
     .container { padding: 40px 20px; }
-    h1 { font-size: 32px; }
+    h1 { font-size: 28px; }
   }
 </style>
 </head>
@@ -152,41 +162,38 @@
   
   <header>
     <h1>Miya</h1>
-    <p class="tagline">"Nebula in a jewelry box" — exploring the boundaries of constrained intelligence and creative AI solutions.</p>
+    <p class="tagline">"Nebula in a jewelry box" as a metaphor for constrained intelligence.</p>
   </header>
 
   <main>
-    <h3 class="section-label">Selected Works</h3>
+    <div class="section-title">Research & Case Studies</div>
     
     <div class="project-list">
       
-      <a href="#" class="project-card">
-        <h2>Project A: LLM Tuning Framework</h2>
-        <p>Developed a custom micro-tuning workflow for enterprise chatbots, reducing hallucination rates by 40%.</p>
-        <div class="tags">
-          <span class="tag-pill">Python</span>
-          <span class="tag-pill">LLaMA</span>
-          <span class="tag-pill">Fine-tuning</span>
+      <a href="#" class="case-card">
+        <h2>Adversarial Robustness Evaluation</h2>
+        <p>Designed a multi-turn red teaming framework to detect "Jailbreak" vulnerabilities in large language models before deployment.</p>
+        <div class="meta-tags">
+          <span class="meta-item">Red Teaming</span>
+          <span class="meta-item">Safety Benchmarks</span>
         </div>
       </a>
 
-      <a href="#" class="project-card">
-        <h2>Project B: Data Visualization Engine</h2>
-        <p>Engineered a real-time 3D visualization tool for high-dimensional sensor data using WebGL.</p>
-        <div class="tags">
-          <span class="tag-pill">WebGL</span>
-          <span class="tag-pill">React</span>
-          <span class="tag-pill">D3.js</span>
+      <a href="#" class="case-card">
+        <h2>Automated Hallucination Detection</h2>
+        <p>Built an eval pipeline using reference-free metrics to quantify factual inconsistencies in RAG-based systems.</p>
+        <div class="meta-tags">
+          <span class="meta-item">Model Eval</span>
+          <span class="meta-item">Factuality</span>
         </div>
       </a>
 
-      <a href="#" class="project-card">
-        <h2>Project C: Semantic Search API</h2>
-        <p>Built a vector-based search engine for legal documents with sub-second retrieval latency.</p>
-        <div class="tags">
-            <span class="tag-pill">Vector DB</span>
-            <span class="tag-pill">NLP</span>
-            <span class="tag-pill">FastAPI</span>
+      <a href="#" class="case-card">
+        <h2>Constitutional AI Alignment</h2>
+        <p>Experimented with RLAIF (Reinforcement Learning from AI Feedback) to align models with specific safety principles without heavy human labeling.</p>
+        <div class="meta-tags">
+          <span class="meta-item">Alignment Research</span>
+          <span class="meta-item">RLAIF</span>
         </div>
       </a>
 
@@ -194,75 +201,88 @@
   </main>
 
   <footer>
-    <small>© 2025 Miya • Hosted on GitHub Pages</small>
+    <small>© 2025 Miya • AI Safety Research</small>
   </footer>
 </div>
 
 <script>
-/* Nebula Config - Adjusted for "Sci-Fi Blue/Purple"
-   Removed Red/Warm tones.
+/* 這裏保留了您原始的 JS 邏輯 (Additive blending, particles)
+   只修改了 PALETTE 以符合「科幻藍紫」的需求
 */
+
 const canvas = document.getElementById('nebula');
 const ctx = canvas.getContext('2d');
-let W, H, DPR;
-
-const PALETTE = [
-  {h: 220, s: 80, l: 60}, // Bright Blue
-  {h: 260, s: 70, l: 55}, // Deep Purple
-  {h: 200, s: 80, l: 50}, // Cyan/Teal
-  {h: 240, s: 60, l: 45}  // Royal Blue
-];
-
-const LAYERS = 3;
-const PARTICLE_COUNT = 40; 
+let W=0,H=0, DPR = Math.max(1, window.devicePixelRatio || 1);
 
 function resize(){
-  DPR = Math.max(1, window.devicePixelRatio || 1);
   W = innerWidth;
   H = innerHeight;
   canvas.width = Math.floor(W * DPR);
   canvas.height = Math.floor(H * DPR);
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
   ctx.setTransform(DPR,0,0,DPR,0,0);
 }
-window.addEventListener('resize', resize);
+addEventListener('resize', resize);
 resize();
+
+/* Config */
+const LAYERS = 3;
+const PARTICLE_COUNT = 45; 
+
+/* 修改點：PALETTE
+   去掉了 h:300 (洋紅/紅)，保留 h:200~270 之間的冷色調
+*/
+const PALETTE = [
+  {h: 250, s: 80, l: 60}, // Deep Purple
+  {h: 210, s: 80, l: 60}, // Electric Blue
+  {h: 190, s: 75, l: 55}, // Cyan/Teal
+  {h: 270, s: 65, l: 50}  // Violet
+];
 
 function rand(min, max){ return Math.random()*(max-min)+min; }
 
 class Particle {
-  constructor(layer){
-    this.layer = layer;
+  constructor(layerIndex){
+    this.layer = layerIndex;
     this.reset(true);
   }
   reset(initial=false){
-    this.x = rand(-0.2*W, 1.2*W);
-    this.y = rand(-0.2*H, 1.2*H);
-    const baseSpeed = 0.05 + this.layer * 0.05;
-    this.vx = rand(-0.2, 0.2) * baseSpeed;
-    this.vy = rand(-0.1, 0.1) * baseSpeed;
-    this.size = rand(100, 300) * (1 + this.layer*0.5);
+    this.x = rand(-0.3*W, 1.3*W);
+    this.y = rand(-0.3*H, 1.3*H);
+    const base = 0.1 + this.layer * 0.6; 
+    this.vx = rand(-0.03,0.03) * base;
+    this.vy = rand(-0.01,0.01) * base;
+    this.size = rand(120, 420) * (1 + this.layer*0.6);
     
-    const c = PALETTE[Math.floor(Math.random()*PALETTE.length)];
-    this.h = c.h + rand(-15,15);
-    this.s = c.s; 
-    this.l = c.l;
+    const color = PALETTE[(this.layer + Math.floor(Math.random()*PALETTE.length)) % PALETTE.length];
     
-    this.alpha = rand(0.02, 0.08); // Lower alpha for subtle effect
-    this.age = initial ? rand(0, 1000) : 0;
+    // Hue variation
+    this.h = color.h + rand(-15,15); 
+    this.s = color.s + rand(-6,6);
+    this.l = color.l + rand(-6,6);
+    
+    this.alpha = rand(0.035, 0.18);
+    this.twist = rand(0,Math.PI*2);
+    if(initial) this.age = rand(0,200);
+    else this.age = 0;
   }
-  update(dt){
-    this.x += this.vx * dt;
-    this.y += this.vy * dt;
+  step(dt){
+    const t = performance.now() * 0.00008;
+    const flowX = Math.cos((this.y*0.002 + t + this.twist))*0.15;
+    const flowY = Math.sin((this.x*0.002 + t - this.twist))*0.15;
+    this.x += (this.vx + flowX) * dt;
+    this.y += (this.vy + flowY) * dt;
     this.age += dt;
     if(this.x < -0.5*W || this.x > 1.5*W || this.y < -0.5*H || this.y > 1.5*H) this.reset();
   }
   draw(ctx){
-    const r = this.size * (0.8 + 0.2*Math.sin(this.age*0.001));
+    const r = this.size * (0.7 + 0.3*Math.sin(this.age*0.002 + this.twist));
     const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r);
-    // Gradient focused on Cold/Space colors
     g.addColorStop(0, `hsla(${this.h}, ${this.s}%, ${this.l}%, ${this.alpha})`);
-    g.addColorStop(1, `hsla(${this.h}, ${this.s}%, ${this.l-20}%, 0)`);
-    
+    g.addColorStop(0.25, `hsla(${this.h+10}, ${this.s}%, ${this.l-6}%, ${this.alpha*0.85})`);
+    g.addColorStop(0.6, `hsla(${this.h+30}, ${this.s-10}%, ${this.l-12}%, ${this.alpha*0.45})`);
+    g.addColorStop(1, `hsla(${this.h+40}, ${this.s-20}%, ${this.l-20}%, 0)`);
     ctx.fillStyle = g;
     ctx.beginPath();
     ctx.arc(this.x, this.y, r, 0, Math.PI*2);
@@ -271,32 +291,66 @@ class Particle {
 }
 
 const layers = [];
-for(let i=0; i<LAYERS; i++){
+for(let L=0; L<LAYERS; L++){
   const arr = [];
-  for(let j=0; j<PARTICLE_COUNT; j++) arr.push(new Particle(i));
+  for(let i=0;i<PARTICLE_COUNT;i++) arr.push(new Particle(L));
   layers.push(arr);
 }
 
 let last = performance.now();
-function loop(now){
-  const dt = Math.min(60, (now - last)*0.05); // time scale
+function frame(now){
+  const dt = Math.min(60, now - last); 
   last = now;
-
-  // Clear with very slight fade for smooth trails
+  
+  // Clear with slight fade (Original Logic)
   ctx.globalCompositeOperation = 'source-over';
-  ctx.fillStyle = '#020205'; // Dark background matching CSS
+  ctx.fillStyle = 'rgba(0,0,0,0.12)';
   ctx.fillRect(0,0,W,H);
 
-  ctx.globalCompositeOperation = 'screen'; // Use screen or lighter for neon feel
-  for(const layer of layers){
-    for(const p of layer){
-      p.update(dt);
+  // Additive Blending (Original Logic - The "Glow" Key)
+  ctx.globalCompositeOperation = 'lighter';
+  for(let L=0; L<LAYERS; L++){
+    const depthAlpha = 0.6 + L*0.6; 
+    for(const p of layers[L]){
+      p.step(dt);
+      ctx.save();
+      ctx.globalAlpha = Math.min(1, p.alpha * depthAlpha);
       p.draw(ctx);
+      ctx.restore();
     }
   }
-  requestAnimationFrame(loop);
+
+  // Vignette (Original Logic)
+  ctx.globalCompositeOperation = 'source-over';
+  const vg = ctx.createRadialGradient(W/2, H/2, Math.min(W,H)*0.2, W/2, H/2, Math.max(W,H)*0.8);
+  vg.addColorStop(0, 'rgba(0,0,0,0)');
+  vg.addColorStop(1, 'rgba(0,0,0,0.18)');
+  ctx.fillStyle = vg;
+  ctx.fillRect(0,0,W,H);
+
+  requestAnimationFrame(frame);
 }
-requestAnimationFrame(loop);
+requestAnimationFrame(frame);
+
+/* Interactive handlers */
+window.addEventListener('pointermove', (e)=>{
+  const mx = e.clientX, my = e.clientY;
+  for(let L=0; L<LAYERS; L++){
+    const arr = layers[L];
+    for(let i=0;i<6;i++){
+      const p = arr[Math.floor(Math.random()*arr.length)];
+      const dx = p.x - mx, dy = p.y - my;
+      const d2 = dx*dx + dy*dy;
+      if(d2 < 120000){
+        p.vx += (dx*0.00002) * (1+L*0.5);
+        p.vy += (dy*0.00002) * (1+L*0.5);
+      }
+    }
+  }
+});
+window.addEventListener('click', ()=>{ 
+  for(const arr of layers) for(const p of arr) { p.vx += rand(-0.06,0.06); p.vy += rand(-0.03,0.03); }
+});
 </script>
 </body>
 </html>
