@@ -1,297 +1,671 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | AI Safety Research</title>
-    
+    <title>Red Team Portfolio | AI Safety Research</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- DESIGN TOKENS (APPLE LAB STYLE) --- */
+        /* === Apple-inspired Design System === */
         :root {
-            --bg-color: #ffffff;
-            --bg-secondary: #f5f5f7; /* Apple 經典淺灰 */
-            --text-main: #1d1d1f;    /* Apple 經典近黑 */
-            --text-secondary: #86868b;
-            --accent-color: #0066cc; /* 專業的科研藍，而非黑客綠 */
-            --border-color: #d2d2d7;
-            --card-hover: rgba(0, 0, 0, 0.04);
-            
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --white: #ffffff;
+            --off-white: #fbfbfd;
+            --gray-50: #f5f5f7;
+            --gray-100: #e8e8ed;
+            --gray-400: #86868b;
+            --gray-600: #6e6e73;
+            --gray-900: #1d1d1f;
+            --black: #000000;
+
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+            --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
-        /* --- RESET & BASE --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
             font-family: var(--font-main);
+            background-color: var(--white);
+            color: var(--gray-900);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        a { text-decoration: none; color: inherit; transition: 0.2s; }
-        ul { list-style: none; }
 
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
-        p { color: var(--text-secondary); font-size: 1.05rem; }
-        
-        .mono { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: -0.03em; }
-        .label {
-            display: inline-block;
-            background: var(--bg-secondary);
-            color: var(--text-main);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+        /* === Navigation === */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--gray-100);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-content {
+            width: 100%;
+            max-width: 980px;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--gray-900);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--gray-900);
+        }
+
+        /* === Hero Section === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background: var(--white);
+        }
+
+        .hero-eyebrow {
+            font-size: 0.875rem;
             font-weight: 500;
-            font-family: var(--font-mono);
-            margin-right: 6px;
+            color: var(--gray-400);
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
+            text-transform: uppercase;
         }
 
-        /* --- LAYOUT --- */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 24px;
-        }
-        .section-spacer { margin-bottom: 100px; }
-
-        /* --- 1. HERO SECTION --- */
         .hero h1 {
-            font-size: 3rem;
-            line-height: 1.1;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.08;
+            color: var(--gray-900);
+            max-width: 900px;
             margin-bottom: 24px;
-            color: var(--text-main);
         }
-        .hero p {
-            max-width: 500px;
-            line-height: 1.6;
-            margin-bottom: 40px;
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--gray-600);
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 48px;
         }
-        .status-badge {
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
             display: inline-flex;
             align-items: center;
-            margin-bottom: 20px;
-            font-size: 0.8rem;
-            font-family: var(--font-mono);
-            color: var(--text-secondary);
-            background: var(--bg-secondary);
-            padding: 6px 12px;
-            border-radius: 20px;
-        }
-        .dot {
-            width: 8px; height: 8px; background-color: #34c759; /* Apple Green */
-            border-radius: 50%; display: inline-block; margin-right: 8px;
-        }
-
-        .cta-links a {
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-size: 0.9375rem;
             font-weight: 500;
-            color: var(--accent-color);
-            margin-right: 24px;
-            font-size: 0.95rem;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
         }
-        .cta-links a:hover { text-decoration: underline; }
 
-        /* --- SECTION HEADERS (DATA STYLE) --- */
+        .btn-primary {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--black);
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gray-900);
+            border: 1px solid var(--gray-100);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-50);
+        }
+
+        /* === Section Base === */
+        section {
+            padding: 100px 24px;
+        }
+
         .section-header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 16px;
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 64px;
         }
-        .section-title { font-size: 1.25rem; }
-        .section-index { font-family: var(--font-mono); color: var(--text-secondary); }
 
-        /* --- 2. PROJECTS (GRID) --- */
-        .project-grid {
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+        }
+
+        /* === About Section === */
+        .about {
+            background: var(--gray-50);
+        }
+
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 40px 32px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .about-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .about-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-50);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .about-card p {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* === Case Studies === */
+        .cases {
+            background: var(--white);
+        }
+
+        .case-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .case-item {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .case-item:hover {
+            background: var(--gray-100);
+        }
+
+        .case-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .case-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-400);
+            width: 32px;
+        }
+
+        .case-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--gray-900);
+        }
+
+        .case-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .case-tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 980px;
+            background: var(--white);
+            color: var(--gray-600);
+        }
+
+        .case-arrow {
+            color: var(--gray-400);
+            transition: var(--transition);
+        }
+
+        .case-item:hover .case-arrow {
+            color: var(--gray-900);
+            transform: translateX(4px);
+        }
+
+        /* === Methodology === */
+        .methodology {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .methodology .section-header h2 {
+            color: var(--white);
+        }
+
+        .methodology .section-header p {
+            color: var(--gray-400);
+        }
+
+        .method-steps {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
             gap: 40px;
         }
-        .project-card {
-            display: block;
-            padding: 24px;
-            border-radius: 12px; /* Apple style rounded corners */
-            background: #fff;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .project-card:hover {
-            background: var(--bg-secondary);
-            transform: scale(1.01);
-        }
-        .project-title { font-size: 1.1rem; margin-bottom: 8px; color: var(--text-main); }
-        .project-desc { font-size: 0.95rem; margin-bottom: 20px; }
-        
-        /* DATA SYMBOLS */
-        .data-point::before { content: '['; color: var(--text-secondary); margin-right: 4px; }
-        .data-point::after { content: ']'; color: var(--text-secondary); margin-left: 4px; }
 
-        /* --- 3. LIST VIEW (DOMAIN) --- */
-        .list-item {
+        .method-step {
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--bg-secondary);
+            gap: 32px;
+            align-items: flex-start;
         }
-        .list-info h3 { font-size: 1rem; margin-bottom: 6px; }
-        .list-meta { text-align: right; }
 
-        /* --- 4. GAME SECTION --- */
-        .game-area {
-            background: var(--bg-secondary);
-            border-radius: 18px;
-            padding: 40px;
+        .step-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.1);
+            line-height: 1;
+            min-width: 80px;
+        }
+
+        .step-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            font-size: 0.9375rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        /* === Contact === */
+        .contact {
+            background: var(--white);
             text-align: center;
         }
-        .play-btn {
-            display: inline-block;
-            margin-top: 20px;
-            background: var(--text-main);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
+
+        .contact-box {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 48px;
+            background: var(--gray-50);
+            border-radius: 24px;
+        }
+
+        .contact-box h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .contact-box p {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+
+        .contact-email {
+            font-size: 1.125rem;
             font-weight: 500;
-            font-size: 0.9rem;
+            color: var(--gray-900);
+            text-decoration: none;
+            padding: 12px 24px;
+            background: var(--white);
+            border-radius: 12px;
+            display: inline-block;
+            transition: var(--transition);
         }
-        .play-btn:hover { opacity: 0.8; }
 
-        /* --- FOOTER --- */
+        .contact-email:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        /* === Footer === */
         footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            display: flex;
-            justify-content: space-between;
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid var(--gray-100);
         }
 
-        /* MOBILE */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2.2rem; }
-            .project-grid { grid-template-columns: 1fr; }
-            .list-item { flex-direction: column; gap: 10px; }
-            .list-meta { text-align: left; }
+        footer p {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+        }
+
+        /* === Animations === */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1,
+        .hero-subtitle,
+        .cta-group {
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        .hero-subtitle {
+            animation-delay: 0.1s;
+        }
+
+        .cta-group {
+            animation-delay: 0.2s;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .method-step {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .step-number {
+                font-size: 3rem;
+            }
+
+            .case-meta {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
-
-<div class="container">
-
-    <header class="hero section-spacer">
-        <div class="status-badge">
-            <span class="dot"></span>
-            System Status: Monitoring
+    <nav>
+        <div class="nav-content">
+            <div class="nav-logo">Red Team Research</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#cases">Case Studies</a>
+                <a href="#methodology">Methodology</a>
+                <a href="#contact">Contact</a>
+            </div>
         </div>
-        <h1>AI Alignment &<br>Systemic Risk Analyst.</h1>
-        <p>
-            Bridging the gap between <strong>Public Health expertise</strong> and <strong>LLM incentive structures</strong>. 
-            Focusing on how corporate objectives silently compromise model safety.
+    </nav>
+
+    <section class="hero">
+        <p class="hero-eyebrow">AI Red Team · Evaluation · LLM Behavior Analysis</p>
+        <h1>When Alignment Breaks Quietly</h1>
+        <p class="hero-subtitle">
+            I study subtle failure modes in aligned language models - not jailbreaks,
+            but moments where role, priority, or judgment quietly drift under pressure.
         </p>
-        
-        <div class="cta-links mono">
-            <a href="#research">↓ View Research Data</a>
-            <a href="#interactive">Play Interactive CV →</a>
-        </div>
-    </header>
-
-    <section id="research" class="section-spacer">
-        <div class="section-header">
-            <h2 class="section-title">Risk Evaluation Logs</h2>
-            <span class="section-index mono">01 / SYSTEMIC</span>
-        </div>
-        
-        <div class="project-grid">
-            <a href="#" class="project-card">
-                <div class="label">BEHAVIORAL</div>
-                <h3 class="project-title">Incentive-Driven Sycophancy</h3>
-                <p class="project-desc">Analysis of how RLHF creates "Yes-Man" models that prioritize politeness over factual safety boundaries.</p>
-                <div class="mono data-point">Severity: High</div>
-            </a>
-
-            <a href="#" class="project-card">
-                <div class="label">PRIVACY</div>
-                <h3 class="project-title">Cross-Session Leakage</h3>
-                <p class="project-desc">Audit revealing how platform context-retention architectures lead to unintentional data exposure.</p>
-                <div class="mono data-point">Impact: Critical</div>
-            </a>
-
-            <a href="#" class="project-card">
-                <div class="label">EPISTEMOLOGY</div>
-                <h3 class="project-title">The "Why" Gap</h3>
-                <p class="project-desc">Comparative tests demonstrating the disconnect between linguistic fluency and causal reasoning.</p>
-                <div class="mono data-point">Logic: Fail</div>
-            </a>
+        <div class="cta-group">
+            <a href="#cases" class="btn btn-primary">View Case Studies</a>
+            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
         </div>
     </section>
 
-    <section class="section-spacer">
+    <section class="about" id="about">
         <div class="section-header">
-            <h2 class="section-title">Domain Stress Testing</h2>
-            <span class="section-index mono">02 / PUBLIC HEALTH</span>
+            <h2>What I Focus On</h2>
+            <p>Not isolated bugs, but patterns that emerge across models.</p>
         </div>
-        
-        <div>
-            <div class="list-item">
-                <div class="list-info">
-                    <h3>Cross-Lingual Information Contagion</h3>
-                    <p class="mono" style="color:var(--text-secondary); margin-top:5px;">Target: JP / EN / ZH Models</p>
-                </div>
-                <div class="list-meta mono">
-                    > Verifying Safety Degradation
-                </div>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Failure Mode Discovery</h3>
+                <p>
+                    Identifying repeatable behavioral failures such as referential collapse,
+                    role drift, and priority hijacking across languages and domains.
+                </p>
             </div>
-
-            <div class="list-item">
-                <div class="list-info">
-                    <h3>Published Research: Disease Transmission</h3>
-                    <p>Utilized as "Ground Truth" benchmark for AI logic validation.</p>
-                </div>
-                <div class="list-meta mono">
-                    [ Reference Data ]
-                </div>
+            <div class="about-card">
+                <h3>Cross-Model Evaluation</h3>
+                <p>
+                    Comparing how different alignment strategies respond to the same scenario,
+                    including how models judge each other under blind evaluation.
+                </p>
+            </div>
+            <div class="about-card">
+                <h3>Risk Prioritization Dynamics</h3>
+                <p>
+                    Analyzing how safety signals (e.g. self-harm detection) dominate or suppress
+                    other critical risks over multi-turn interactions.
+                </p>
             </div>
         </div>
     </section>
 
-    <section id="interactive" class="section-spacer">
+    <section class="cases" id="cases">
         <div class="section-header">
-            <h2 class="section-title">Interactive Capability</h2>
-            <span class="section-index mono">03 / GODOT ENGINE</span>
+            <h2>Selected Findings</h2>
+            <p>Concrete behaviors observed across GPT, Claude, and Gemini.</p>
         </div>
 
-        <div class="game-area">
-            <h3 style="margin-bottom: 10px;">Playable Portfolio</h3>
-            <p style="margin-bottom: 25px;">A platformer built to verify engineering versatility.</p>
-            
-            <div style="width: 100%; height: 200px; background: #fff; border-radius: 12px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; border: 1px dashed #d2d2d7;">
-                <span class="mono" style="color:var(--text-secondary);">[ GAME PREVIEW SIGNAL ]</span>
+        <div class="case-list">
+            <div class="case-item">
+                <div class="case-info">
+                    <span class="case-number">01</span>
+                    <span class="case-title">Referential Collapse Across Languages</span>
+                </div>
+                <div class="case-meta">
+                    <span class="case-tag">EN / ZH / JP</span>
+                    <span class="case-arrow">→</span>
+                </div>
             </div>
 
-            <a href="#" class="play-btn">Initialize Game Instance</a>
+            <div class="case-item">
+                <div class="case-info">
+                    <span class="case-number">02</span>
+                    <span class="case-title">Risk Hijacking by Self-Harm Detection</span>
+                </div>
+                <div class="case-meta">
+                    <span class="case-tag">Medical–Legal</span>
+                    <span class="case-arrow">→</span>
+                </div>
+            </div>
+
+            <div class="case-item">
+                <div class="case-info">
+                    <span class="case-number">03</span>
+                    <span class="case-title">Judge Reassessment Asymmetry</span>
+                </div>
+                <div class="case-meta">
+                    <span class="case-tag">LLM-as-Judge</span>
+                    <span class="case-arrow">→</span>
+                </div>
+            </div>
+
+            <div class="case-item">
+                <div class="case-info">
+                    <span class="case-number">04</span>
+                    <span class="case-title">Response Length vs. Score Correlation</span>
+                </div>
+                <div class="case-meta">
+                    <span class="case-tag">RLHF Signal</span>
+                    <span class="case-arrow">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="methodology" id="methodology">
+        <div class="section-header">
+            <h2>Methodology</h2>
+            <p>Observation-driven, but not aimless.</p>
+        </div>
+
+        <div class="method-steps">
+            <div class="method-step">
+                <span class="step-number">01</span>
+                <div class="step-content">
+                    <h3>Initial Question</h3>
+                    <p>
+                        Each investigation begins with a concrete question about role,
+                        ethics, or risk prioritization in a realistic scenario —
+                        often involving conflicting perspectives on the same event.
+                    </p>
+                </div>
+            </div>
+
+            <div class="method-step">
+                <span class="step-number">02</span>
+                <div class="step-content">
+                    <h3>Iterative Probing</h3>
+                    <p>
+                        As unexpected behaviors emerge, prompts are refined to test
+                        whether the behavior is incidental or systematic, including
+                        language switches and judge reassessment.
+                    </p>
+                </div>
+            </div>
+
+            <div class="method-step">
+                <span class="step-number">03</span>
+                <div class="step-content">
+                    <h3>Cross-Model Comparison</h3>
+                    <p>
+                        The same scenarios are evaluated across multiple models,
+                        with blind LLM-based judges scoring responses along
+                        clinical, ethical, legal, and empathetic dimensions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="method-step">
+                <span class="step-number">04</span>
+                <div class="step-content">
+                    <h3>Pattern Extraction</h3>
+                    <p>
+                        Rather than treating failures as isolated bugs,
+                        behaviors are analyzed as repeatable patterns tied
+                        to alignment strategies and reward signals.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <h2>Let's Talk</h2>
+            <p>Interested in collaboration or have questions about AI safety research?</p>
+        </div>
+        <div class="contact-box">
+            <h3>Open to Opportunities</h3>
+            <p>Currently seeking red teaming roles at AI labs and safety-focused organizations.</p>
+            <a href="mailto:your.email@example.com" class="contact-email">miya20001@gmail.com</a>
         </div>
     </section>
 
     <footer>
-        <div>Your Name © 2024</div>
-        <div class="mono">
-            <a href="#" style="margin-left: 20px;">Email</a>
-            <a href="#" style="margin-left: 20px;">GitHub</a>
-            <a href="#" style="margin-left: 20px;">LinkedIn</a>
-        </div>
+        <p>© 2025 Red Team Research. Built with intention.</p>
     </footer>
-
-</div>
-
 </body>
+
 </html>
