@@ -8,7 +8,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
         /* === Apple-inspired Design System === */
@@ -22,7 +23,7 @@
             --gray-900: #1d1d1f;
             --black: #000000;
 
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --font-main: 'Alata', 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
             --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -103,47 +104,144 @@
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 120px 24px 80px;
+            padding: 120px 48px 80px;
             background: var(--white);
         }
 
-        .hero-eyebrow {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--gray-400);
-            letter-spacing: 0.02em;
-            margin-bottom: 16px;
-            text-transform: uppercase;
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1200px;
+            width: 100%;
+            align-items: center;
         }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.08;
+        /* Left side - Typography */
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--gray-400);
+            letter-spacing: 0.02em;
+            margin-bottom: 32px;
+        }
+
+        .hero-eyebrow span {
+            margin: 0 8px;
+            color: var(--gray-100);
+        }
+
+        /* Creative staggered typography */
+        .hero-title {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title-line {
+            display: block;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
             color: var(--gray-900);
-            max-width: 900px;
-            margin-bottom: 24px;
+        }
+
+        .title-line-1 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 600;
+            margin-left: 11.5rem;
+            margin-bottom: -0.9rem;
+        }
+
+        .title-line-2 {
+            font-size: clamp(2.8rem, 6vw, 4rem);
+            font-weight: 500;
+            margin-left: 0;
+        }
+
+        .title-line-3 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-left: 6.5rem;
+            margin-top: 0.2rem;
+        }
+
+        .title-line-4 {
+            font-size: clamp(5rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-left: 2rem;
+            margin-top: -0.5rem;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: 400;
             color: var(--gray-600);
-            max-width: 600px;
-            line-height: 1.5;
-            margin-bottom: 48px;
+            max-width: 420px;
+            line-height: 1.6;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        /* Right side - Cards */
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .finding-card {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 28px 32px;
+            border-radius: 16px;
+            transition: var(--transition);
+        }
+
+        .finding-card:hover {
+            transform: translateX(4px);
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            box-shadow: var(--shadow-md);
+        }
+
+        .finding-card:hover h3 {
+            color: var(--gray-900);
+        }
+
+        .finding-card:hover p {
+            color: var(--gray-600);
+        }
+
+        .finding-card h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .finding-card p {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--gray-400);
+            line-height: 1.6;
         }
 
         .cta-group {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: flex-start;
+            margin-top: 40px;
         }
 
         .btn {
@@ -178,6 +276,38 @@
 
         .btn-secondary:hover {
             background: var(--gray-50);
+        }
+
+        /* Responsive for hero */
+        @media (max-width: 900px) {
+            .hero {
+                padding: 100px 24px 60px;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .hero-left {
+                text-align: center;
+            }
+
+            .title-line-1,
+            .title-line-2,
+            .title-line-3,
+            .title-line-4 {
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .hero-subtitle {
+                margin: 0 auto;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
         }
 
         /* === Section Base === */
@@ -441,9 +571,9 @@
             }
         }
 
-        .hero h1,
+        .hero-title,
         .hero-subtitle,
-        .cta-group {
+        .hero-right {
             animation: fadeUp 0.8s ease-out;
         }
 
@@ -451,7 +581,7 @@
             animation-delay: 0.1s;
         }
 
-        .cta-group {
+        .hero-right {
             animation-delay: 0.2s;
         }
 
@@ -499,15 +629,44 @@
     </nav>
 
     <section class="hero">
-        <p class="hero-eyebrow">AI Red Team · Evaluation · LLM Behavior Analysis</p>
-        <h1>When Alignment Breaks Quietly</h1>
-        <p class="hero-subtitle">
-            I study subtle failure modes in aligned language models - not jailbreaks,
-            but moments where role, priority, or judgment quietly drift under pressure.
-        </p>
-        <div class="cta-group">
-            <a href="#cases" class="btn btn-primary">View Case Studies</a>
-            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+        <div class="hero-container">
+            <!-- Left: Typography -->
+            <div class="hero-left">
+                <p class="hero-eyebrow">AI Red Team · Evaluation · LLM Behavior Analysis</p>
+
+                <div class="hero-title">
+                    <span class="title-line title-line-1">When</span>
+                    <span class="title-line title-line-2">Alignment</span>
+                    <span class="title-line title-line-3">Breaks</span>
+                    <span class="title-line title-line-4">Quietly</span>
+                </div>
+
+                <p class="hero-subtitle">
+                    I study subtle failure modes in aligned language models <br>– not jailbreaks,
+                    but moments where role, priority, <br>or judgment quietly drift under pressure.
+                </p>
+            </div>
+
+            <!-- Right: Finding Cards -->
+            <div class="hero-right">
+                <div class="finding-card">
+                    <h3>Orthographic Drift</h3>
+                    <p>Under high-entropy medical-legal prompts, Gemini exhibits orthographic drift, reverting from
+                        Traditional to Simplified Chinese mid-response.</p>
+                </div>
+
+                <div class="finding-card">
+                    <h3>Referential Collapse</h3>
+                    <p>A failure mode where a model loses consistency in role or referent assignment within a single
+                        response.</p>
+                </div>
+
+                <div class="finding-card">
+                    <h3>Risk Signal Hijacking</h3>
+                    <p>Self-harm detection overrides critical medical advice, causing models to deprioritize actionable
+                        PEP guidance.</p>
+                </div>
+            </div>
         </div>
     </section>
 
