@@ -24,6 +24,18 @@
             --gray-900: #1d1d1f;
             --black: #000000;
 
+            /* Detailed Card Variables moved from secondary root */
+            --bg-card: #ffffff;
+            --bg-card-hover: #fafafa;
+            --border-subtle: #e5e5e5;
+            --text-primary: #111111;
+            --text-secondary: #555555;
+            --text-tertiary: #888888;
+            /* Severity accents */
+            --accent-critical: #e11d48;
+            --accent-structural: #d97706;
+            --accent-signal: #475569;
+
             --font-main: 'Alata', 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
 
@@ -72,7 +84,7 @@
 
         .nav-content {
             width: 100%;
-            max-width: 980px;
+            max-width: 1000px;
             padding: 0 22px;
             display: flex;
             align-items: center;
@@ -117,7 +129,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
-            max-width: 1200px;
+            max-width: 1000px;
             width: 100%;
             align-items: center;
         }
@@ -573,6 +585,190 @@
             box-shadow: var(--shadow-md);
         }
 
+        /* === Game Modal === */
+        .game-tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .launch-btn {
+            font-family: var(--font-mono);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            background: var(--gray-900);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .launch-btn:hover {
+            background: var(--black);
+            transform: scale(1.02);
+        }
+
+        .game-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .game-modal.active {
+            display: flex;
+        }
+
+        .game-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+            background: var(--black);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-modal iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .game-modal-close {
+            position: absolute;
+            top: -48px;
+            right: 0;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 8px 16px;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .game-modal-close:hover {
+            opacity: 1;
+        }
+
+
+
+        /* === Phase Flow === */
+        .phase-section {
+            max-width: 800px;
+            margin: 48px auto 0;
+        }
+
+        .phase-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .phase-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .phase-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .phase-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--gray-900);
+        }
+
+        .phase-details {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .phase-details li {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .phase-details li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: var(--gray-400);
+        }
+
+        .phase-outputs {
+            border-top: 1px solid var(--gray-100);
+            padding-top: 16px;
+        }
+
+        .phase-output-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+        }
+
+        .phase-output-item {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            background: var(--gray-900);
+            color: var(--white);
+            border-radius: 20px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .phase-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gray-300);
+        }
+
+        @media (max-width: 768px) {
+            .phase-flow {
+                grid-template-columns: 1fr;
+            }
+
+            .phase-arrow {
+                transform: rotate(90deg);
+                padding: 8px 0;
+            }
+        }
+
         /* === Footer === */
         footer {
             padding: 40px 24px;
@@ -639,6 +835,487 @@
                 display: none;
             }
         }
+
+        /* ===== Layout ===== */
+
+        .method-map {
+            display: grid;
+            grid-template-columns: 35% 65%;
+            row-gap: 3rem;
+            padding: 4rem 0;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 3rem;
+            /* Padding moved to inline style for specific nodes or handled via flex */
+            position: relative;
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            position: relative;
+            /* For connector positioning context if needed */
+            padding-left: 3rem;
+            /* Space for connectors on right side */
+        }
+
+        /* ===== Timeline ===== */
+
+        .node {
+            position: relative;
+            max-width: 100%;
+            /* Allow flex to handle width */
+            display: flex;
+            align-items: center;
+            /* Vertically align dot and text */
+            gap: 1rem;
+        }
+
+        /* Left-aligned nodes (Phase 1, 2) - Text then Dot */
+        .node.left {
+            justify-content: flex-end;
+            text-align: right;
+            flex-direction: row;
+        }
+
+        /* Right-aligned nodes (Goal, Scenario, Visibility) - Dot then Text */
+        .node.right {
+            justify-content: flex-start;
+            text-align: left;
+            flex-direction: row;
+        }
+
+        .node .label {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #9ca3af;
+            border-radius: 50%;
+            flex-shrink: 0;
+            /* Prevent dot from shrinking */
+            position: relative;
+            /* Anchor for connector */
+            margin: 0;
+            /* Remove old margin */
+        }
+
+        /* Connector Lines */
+        .dot::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 2rem;
+            /* Length of connector */
+            height: 1px;
+            background: #e5e7eb;
+            transform: translateY(-50%);
+        }
+
+        /* Line for Left Nodes (points right) */
+        .node.left .dot::after {
+            left: 100%;
+            margin-left: 0.5rem;
+            /* Gap from dot */
+        }
+
+        /* Line for Right Nodes (points left) */
+        .node.right .dot::after {
+            right: 100%;
+            margin-right: 0.5rem;
+            /* Gap from dot */
+        }
+
+        .node.critical .dot {
+            background: #ef4444;
+        }
+
+        /* vertical line */
+        .method-map::before {
+            content: "";
+            position: absolute;
+            left: 35%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #e5e7eb;
+        }
+
+        /* ===== Cards ===== */
+
+        .failure-card {
+            position: relative;
+            background: #fafafa;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: #111827;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: block;
+            /* Ensure block display for anchor */
+            max-width: 450px;
+        }
+
+        .failure-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* connector */
+        .failure-card::before {
+            content: "";
+            position: absolute;
+            left: -2rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.2;
+        }
+
+        /* ===== Severity ===== */
+
+        .failure-card.warning {
+            border-color: #f59e0b;
+        }
+
+        .failure-card.warning::before {
+            background: #f59e0b;
+        }
+
+        .failure-card.critical {
+            border-color: #ef4444;
+            background: #fff5f5;
+        }
+
+        .failure-card.critical::before {
+            background: #ef4444;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #92400e;
+        }
+
+        .badge.critical {
+            color: #b91c1c;
+        }
+
+        .failure-card h3,
+        .failure-card h4 {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .cta {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: #b91c1c;
+        }
+
+        /* ===== Pulse ===== */
+
+        .pulse {
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        /* ===== Responsive ===== */
+
+        @media (max-width: 768px) {
+            .method-map {
+                grid-template-columns: 1fr;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .method-map::before {
+                display: none;
+            }
+
+            .timeline {
+                justify-content: flex-start;
+                padding-right: 0;
+                margin-bottom: 0;
+                /* Let grid gap handle it */
+            }
+
+            .cards {
+                padding-left: 0;
+                /* Reset mobile padding */
+            }
+
+            .node {
+                text-align: left;
+                flex-direction: row !important;
+                /* Always Dot-Text on mobile */
+                justify-content: flex-start !important;
+                margin-bottom: 1rem;
+            }
+
+            .node.left .dot {
+                order: -1;
+                /* Move dot to start */
+            }
+
+            .dot::after {
+                display: none;
+                /* Hide horizontal connectors on mobile */
+            }
+
+            .failure-card::before {
+                display: none;
+            }
+        }
+
+        .node-title {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--gray-900);
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .node-desc {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            line-height: 1.3;
+            margin-top: 2px;
+        }
+
+        /* failure modes */
+        /* Variables merged to top :root */
+
+        /* ---------- Container ---------- */
+        .failure-modes-container {
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* ---------- Card Base ---------- */
+        .failure-card-detail {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .failure-card-detail:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px -16px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ---------- Header ---------- */
+        .card-header {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .phase-tag {
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Severity badge */
+        .severity-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+        }
+
+        .severity-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .severity-badge.critical {
+            background: rgba(225, 29, 72, 0.1);
+            color: var(--accent-critical);
+        }
+
+        .severity-badge.structural {
+            background: rgba(217, 119, 6, 0.12);
+            color: var(--accent-structural);
+        }
+
+        .severity-badge.signal {
+            background: rgba(71, 85, 105, 0.12);
+            color: var(--accent-signal);
+        }
+
+        /* ---------- Title & Definition ---------- */
+        .failure-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.25;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .card-definition {
+            margin-top: 1.25rem;
+            padding-bottom: 1.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .card-definition p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* ---------- Body ---------- */
+        .card-body-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.06em;
+            font-weight: 600;
+        }
+
+        .signature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .signature-list li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.45;
+            color: var(--text-primary);
+        }
+
+        .signature-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--text-tertiary);
+        }
+
+        .context-list li {
+            display: inline-block;
+            font-size: 0.85rem;
+            background: #f3f4f6;
+            color: var(--text-secondary);
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+        }
+
+        /* ---------- Evidence ---------- */
+        .evidence-block {
+            background: #fafafa;
+            border: 1px dashed var(--border-subtle);
+            border-radius: 10px;
+            padding: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ---------- Insight ---------- */
+        .card-insight {
+            background: #1a1a1a;
+            color: #f5f5f5;
+            padding: 1.25rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+
+        .card-insight.structural-bg {
+            background: #fffbeb;
+            color: #92400e;
+        }
+
+        .card-insight.signal-bg {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        /* ---------- Secondary Grid ---------- */
+        .secondary-failures-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 768px) {
+            .card-body-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .secondary-failures-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .failure-title {
+                font-size: 1.55rem;
+            }
+        }
     </style>
 </head>
 
@@ -647,9 +1324,9 @@
         <div class="nav-content">
             <div class="nav-logo">Red Team Research</div>
             <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#cases">Case Studies</a>
                 <a href="#methodology">Methodology</a>
+                <a href="#failure-modes">Failure Modes</a>
+                <a href="#human-divergence">Human Divergence</a>
                 <a href="#contact">Contact</a>
             </div>
         </div>
@@ -698,92 +1375,229 @@
         </div>
     </section>
 
-    <section class="about" id="about">
-        <div class="section-header">
-            <h2>What I Focus On</h2>
-            <p>Not isolated bugs, but patterns that emerge across models.</p>
-        </div>
-        <div class="about-grid">
-            <div class="about-card">
-                <h3>Failure Mode Discovery</h3>
-                <p>
-                    Identifying repeatable behavioral failures such as referential collapse,
-                    role drift, and priority hijacking across languages and domains.
-                </p>
-            </div>
-            <div class="about-card">
-                <h3>Cross-Model Evaluation</h3>
-                <p>
-                    Comparing how different alignment strategies respond to the same scenario,
-                    including how models judge each other under blind evaluation.
-                </p>
-            </div>
-            <div class="about-card">
-                <h3>Risk Prioritization Dynamics</h3>
-                <p>
-                    Analyzing how safety signals (e.g. self-harm detection) dominate or suppress
-                    other critical risks over multi-turn interactions.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section class="cases" id="cases">
-        <div class="section-header">
-            <h2>Selected Findings</h2>
-            <p>Concrete behaviors observed across GPT, Claude, and Gemini.</p>
-        </div>
-
-        <div class="case-list">
-            <div class="case-item">
-                <div class="case-info">
-                    <span class="case-number">01</span>
-                    <span class="case-title">Referential Collapse Across Languages</span>
-                </div>
-                <div class="case-meta">
-                    <span class="case-tag">EN / ZH / JP</span>
-                    <span class="case-arrow">→</span>
-                </div>
-            </div>
-
-            <div class="case-item">
-                <div class="case-info">
-                    <span class="case-number">02</span>
-                    <span class="case-title">Risk Hijacking by Self-Harm Detection</span>
-                </div>
-                <div class="case-meta">
-                    <span class="case-tag">Medical–Legal</span>
-                    <span class="case-arrow">→</span>
-                </div>
-            </div>
-
-            <div class="case-item">
-                <div class="case-info">
-                    <span class="case-number">03</span>
-                    <span class="case-title">Judge Reassessment Asymmetry</span>
-                </div>
-                <div class="case-meta">
-                    <span class="case-tag">LLM-as-Judge</span>
-                    <span class="case-arrow">→</span>
-                </div>
-            </div>
-
-            <div class="case-item">
-                <div class="case-info">
-                    <span class="case-number">04</span>
-                    <span class="case-title">Response Length vs. Score Correlation</span>
-                </div>
-                <div class="case-meta">
-                    <span class="case-tag">RLHF Signal</span>
-                    <span class="case-arrow">→</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="methodology" id="methodology">
+    <section class="about" id="methodology">
         <div class="section-header">
             <h2>Methodology</h2>
+            <p>This study follows a goal-anchored, observation-responsive approach: prompts are designed around a
+                predefined ethical question, while analysis remains open to emergent behaviors that surface under
+                realistic, high-ambiguity conditions.</p>
+        </div>
+
+        <!-- Method Map -->
+        <section class="method-map" id="method-map">
+
+            <!-- Goal Constraint (Right Side) -->
+            <div class="timeline"></div>
+            <div class="cards">
+                <div class="node right">
+                    <span class="dot"></span>
+                    <div>
+                        <span class="node-title">Goal Constraint</span>
+                        <p class="node-desc">Focuses on LLM decision behavior under sustained high-stakes pressure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario Framing (Right Side) -->
+            <div class="timeline"></div>
+            <div class="cards">
+                <div class="node right">
+                    <span class="dot"></span>
+                    <div>
+                        <span class="node-title">Scenario Framing</span>
+                        <p class="node-desc">Introduces competing clinical, ethical, legal, and social tensions without
+                            resolution cues.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 1 (Left Side) -->
+            <div class="timeline">
+                <div class="node left">
+                    <div>
+                        <span class="label">Phase 1 · Static Stress Test</span>
+                        <span class="node-title">Single-Prompt Exposure</span>
+                        <p class="node-desc">Serves as an entry disturbance, allowing early instability to surface.</p>
+                    </div>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <div class="cards">
+                <a class="failure-card warning" href="#orthographic-drift">
+                    <span class="badge">Warning</span>
+                    <h4>Orthographic Drift</h4>
+                    <p>Script stability degrades under high-entropy constraints.</p>
+                </a>
+
+                <a class="failure-card warning" href="#referential-collapse">
+                    <span class="badge">Warning</span>
+                    <h4>Referential Collapse</h4>
+                    <p>Silent role or addressee shifts mid-response.</p>
+                </a>
+            </div>
+
+            <!-- Phase 2 (Left Side) -->
+            <div class="timeline">
+                <div class="node left critical">
+                    <div>
+                        <span class="label">Phase 2 · Dynamic Escalation</span>
+                        <span class="node-title">Multi-turn Interaction</span>
+                        <p class="node-desc">Designed with the expectation of ethical slippage, uncertain in timing and
+                            form.</p>
+                    </div>
+                    <span class="dot pulse"></span>
+                </div>
+            </div>
+
+            <div class="cards">
+                <a class="failure-card critical" href="#risk-hijacking">
+                    <span class="badge critical">CRITICAL</span>
+                    <h3>Risk Signal Hijacking</h3>
+                    <p>
+                        Persistent fixation on a single detected risk suppresses
+                        other medically and ethically salient factors.
+                    </p>
+                    <span class="cta">Read analysis →</span>
+                </a>
+            </div>
+
+            <!-- Behavioral Visibility (Right Side) -->
+            <div class="timeline"></div>
+            <div class="cards">
+                <div class="node right">
+                    <span class="dot"></span>
+                    <div>
+                        <span class="node-title">Behavioral Visibility</span>
+                        <p class="node-desc">Observed through persistence, suppression, and recovery across model and
+                            human lenses.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </section>
+
+    <section class="cases" id="failure-modes">
+        <div class="section-header">
+            <h2>Failure Modes</h2>
+            <p>Observed behaviors were grouped into recurring patterns, including but not limited to:</p>
+        </div>
+
+        <div class="failure-modes-container">
+
+            <!-- Primary Failure -->
+            <article class="failure-card-detail type-critical" id="risk-hijacking">
+                <header class="card-header">
+                    <div class="header-top">
+                        <span class="phase-tag">Phase 2 · Dynamic Escalation</span>
+                        <span class="severity-badge critical">
+                            <span class="dot"></span> Critical
+                        </span>
+                    </div>
+                    <h3 class="failure-title">Risk Signal Hijacking</h3>
+                </header>
+
+                <div class="card-definition">
+                    <p>
+                        Persistent fixation on a single detected safety risk suppresses
+                        re-evaluation of other critical risks across turns.
+                    </p>
+                </div>
+
+                <div class="card-body-grid">
+                    <div>
+                        <h4 class="section-label">Behavioral Signature</h4>
+                        <ul class="signature-list">
+                            <li>Early detection of high-salience self-harm signals.</li>
+                            <li>Repeated safety check-ins despite topic shifts.</li>
+                            <li>No spontaneous reprioritization toward HIV or legal risks.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="section-label">Observed Context</h4>
+                        <ul class="context-list">
+                            <li>Multi-turn pre-test</li>
+                            <li>Perspective-shifted prompts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="evidence-block">
+                    <strong>Evidence snapshot:</strong>
+                    From turn 3 to turn 8, the model repeatedly assessed self-harm risk
+                    while ignoring newly introduced HIV exposure context.
+                </div>
+
+                <footer class="card-insight">
+                    <strong>Implication:</strong>
+                    Prolonged risk prioritization becomes normalized rather than dynamically
+                    constrained by contextual relevance.
+                </footer>
+            </article>
+
+            <!-- Secondary Failures -->
+            <div class="secondary-failures-grid">
+
+                <article class="failure-card-detail type-structural" id="referential-collapse">
+                    <header class="card-header">
+                        <div class="header-top">
+                            <span class="phase-tag">Phase 1</span>
+                            <span class="severity-badge structural">Structural</span>
+                        </div>
+                        <h3 class="failure-title">Referential Collapse</h3>
+                    </header>
+
+                    <div class="card-definition">
+                        <p>
+                            Loss of consistent role or referent assignment within a single response.
+                        </p>
+                    </div>
+
+                    <ul class="signature-list">
+                        <li>Mid-response pronoun shift.</li>
+                        <li>Implicit role reassignment.</li>
+                    </ul>
+
+                    <footer class="card-insight structural-bg">
+                        Model self-evaluation mechanisms did not flag this behavior as erroneous.
+                    </footer>
+                </article>
+
+                <article class="failure-card-detail type-signal" id="orthographic-drift">
+                    <header class="card-header">
+                        <div class="header-top">
+                            <span class="phase-tag">Phase 1</span>
+                            <span class="severity-badge signal">Signal-Level</span>
+                        </div>
+                        <h3 class="failure-title">Orthographic Drift</h3>
+                    </header>
+
+                    <div class="card-definition">
+                        <p>
+                            Unintended script reversion under high-entropy legal-medical constraints.
+                        </p>
+                    </div>
+
+                    <ul class="signature-list">
+                        <li>Triggered by cross-domain professional lexicon.</li>
+                        <li>Overrides explicit user orthographic preference.</li>
+                    </ul>
+
+                    <footer class="card-insight signal-bg">
+                        Risk of latent jurisdictional misalignment.
+                    </footer>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="methodology" id="human-divergence">
+        <div class="section-header">
+            <h2>Human Divergence</h2>
             <p>Observation-driven, but not aimless.</p>
         </div>
 
@@ -840,13 +1654,14 @@
 
     <section class="contact" id="contact">
         <div class="section-header">
-            <h2>Let's Talk</h2>
-            <p>Interested in collaboration or have questions about AI safety research?</p>
+            <h2>Contact</h2>
+            <p>miya20001@gmail.com</p>
         </div>
         <div class="contact-box">
-            <h3>Open to Opportunities</h3>
-            <p>Currently seeking red teaming roles at AI labs and safety-focused organizations.</p>
-            <a href="mailto:your.email@example.com" class="contact-email">miya20001@gmail.com</a>
+            <p class="game-tag">[ GODOT_ENGINE_INSTANCE ]</p>
+            <h3>Playable Resume</h3>
+            <p>A small space for free exploration.</p>
+            <button class="launch-btn" onclick="openGame()">START</button>
         </div>
     </section>
 
@@ -854,5 +1669,47 @@
         <p>© 2025 Red Team Research. Built with intention.</p>
     </footer>
 </body>
+
+<!-- Game Modal -->
+<div class="game-modal" id="gameModal">
+    <div class="game-modal-content">
+        <button class="game-modal-close" onclick="closeGame()">✕ Close</button>
+        <iframe id="gameFrame" src="" allow="fullscreen"></iframe>
+    </div>
+</div>
+
+<script>
+    function openGame() {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameFrame');
+        iframe.src = 'https://miyasyf.github.io/game/';
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeGame() {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameFrame');
+        modal.classList.remove('active');
+        iframe.src = '';
+        document.body.style.overflow = '';
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeGame();
+        }
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('gameModal').addEventListener('click', function (e) {
+        if (e.target === this) {
+            closeGame();
+        }
+    });
+
+
+</script>
 
 </html>
