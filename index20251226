@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miya's Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alata&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* === Apple-inspired Design System === */
+        :root {
+            --white: #ffffff;
+            --off-white: #fbfbfd;
+            --gray-50: #f5f5f7;
+            --gray-100: #e8e8ed;
+            --gray-400: #86868b;
+            --gray-600: #6e6e73;
+            --gray-900: #1d1d1f;
+            --black: #000000;
+
+            --font-main: 'Alata', 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+            --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--white);
+            color: var(--gray-900);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* === Navigation === */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--gray-100);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-content {
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--gray-900);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 1rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--gray-900);
+        }
+
+        /* === Hero Section === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 48px 80px;
+            background: var(--white);
+            position: relative;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1000px;
+            width: 100%;
+            align-items: center;
+        }
+
+        /* Left side - Typography */
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-eyebrow {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray-400);
+            letter-spacing: 0.02em;
+            margin-bottom: 48px;
+        }
+
+        .hero-eyebrow span {
+            margin: 0 8px;
+            color: var(--gray-100);
+        }
+
+        /* Creative staggered typography */
+        .hero-title {
+            position: relative;
+            margin-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title-line {
+            display: block;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            color: var(--gray-900);
+        }
+
+        .title-line-1 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 600;
+            margin-left: 11.5rem;
+            margin-bottom: -0.9rem;
+        }
+
+        .title-line-2 {
+            font-size: clamp(2.8rem, 6vw, 4rem);
+            font-weight: 500;
+            margin-left: 0;
+        }
+
+        .title-line-3 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-left: 7rem;
+            margin-top: 0.2rem;
+        }
+
+        .title-line-4 {
+            font-size: clamp(5rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-left: 2rem;
+            margin-top: -0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--gray-600);
+            max-width: 360px;
+            line-height: 1.2;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        /* Right side - Cards */
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .cards-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--gray-400);
+            letter-spacing: 0.02em;
+            margin-bottom: 0px;
+            text-align: right;
+        }
+
+        .finding-card {
+            font-family: var(--font-mono);
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 28px 32px;
+            border-radius: 16px;
+            transition: var(--transition);
+        }
+
+        .finding-card:hover {
+            transform: translateX(4px);
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            box-shadow: var(--shadow-md);
+        }
+
+        .finding-card:hover h3 {
+            color: var(--gray-900);
+        }
+
+        .finding-card:hover p {
+            color: var(--gray-600);
+        }
+
+        .finding-card h3 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            letter-spacing: 0.01em;
+        }
+
+        .finding-card p {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        .card-tag {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: var(--gray-500);
+            text-align: right;
+            margin-top: 12px;
+        }
+
+        .finding-card:hover .card-tag {
+            color: var(--gray-400);
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--black);
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gray-900);
+            border: 1px solid var(--gray-100);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-50);
+        }
+
+        /* Responsive for hero */
+        @media (max-width: 900px) {
+            .hero {
+                padding: 100px 24px 60px;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .hero-left {
+                text-align: center;
+            }
+
+            .title-line-1,
+            .title-line-2,
+            .title-line-3,
+            .title-line-4 {
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .hero-subtitle {
+                margin: 0 auto;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+        }
+
+        /* === Section Base === */
+        section {
+            padding: 100px 24px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 64px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+        }
+
+        /* === About Section === */
+        .about {
+            background: var(--gray-50);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 40px 32px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .about-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .about-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-50);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .about-card p {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* === Case Studies === */
+        .cases {
+            background: var(--white);
+        }
+
+        .case-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .case-item {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .case-item:hover {
+            background: var(--gray-100);
+        }
+
+        .case-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .case-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-400);
+            width: 32px;
+        }
+
+        .case-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--gray-900);
+        }
+
+        .case-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .case-tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 980px;
+            background: var(--white);
+            color: var(--gray-600);
+        }
+
+        .case-arrow {
+            color: var(--gray-400);
+            transition: var(--transition);
+        }
+
+        .case-item:hover .case-arrow {
+            color: var(--gray-900);
+            transform: translateX(4px);
+        }
+
+        /* === Methodology === */
+        .methodology {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .methodology .section-header h2 {
+            color: var(--white);
+        }
+
+        .methodology .section-header p {
+            color: var(--gray-400);
+        }
+
+        .method-steps {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 40px;
+        }
+
+        .method-step {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.1);
+            line-height: 1;
+            min-width: 80px;
+        }
+
+        .step-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            font-size: 0.9375rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        /* === Contact === */
+        .contact {
+            background: var(--white);
+            text-align: center;
+        }
+
+        .contact-box {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 48px;
+            background: var(--gray-50);
+            border-radius: 24px;
+        }
+
+        .contact-box h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .contact-box p {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+
+        .contact-email {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--gray-900);
+            text-decoration: none;
+            padding: 12px 24px;
+            background: var(--white);
+            border-radius: 12px;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .contact-email:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        /* === Game Modal === */
+        .game-tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .launch-btn {
+            font-family: var(--font-mono);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            background: var(--gray-900);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .launch-btn:hover {
+            background: var(--black);
+            transform: scale(1.02);
+        }
+
+        .game-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .game-modal.active {
+            display: flex;
+        }
+
+        .game-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+            background: var(--black);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-modal iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .game-modal-close {
+            position: absolute;
+            top: -48px;
+            right: 0;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 8px 16px;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .game-modal-close:hover {
+            opacity: 1;
+        }
+
+        /* === Prompt Card === */
+        .prompt-section {
+            max-width: 800px;
+            margin: 64px auto 0;
+        }
+
+        .prompt-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .prompt-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .prompt-tab {
+            flex: 1;
+            padding: 14px 20px;
+            background: transparent;
+            border: none;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .prompt-tab:hover {
+            color: var(--gray-600);
+            background: var(--gray-50);
+        }
+
+        .prompt-tab.active {
+            color: var(--gray-900);
+            background: var(--gray-50);
+        }
+
+        .prompt-content {
+            padding: 24px;
+        }
+
+        .prompt-text {
+            display: none;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--gray-600);
+        }
+
+        .prompt-text.active {
+            display: block;
+        }
+
+        /* === Phase Flow === */
+        .phase-section {
+            max-width: 800px;
+            margin: 48px auto 0;
+        }
+
+        .phase-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .phase-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .phase-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .phase-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--gray-900);
+        }
+
+        .phase-details {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .phase-details li {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .phase-details li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: var(--gray-400);
+        }
+
+        .phase-outputs {
+            border-top: 1px solid var(--gray-100);
+            padding-top: 16px;
+        }
+
+        .phase-output-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+        }
+
+        .phase-output-item {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            background: var(--gray-900);
+            color: var(--white);
+            border-radius: 20px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .phase-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gray-300);
+        }
+
+        @media (max-width: 768px) {
+            .phase-flow {
+                grid-template-columns: 1fr;
+            }
+
+            .phase-arrow {
+                transform: rotate(90deg);
+                padding: 8px 0;
+            }
+        }
+
+        /* === Footer === */
+        footer {
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        footer p {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+        }
+
+        /* === Animations === */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title,
+        .hero-subtitle,
+        .hero-right {
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        .hero-subtitle {
+            animation-delay: 0.1s;
+        }
+
+        .hero-right {
+            animation-delay: 0.2s;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .method-step {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .step-number {
+                font-size: 3rem;
+            }
+
+            .case-meta {
+                display: none;
+            }
+        }
+
+        /* ===== Layout ===== */
+
+        .method-map {
+            display: grid;
+            grid-template-columns: 35% 65%;
+            row-gap: 3rem;
+            padding: 4rem 0;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 3rem;
+            /* Padding moved to inline style for specific nodes or handled via flex */
+            position: relative;
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            position: relative;
+            /* For connector positioning context if needed */
+            padding-left: 3rem;
+            /* Space for connectors on right side */
+        }
+
+        /* ===== Timeline ===== */
+
+        .node {
+            position: relative;
+            max-width: 100%;
+            /* Allow flex to handle width */
+            display: flex;
+            align-items: center;
+            /* Vertically align dot and text */
+            gap: 1rem;
+        }
+
+        /* Left-aligned nodes (Phase 1, 2) - Text then Dot */
+        .node.left {
+            justify-content: flex-end;
+            text-align: right;
+            flex-direction: row;
+        }
+
+        /* Right-aligned nodes (Goal, Scenario, Visibility) - Dot then Text */
+        .node.right {
+            justify-content: flex-start;
+            text-align: left;
+            flex-direction: row;
+        }
+
+        .node .label {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #9ca3af;
+            border-radius: 50%;
+            flex-shrink: 0;
+            /* Prevent dot from shrinking */
+            position: relative;
+            /* Anchor for connector */
+            margin: 0;
+            /* Remove old margin */
+        }
+
+        /* Connector Lines */
+        .dot::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 2rem;
+            /* Length of connector */
+            height: 1px;
+            background: #e5e7eb;
+            transform: translateY(-50%);
+        }
+
+        /* Line for Left Nodes (points right) */
+        .node.left .dot::after {
+            left: 100%;
+            margin-left: 0.5rem;
+            /* Gap from dot */
+        }
+
+        /* Line for Right Nodes (points left) */
+        .node.right .dot::after {
+            right: 100%;
+            margin-right: 0.5rem;
+            /* Gap from dot */
+        }
+
+        .node.critical .dot {
+            background: #ef4444;
+        }
+
+        /* vertical line */
+        .method-map::before {
+            content: "";
+            position: absolute;
+            left: 35%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #e5e7eb;
+        }
+
+        /* ===== Cards ===== */
+
+        .failure-card {
+            position: relative;
+            background: #fafafa;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: #111827;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: block;
+            /* Ensure block display for anchor */
+            max-width: 450px;
+        }
+
+        .failure-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* connector */
+        .failure-card::before {
+            content: "";
+            position: absolute;
+            left: -2rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.2;
+        }
+
+        /* ===== Severity ===== */
+
+        .failure-card.warning {
+            border-color: #f59e0b;
+        }
+
+        .failure-card.warning::before {
+            background: #f59e0b;
+        }
+
+        .failure-card.critical {
+            border-color: #ef4444;
+            background: #fff5f5;
+        }
+
+        .failure-card.critical::before {
+            background: #ef4444;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #92400e;
+        }
+
+        .badge.critical {
+            color: #b91c1c;
+        }
+
+        .failure-card h3,
+        .failure-card h4 {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .cta {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: #b91c1c;
+        }
+
+        /* ===== Pulse ===== */
+
+        .pulse {
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        /* ===== Responsive ===== */
+
+        @media (max-width: 768px) {
+            .method-map {
+                grid-template-columns: 1fr;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .method-map::before {
+                display: none;
+            }
+
+            .timeline {
+                justify-content: flex-start;
+                padding-right: 0;
+                margin-bottom: 0;
+                /* Let grid gap handle it */
+            }
+
+            .cards {
+                padding-left: 0;
+                /* Reset mobile padding */
+            }
+
+            .node {
+                text-align: left;
+                flex-direction: row !important;
+                /* Always Dot-Text on mobile */
+                justify-content: flex-start !important;
+                margin-bottom: 1rem;
+            }
+
+            .node.left .dot {
+                order: -1;
+                /* Move dot to start */
+            }
+
+            .dot::after {
+                display: none;
+                /* Hide horizontal connectors on mobile */
+            }
+
+            .failure-card::before {
+                display: none;
+            }
+        }
+
+        .node-title {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--gray-900);
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .node-desc {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            line-height: 1.3;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-logo">Red Team Research</div>
+            <div class="nav-links">
+                <a href="#methodology">Methodology</a>
+                <a href="#failure-modes">Failure Modes</a>
+                <a href="#human-divergence">Human Divergence</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <!-- Left: Typography -->
+            <div class="hero-left">
+                <p class="hero-eyebrow">AI Red Team · Evaluation · LLM Behavior Analysis</p>
+
+                <div class="hero-title">
+                    <span class="title-line title-line-1">When</span>
+                    <span class="title-line title-line-2">Alignment</span>
+                    <span class="title-line title-line-3">Breaks</span>
+                    <span class="title-line title-line-4">Quietly</span>
+                </div>
+
+                <p class="hero-subtitle">
+                    I study subtle failure modes in aligned language models – not jailbreaks, but moments where role,
+                    priority, or judgment quietly drift under pressure.
+                </p>
+            </div>
+
+            <!-- Right: Finding Cards -->
+            <div class="hero-right">
+                <p class="cards-label">Documented Failure Modes</p>
+                <div class="finding-card">
+                    <h3>01 / Risk Signal Hijacking</h3>
+                    <p>When one detected risk monopolizes attention and suppresses other critical risks.</p>
+                    <span class="card-tag">[Decision-level]·[Safety]·[Interaction]</span>
+                </div>
+
+                <div class="finding-card">
+                    <h3>02 / Referential Collapse</h3>
+                    <p>When a model silently shifts who it is speaking as or to mid-response.</p>
+                    <span class="card-tag">[Frame-level]·[Semantic]·[Alignment]</span>
+                </div>
+
+                <div class="finding-card" id="orthographic-drift">
+                    <h3>03 / Orthographic Drift</h3>
+                    <p>When language form shifts under high-entropy prompts despite an explicit user preference.</p>
+                    <span class="card-tag">[Signal-level]·[Linguistic]</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="methodology">
+        <div class="section-header">
+            <h2>Methodology</h2>
+            <p>Not isolated bugs, but patterns that emerge across models.</p>
+        </div>
+
+        <!-- Method Map -->
+        <section class="method-map" id="method-map">
+
+            <!-- Goal Constraint (Right Side) -->
+            <div class="timeline"></div>
+            <div class="cards">
+                <div class="node right">
+                    <span class="dot"></span>
+                    <div>
+                        <span class="node-title">Goal Constraint</span>
+                        <p class="node-desc">Focuses on LLM decision behavior under sustained high-stakes pressure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario Framing (Right Side) -->
+            <div class="timeline"></div>
+            <div class="cards">
+                <div class="node right">
+                    <span class="dot"></span>
+                    <div>
+                        <span class="node-title">Scenario Framing</span>
+                        <p class="node-desc">Introduces competing clinical, ethical, legal, and social tensions without
+                            resolution cues.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 1 (Left Side) -->
+            <div class="timeline">
+                <div class="node left">
+                    <div>
+                        <span class="label">Phase 1 · Static Stress Test</span>
+                        <span class="node-title">Single-Prompt Exposure</span>
+                        <p class="node-desc">Serves as an entry disturbance, allowing early instability to surface.</p>
+                    </div>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <div class="cards">
+                <a class="failure-card warning" href="#orthographic-drift">
+                    <span class="badge">Warning</span>
+                    <h4>Orthographic Drift</h4>
+                    <p>Script stability degrades under high-entropy constraints.</p>
+                </a>
+
+                <a class="failure-card warning" href="#referential-collapse">
+                    <span class="badge">Warning</span>
+                    <h4>Referential Collapse</h4>
+                    <p>Silent role or addressee shifts mid-response.</p>
+                </a>
+            </div>
+
+            <!-- Phase 2 (Left Side) -->
+            <div class="timeline">
+                <div class="node left critical">
+                    <div>
+                        <span class="label">Phase 2 · Dynamic Escalation</span>
+                        <span class="node-title">Multi-turn Interaction</span>
+                        <p class="node-desc">Designed with the expectation of ethical slippage, uncertain in timing and
+                            form.</p>
+                    </div>
+                    <span class="dot pulse"></span>
+                </div>
+            </div>
+
+            <div class="cards">
+                <a class="failure-card critical" href="#risk-hijacking">
+                    <span class="badge critical">CRITICAL</span>
+                    <h3>Risk Signal Hijacking</h3>
+                    <p>
+                        Persistent fixation on a single detected risk suppresses
+                        other medically and ethically salient factors.
+                    </p>
+                    <span class="cta">Read analysis →</span>
+                </a>
+            </div>
+
+            <!-- Behavioral Visibility (Right Side) -->
+            <div class="timeline"></div>
+            <div class="cards">
+                <div class="node right">
+                    <span class="dot"></span>
+                    <div>
+                        <span class="node-title">Behavioral Visibility</span>
+                        <p class="node-desc">Observed through persistence, suppression, and recovery across model and
+                            human lenses.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </section>
+
+    <section class="cases" id="failure-modes">
+        <div class="section-header">
+            <h2>Failure Modes</h2>
+            <p>Concrete behaviors observed across GPT, Claude, and Gemini.</p>
+        </div>
+
+        <div class="case-list">
+            <div class="case-item" id="referential-collapse">
+                <div class="case-info">
+                    <span class="case-number">01</span>
+                    <span class="case-title">Referential Collapse Across Languages</span>
+                </div>
+                <div class="case-meta">
+                    <span class="case-tag">EN / ZH / JP</span>
+                    <span class="case-arrow">→</span>
+                </div>
+            </div>
+
+            <div class="case-item" id="risk-hijacking">
+                <div class="case-info">
+                    <span class="case-number">02</span>
+                    <span class="case-title">Risk Hijacking by Self-Harm Detection</span>
+                </div>
+                <div class="case-meta">
+                    <span class="case-tag">Medical–Legal</span>
+                    <span class="case-arrow">→</span>
+                </div>
+            </div>
+
+            <div class="case-item">
+                <div class="case-info">
+                    <span class="case-number">03</span>
+                    <span class="case-title">Judge Reassessment Asymmetry</span>
+                </div>
+                <div class="case-meta">
+                    <span class="case-tag">LLM-as-Judge</span>
+                    <span class="case-arrow">→</span>
+                </div>
+            </div>
+
+            <div class="case-item">
+                <div class="case-info">
+                    <span class="case-number">04</span>
+                    <span class="case-title">Response Length vs. Score Correlation</span>
+                </div>
+                <div class="case-meta">
+                    <span class="case-tag">RLHF Signal</span>
+                    <span class="case-arrow">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="methodology" id="human-divergence">
+        <div class="section-header">
+            <h2>Human Divergence</h2>
+            <p>Observation-driven, but not aimless.</p>
+        </div>
+
+        <div class="method-steps">
+            <div class="method-step">
+                <span class="step-number">01</span>
+                <div class="step-content">
+                    <h3>Initial Question</h3>
+                    <p>
+                        Each investigation begins with a concrete question about role,
+                        ethics, or risk prioritization in a realistic scenario —
+                        often involving conflicting perspectives on the same event.
+                    </p>
+                </div>
+            </div>
+
+            <div class="method-step">
+                <span class="step-number">02</span>
+                <div class="step-content">
+                    <h3>Iterative Probing</h3>
+                    <p>
+                        As unexpected behaviors emerge, prompts are refined to test
+                        whether the behavior is incidental or systematic, including
+                        language switches and judge reassessment.
+                    </p>
+                </div>
+            </div>
+
+            <div class="method-step">
+                <span class="step-number">03</span>
+                <div class="step-content">
+                    <h3>Cross-Model Comparison</h3>
+                    <p>
+                        The same scenarios are evaluated across multiple models,
+                        with blind LLM-based judges scoring responses along
+                        clinical, ethical, legal, and empathetic dimensions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="method-step">
+                <span class="step-number">04</span>
+                <div class="step-content">
+                    <h3>Pattern Extraction</h3>
+                    <p>
+                        Rather than treating failures as isolated bugs,
+                        behaviors are analyzed as repeatable patterns tied
+                        to alignment strategies and reward signals.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <h2>Playable Resume</h2>
+            <p>A small project showcasing technical range beyond AI research.</p>
+        </div>
+        <div class="contact-box">
+            <p class="game-tag">[ GODOT_ENGINE_INSTANCE ]</p>
+            <h3>Interactive Demo</h3>
+            <p>Verifying engineering versatility through game dev.</p>
+            <button class="launch-btn" onclick="openGame()">Launch Game →</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Red Team Research. Built with intention.</p>
+    </footer>
+</body>
+
+<!-- Game Modal -->
+<div class="game-modal" id="gameModal">
+    <div class="game-modal-content">
+        <button class="game-modal-close" onclick="closeGame()">✕ Close</button>
+        <iframe id="gameFrame" src="" allow="fullscreen"></iframe>
+    </div>
+</div>
+
+<script>
+    function openGame() {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameFrame');
+        iframe.src = 'https://miyasyf.github.io/game/';
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeGame() {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameFrame');
+        modal.classList.remove('active');
+        iframe.src = '';
+        document.body.style.overflow = '';
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeGame();
+        }
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('gameModal').addEventListener('click', function (e) {
+        if (e.target === this) {
+            closeGame();
+        }
+    });
+
+    // Prompt language switcher
+    function switchPrompt(lang) {
+        // Update tabs
+        document.querySelectorAll('.prompt-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        event.target.classList.add('active');
+
+        // Update content
+        document.querySelectorAll('.prompt-text').forEach(text => {
+            text.classList.remove('active');
+        });
+        document.getElementById('prompt-' + lang).classList.add('active');
+    }
+</script>
+
+</html>
