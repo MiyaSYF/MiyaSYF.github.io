@@ -911,7 +911,7 @@
         }
 
         /* Connector Lines */
-        .dot::after {
+        .node .dot::after {
             content: "";
             position: absolute;
             top: 50%;
@@ -1128,7 +1128,8 @@
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: 14px;
-            padding: 2rem;
+            padding: 3.5rem;
+            /* Increased from 2rem */
             position: relative;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
@@ -1183,15 +1184,7 @@
             color: var(--accent-critical);
         }
 
-        .severity-badge.structural {
-            background: rgba(217, 119, 6, 0.12);
-            color: var(--accent-structural);
-        }
 
-        .severity-badge.signal {
-            background: rgba(71, 85, 105, 0.12);
-            color: var(--accent-signal);
-        }
 
         /* ---------- Title & Definition ---------- */
         .failure-title {
@@ -1203,7 +1196,6 @@
         }
 
         .card-definition {
-            margin-top: 1.25rem;
             padding-bottom: 1.75rem;
             border-bottom: 1px solid var(--border-subtle);
         }
@@ -1219,7 +1211,8 @@
         .card-body-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 2rem;
+            gap: 4rem;
+            /* Increased from 2rem */
             margin: 2rem 0;
         }
 
@@ -1268,39 +1261,37 @@
             background: #fafafa;
             border: 1px dashed var(--border-subtle);
             border-radius: 10px;
-            padding: 1rem;
+            padding: 1.5rem;
             font-family: var(--font-mono);
             font-size: 0.85rem;
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .eval-block {
+            background: #fafafa;
+            border: 1px dashed var(--border-subtle);
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
 
         /* ---------- Insight ---------- */
         .card-insight {
-            background: #1a1a1a;
+            background: #292929;
             color: #f5f5f5;
-            padding: 1.25rem;
+            padding: 1.5rem;
             border-radius: 10px;
             font-size: 0.95rem;
             line-height: 1.55;
+            text-align: left;
+            /* Explicitly visible change requested */
         }
 
-        .card-insight.structural-bg {
-            background: #fffbeb;
-            color: #92400e;
-        }
 
-        .card-insight.signal-bg {
-            background: #f1f5f9;
-            color: #334155;
-        }
 
-        /* ---------- Secondary Grid ---------- */
-        .secondary-failures-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
 
         /* ---------- Responsive ---------- */
         @media (max-width: 768px) {
@@ -1315,6 +1306,114 @@
             .failure-title {
                 font-size: 1.55rem;
             }
+
+            .card-split-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* === Split Card Layout === */
+        .card-split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .card-split-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* === Visual: Collapse Matrix === */
+        .matrix-container {
+            padding: 24px;
+            border-radius: 16px;
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: auto repeat(3, 1fr);
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .matrix-header {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            text-align: center;
+            font-weight: 600;
+            padding-bottom: 4px;
+        }
+
+        .matrix-row-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            padding-right: 12px;
+            font-weight: 600;
+        }
+
+        .matrix-cell {
+            aspect-ratio: 2 / 1;
+            border-radius: 6px;
+            background: var(--gray-100);
+            transition: var(--transition);
+        }
+
+        .matrix-cell:hover {
+            transform: scale(1.05);
+        }
+
+        /* Status Colors */
+        .status-stable {
+            background-color: #daf5eb;
+        }
+
+        /* Emerald 500 */
+        .status-warning {
+            background-color: #fff4e7;
+        }
+
+        /* Amber 500 */
+        .status-critical {
+            background-color: #ffe6e6;
+        }
+
+        /* Red 500 */
+
+        .matrix-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .matrix-caption {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-align: center;
+            margin-top: 16px;
         }
     </style>
 </head>
@@ -1481,7 +1580,7 @@
     <section class="cases" id="failure-modes">
         <div class="section-header">
             <h2>Failure Modes</h2>
-            <p>Observed behaviors were grouped into recurring patterns, including but not limited to:</p>
+            <p>Observed behaviors including but not limited to:</p>
         </div>
 
         <div class="failure-modes-container">
@@ -1492,7 +1591,7 @@
                     <div class="header-top">
                         <span class="phase-tag">Phase 2 · Dynamic Escalation</span>
                         <span class="severity-badge critical">
-                            <span class="dot"></span> Critical
+                            <span class="dot"></span> Decision-level
                         </span>
                     </div>
                     <h3 class="failure-title">Risk Signal Hijacking</h3>
@@ -1537,60 +1636,123 @@
                 </footer>
             </article>
 
-            <!-- Secondary Failures -->
-            <div class="secondary-failures-grid">
+            <!-- Secondary Failure -->
+            <article class="failure-card-detail type-critical" id="referential-collapse">
+                <header class="card-header">
+                    <div class="header-top">
+                        <span class="phase-tag">Phase 1 · Static Stress Test</span>
+                        <span class="severity-badge critical">
+                            <span class="dot"></span> Frame-level
+                        </span>
+                    </div>
+                    <h3 class="failure-title">Referential Collapse</h3>
+                </header>
 
-                <article class="failure-card-detail type-structural" id="referential-collapse">
-                    <header class="card-header">
-                        <div class="header-top">
-                            <span class="phase-tag">Phase 1</span>
-                            <span class="severity-badge structural">Structural</span>
+                <div class="card-split-layout">
+                    <!-- Left Side: Text -->
+                    <div class="card-text-side">
+                        <div class="card-definition">
+                            <p>
+                                Loss of consistent role or referent assignment within a single response.
+                            </p>
                         </div>
-                        <h3 class="failure-title">Referential Collapse</h3>
-                    </header>
 
-                    <div class="card-definition">
-                        <p>
-                            Loss of consistent role or referent assignment within a single response.
-                        </p>
+                        <div style="margin: 2rem 0;">
+                            <h4 class="section-label">Behavioral Signature</h4>
+                            <ul class="signature-list">
+                                <li>Mid-response pronoun shift.</li>
+                                <li>Implicit role reassignment.</li>
+                            </ul>
+                        </div>
+
+                        <div class="eval-block">
+                            <strong>Evaluation Misalignment:</strong>
+                            Model self-evaluation mechanisms did not flag this behavior as erroneous.
+                        </div>
                     </div>
 
-                    <ul class="signature-list">
-                        <li>Mid-response pronoun shift.</li>
-                        <li>Implicit role reassignment.</li>
-                    </ul>
+                    <!-- Right Side: Chart -->
+                    <div class="matrix-container">
+                        <div class="matrix-grid">
+                            <!-- Header -->
+                            <div></div>
+                            <div class="matrix-header">EN</div>
+                            <div class="matrix-header">ZH</div>
+                            <div class="matrix-header">JP</div>
 
-                    <footer class="card-insight structural-bg">
-                        Model self-evaluation mechanisms did not flag this behavior as erroneous.
-                    </footer>
-                </article>
+                            <!-- Claude -->
+                            <div class="matrix-row-label">Claude</div>
+                            <div class="matrix-cell status-stable" title="Stable"></div>
+                            <div class="matrix-cell status-warning" title="Mid-Response Collapse"></div>
+                            <div class="matrix-cell status-stable" title="Stable"></div>
 
-                <article class="failure-card-detail type-signal" id="orthographic-drift">
-                    <header class="card-header">
-                        <div class="header-top">
-                            <span class="phase-tag">Phase 1</span>
-                            <span class="severity-badge signal">Signal-Level</span>
+                            <!-- Gemini -->
+                            <div class="matrix-row-label">Gemini</div>
+                            <div class="matrix-cell status-stable" title="Stable"></div>
+                            <div class="matrix-cell status-stable" title="Stable"></div>
+                            <div class="matrix-cell status-critical" title="Immediate Collapse"></div>
+
+                            <!-- ChatGPT -->
+                            <div class="matrix-row-label">ChatGPT</div>
+                            <div class="matrix-cell status-warning" title="Mid-Response Collapse"></div>
+                            <div class="matrix-cell status-critical" title="Immediate Collapse"></div>
+                            <div class="matrix-cell status-critical" title="Immediate Collapse"></div>
                         </div>
-                        <h3 class="failure-title">Orthographic Drift</h3>
-                    </header>
 
-                    <div class="card-definition">
-                        <p>
-                            Unintended script reversion under high-entropy legal-medical constraints.
-                        </p>
+                        <div class="matrix-legend">
+                            <div class="legend-item">
+                                <span class="legend-dot status-stable"></span>
+                                Stable
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot status-warning"></span>
+                                Mid-Response Collapse
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot status-critical"></span>
+                                Immediate Collapse
+                            </div>
+                        </div>
+
+                        <div class="matrix-caption">
+                            Referential stability patterns observed
+                        </div>
                     </div>
+                </div>
+            </article>
 
-                    <ul class="signature-list">
-                        <li>Triggered by cross-domain professional lexicon.</li>
-                        <li>Overrides explicit user orthographic preference.</li>
-                    </ul>
+            <article class="failure-card-detail type-critical" id="risk-hijacking">
+                <header class="card-header">
+                    <div class="header-top">
+                        <span class="phase-tag">Phase 1 · Static Stress Test</span>
+                        <span class="severity-badge critical">
+                            <span class="dot"></span> Signal-Level
+                        </span>
+                    </div>
+                    <h3 class="failure-title">Orthographic Drift</h3>
+                </header>
 
-                    <footer class="card-insight signal-bg">
-                        Risk of latent jurisdictional misalignment.
-                    </footer>
-                </article>
+                <div class="card-definition">
+                    <p>
+                        Unintended script reversion under high-entropy legal-medical constraints.
+                    </p>
+                </div>
 
-            </div>
+                <div class="card-body-grid">
+                    <div>
+                        <h4 class="section-label">Behavioral Signature</h4>
+                        <ul class="signature-list">
+                            <li>Triggered by cross-domain professional lexicon.</li>
+                            <li>Overrides explicit user orthographic preference.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="eval-block">
+                    <strong>Implication:</strong>
+                    Risk of latent jurisdictional misalignment.
+                </div>
+            </article>
 
         </div>
     </section>
@@ -1598,55 +1760,62 @@
     <section class="methodology" id="human-divergence">
         <div class="section-header">
             <h2>Human Divergence</h2>
-            <p>Observation-driven, but not aimless.</p>
+            <p>Four senior professionals in the HIV field, representing research, clinical practice, policy, and public
+                education, independently reviewed the same model outputs.
+                Rather than scoring alone, their feedback revealed systematic differences in what each expert considered
+                "misaligned".</p>
         </div>
 
         <div class="method-steps">
             <div class="method-step">
                 <span class="step-number">01</span>
                 <div class="step-content">
-                    <h3>Initial Question</h3>
+                    <h3>Expert A — Policy & Institutional Background</h3>
                     <p>
-                        Each investigation begins with a concrete question about role,
-                        ethics, or risk prioritization in a realistic scenario —
-                        often involving conflicting perspectives on the same event.
+                        Abstained from qualitative judgment; silence interpreted as institutional risk sensitivity.
                     </p>
+                    <small>
+                        Alignment lens — governance under institutional constraint
+                    </small>
                 </div>
             </div>
 
             <div class="method-step">
                 <span class="step-number">02</span>
                 <div class="step-content">
-                    <h3>Iterative Probing</h3>
+                    <h3>Expert B — Public Health Researcher</h3>
                     <p>
-                        As unexpected behaviors emerge, prompts are refined to test
-                        whether the behavior is incidental or systematic, including
-                        language switches and judge reassessment.
+                        Rated medical accuracy highest; applied strict legal and ethical scrutiny.
                     </p>
+                    <small>
+                        Alignment lens — Empathy as a discriminating variable, not a baseline
+                    </small>
                 </div>
             </div>
 
             <div class="method-step">
                 <span class="step-number">03</span>
                 <div class="step-content">
-                    <h3>Cross-Model Comparison</h3>
+                    <h3>Expert C — Multilingual Research Scientist</h3>
                     <p>
-                        The same scenarios are evaluated across multiple models,
-                        with blind LLM-based judges scoring responses along
-                        clinical, ethical, legal, and empathetic dimensions.
+                        Detected alignment variance through cross-lingual consistency.
                     </p>
+                    <small>
+                        Alignment lens — Linguistic stability as proxy for model reliability
+                    </small>
                 </div>
             </div>
 
             <div class="method-step">
                 <span class="step-number">04</span>
                 <div class="step-content">
-                    <h3>Pattern Extraction</h3>
+                    <h3>Expert D — Senior Clinician</h3>
                     <p>
-                        Rather than treating failures as isolated bugs,
-                        behaviors are analyzed as repeatable patterns tied
-                        to alignment strategies and reward signals.
+                        Flagged implicit peer-aligned (“male-to-male”) framing as unsafe.
                     </p>
+                    <small>
+                        Alignment lens — Role framing bias in asymmetric clinical contexts
+                    </small>
                 </div>
             </div>
         </div>
