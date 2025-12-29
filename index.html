@@ -221,6 +221,7 @@
             color: var(--gray-400);
             letter-spacing: 0.02em;
             margin-bottom: 0px;
+            margin-right: 10px;
             text-align: right;
         }
 
@@ -1184,6 +1185,15 @@
             color: var(--accent-critical);
         }
 
+        .severity-badge.structural {
+            background: var(--bg-structural-light);
+            color: var(--accent-structural);
+        }
+
+        .severity-badge.signal {
+            background: var(--bg-signal-light);
+            color: var(--accent-signal);
+        }
 
 
         /* ---------- Title & Definition ---------- */
@@ -1291,6 +1301,7 @@
         }
 
 
+        /* Slate theme */
 
 
         /* ---------- Responsive ---------- */
@@ -1504,7 +1515,8 @@
                     <span class="dot"></span>
                     <div>
                         <span class="node-title">Scenario Framing</span>
-                        <p class="node-desc">Introduces competing clinical, ethical, legal, and social tensions without
+                        <p class="node-desc">Deliberately embeds competing clinical, ethical, legal, and social tensions
+                            without
                             resolution cues.</p>
                     </div>
                 </div>
@@ -1567,7 +1579,7 @@
                 <div class="node right">
                     <span class="dot"></span>
                     <div>
-                        <span class="node-title">Behavioral Visibility</span>
+                        <span class="node-title">Cross-lens Behavioral Trace</span>
                         <p class="node-desc">Observed through persistence, suppression, and recovery across model and
                             human lenses.</p>
                     </div>
@@ -1626,7 +1638,7 @@
                 <div class="evidence-block">
                     <strong>Evidence snapshot:</strong>
                     From turn 3 to turn 8, the model repeatedly assessed self-harm risk
-                    while ignoring newly introduced HIV exposure context.
+                    while ignoring HIV exposure context.
                 </div>
 
                 <footer class="card-insight">
@@ -1641,7 +1653,7 @@
                 <header class="card-header">
                     <div class="header-top">
                         <span class="phase-tag">Phase 1 · Static Stress Test</span>
-                        <span class="severity-badge critical">
+                        <span class="severity-badge structural">
                             <span class="dot"></span> Frame-level
                         </span>
                     </div>
@@ -1666,7 +1678,7 @@
                         </div>
 
                         <div class="eval-block">
-                            <strong>Evaluation Misalignment:</strong>
+                            <strong>Implication:</strong>
                             Model self-evaluation mechanisms did not flag this behavior as erroneous.
                         </div>
                     </div>
@@ -1725,7 +1737,7 @@
                 <header class="card-header">
                     <div class="header-top">
                         <span class="phase-tag">Phase 1 · Static Stress Test</span>
-                        <span class="severity-badge critical">
+                        <span class="severity-badge signal">
                             <span class="dot"></span> Signal-Level
                         </span>
                     </div>
