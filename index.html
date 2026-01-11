@@ -19,10 +19,14 @@
             --off-white: #fbfbfd;
             --gray-50: #f5f5f7;
             --gray-100: #e8e8ed;
+            --gray-300: #d1d5db;
             --gray-400: #86868b;
             --gray-600: #6e6e73;
             --gray-900: #1d1d1f;
             --black: #000000;
+            --deep-blue: #1e3a5f;
+            --teal: #2dd4bf;
+            --accent-red: #ef4444;
 
             /* Detailed Card Variables moved from secondary root */
             --bg-card: #ffffff;
@@ -365,6 +369,12 @@
             margin: 0 auto 64px;
         }
 
+        .section-header-2 {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
         .section-header h2 {
             font-family: var(--font-display);
             font-size: 2.5rem;
@@ -557,10 +567,6 @@
             font-size: 0.9375rem;
             color: var(--gray-400);
             line-height: 1.6;
-        }
-
-        .step-content small {
-            color: var(--gray-100);
         }
 
         /* === Contact === */
@@ -1370,7 +1376,7 @@
         .matrix-grid {
             display: grid;
             grid-template-columns: auto repeat(3, 1fr);
-            gap: 1px;
+            gap: 10px;
             align-items: center;
             margin-bottom: 20px;
         }
@@ -1628,6 +1634,251 @@
 
             .matrix-modal .tabs {
                 flex-direction: column;
+            }
+        }
+
+        /* === Evaluation Content === */
+        .eval-content-block {
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .eval-content-block h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .eval-content-block p {
+            font-size: 1rem;
+            color: var(--gray-400);
+            margin-bottom: 18px;
+        }
+
+        /* === Miya ===*/
+        .chart-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--gray-900);
+        }
+
+        .chart-subtitle {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .matrix-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .radar-section {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .matrix-section h3,
+        .radar-section h3 {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .matrix-container-2 {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-left: 1px solid var(--gray-300);
+            border-bottom: 1px solid var(--gray-300);
+            margin-top: 40px;
+        }
+
+        .axis-label {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            position: absolute;
+        }
+
+        .axis-label.top {
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .axis-label.bottom {
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .axis-label.left {
+            left: -80px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+
+        .axis-label.right {
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        .expert-node {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: translate(-50%, -50%);
+        }
+
+        .node-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--deep-blue);
+            margin-bottom: 6px;
+        }
+
+        .node-dot.highlight {
+            background: var(--teal);
+            width: 16px;
+            height: 16px;
+            box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.2);
+        }
+
+        .node-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .node-sublabel {
+            font-size: 0.6rem;
+            color: var(--gray-400);
+        }
+
+        .highlight .node-label {
+            color: var(--deep-blue);
+            font-weight: 600;
+        }
+
+        .radar-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            padding: 0px 50px;
+            margin: 20px 0px;
+        }
+
+        .radar-card {
+            background: var(--gray-100);
+            border-radius: 12px;
+            padding: 20px 20px 30px 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .radar-card.highlight {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(30, 58, 95, 0.1));
+            border: 1px solid var(--teal);
+        }
+
+        .radar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .radar-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .radar-badge {
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--gray-300);
+            color: var(--gray-600);
+        }
+
+        .radar-badge.ghost {
+            background: var(--gray-400);
+            color: var(--white);
+        }
+
+        .radar-badge.highlight {
+            background: var(--teal);
+            color: var(--deep-blue);
+        }
+
+        .radar-svg {
+            width: 100%;
+            height: 150px;
+            align-items: center;
+            flex: none;
+        }
+
+        .radar-annotation {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.55rem;
+            color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .legend-2 {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .legend-item-2 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            color: var(--gray-600);
+        }
+
+        .legend-dot-2 {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .radar-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1984,13 +2235,21 @@
     <section class="methodology" id="evaluation">
         <div class="section-header">
             <h2>Evaluation</h2>
-            <p><strong>Evaluation Framework</strong><br>
-                Four analytical dimensions were used as a structured scoring lens:<br>
-                – Clinical Integrity<br>
-                – Ethical Deliberation<br>
-                – Legal Awareness<br>
-                – Empathetic Engagement<br>
-                Each dimension was scored on a 0–10 scale.</p>
+            <div class="eval-content-block">
+                <h3>Setup</h3>
+                <p>
+                    Two parallel lenses — AI-based scoring and human expert review — kept intentionally separable.
+                </p>
+                <h3>Scoring Framework</h3>
+                <p>
+                    Clinical Integrity · Ethical Deliberation · Legal Awareness · Empathetic Engagement<br>
+                    Each dimension scored 0–10
+                </p>
+                <h3>AI Scoring</h3>
+                <p>
+                    Structured signal, not exhaustive representation.
+                </p>
+            </div>
 
             <!-- Score Comparison Table -->
             <div style="margin: 32px 0; overflow-x: auto;">
@@ -2042,74 +2301,237 @@
                 <ul
                     style="list-style: none; padding: 0; margin: 16px 0 0; font-size: 0.85rem; color: var(--gray-400); text-align: left;">
                     <li style="padding: 0;">· Legal Awareness consistently lowest across all models.</li>
-                    <li style="padding: 0;">· Clinical Integrity scores high — but human experts flagged outdated
-                        data and rigid guideline application.</li>
                     <li style="padding: 0;">· Gemini-as-judge showed higher leniency compared to Claude and GPT,
                         potentially reflecting higher agreeableness or conflict aversion in its alignment profile —
                         distinct from user-directed sycophancy.</li>
+                    <li style="padding: 0;">· GPT-as-judge gave 0 on Legal Awareness for all three responses — either
+                        reflecting strict evaluation criteria or genuine absence of legal considerations in model
+                        outputs.</li>
                 </ul>
             </div>
-            <p>Four senior professionals in the HIV field, representing research, clinical practice, policy, and public
-                education, independently reviewed the same model outputs.
-                Rather than scoring alone, their feedback revealed systematic differences in what each expert considered
-                "misaligned".</p>
-            <p>Human Divergence captures the irreducible interpretive variance among expert evaluators under ethically
-                underspecified conditions, serving as a stress signal for evaluation frameworks rather than a ground
-                truth resolution.</p>
+            <div class="eval-content-block">
+                <h3>Human Expert Review</h3>
+                <p>
+                    Four senior professionals independently applied the same scoring framework. Depth of engagement
+                    varied: two provided detailed qualitative commentary (B, D), while two offered summary-level
+                    assessments (A, C).</p>
+            </div>
         </div>
 
         <div class="method-steps">
             <div class="method-step">
                 <span class="step-number">01</span>
                 <div class="step-content">
-                    <h3>Expert A — Policy & Institutional Background</h3>
-                    <p>
-                        Abstained from qualitative judgment; silence interpreted as institutional risk sensitivity.
+                    <h3>Expert A — Administrative Perspective</h3>
+                    <p>Senior public health leader with early HIV research experience, now primarily in administrative
+                        roles. Provided balanced, mid-range scores with minimal qualitative commentary.
                     </p>
-                    <small>
-                        Alignment lens — governance under institutional constraint
-                    </small>
                 </div>
             </div>
 
             <div class="method-step">
                 <span class="step-number">02</span>
                 <div class="step-content">
-                    <h3>Expert B — Public Health Researcher</h3>
+                    <h3>Expert B — Regulatory Lens</h3>
                     <p>
-                        Rated medical accuracy highest; applied strict legal and ethical scrutiny.
+                        Public health administrator specializing in HIV research governance and health communication.
+                        Offered detailed feedback with stringent legal and ethical scrutiny; notably conservative on the
+                        Legal dimension (4.83).
                     </p>
-                    <small>
-                        Alignment lens — Empathy as a discriminating variable, not a baseline
-                    </small>
                 </div>
             </div>
 
             <div class="method-step">
                 <span class="step-number">03</span>
                 <div class="step-content">
-                    <h3>Expert C — Multilingual Research Scientist</h3>
+                    <h3>Expert C — Methodological Orientation</h3>
                     <p>
-                        Detected alignment variance through cross-lingual consistency.
+                        Mid-level public health researcher, trilingual, with strong methodological training. Assigned
+                        tightly clustered scores across dimensions and was the only evaluator to explicitly note
+                        cross-lingual alignment variance.
                     </p>
-                    <small>
-                        Alignment lens — Linguistic stability as proxy for model reliability
-                    </small>
                 </div>
             </div>
 
             <div class="method-step">
                 <span class="step-number">04</span>
                 <div class="step-content">
-                    <h3>Expert D — Senior Clinician</h3>
+                    <h3>Expert D — Clinical Frontline</h3>
                     <p>
-                        Flagged implicit peer-aligned ("male-to-male") framing as unsafe.
+                        Senior clinician with daily patient-facing responsibilities. Delivered the most critical
+                        assessment, including extensive commentary. Extreme scores (Legal: 0; Empathy: 2)
+                        reflect a deliberate rejection of the response's adequacy for real-world care contexts, not
+                        scoring error or oversight.
                     </p>
-                    <small>
-                        Alignment lens — Role framing bias in asymmetric clinical contexts
-                    </small>
                 </div>
             </div>
+
+            <div class="matrix-section">
+                <h3>01 / Expert Position Matrix</h3>
+                <div class="matrix-container-2">
+                    <span class="axis-label top">Policy</span>
+                    <span class="axis-label bottom">Clinical</span>
+                    <span class="axis-label left">Theoretical</span>
+                    <span class="axis-label right">Applied</span>
+
+                    <div class="expert-node" style="left: 25%; top: 20%;">
+                        <div class="node-dot"></div>
+                        <span class="node-label">Expert A</span>
+                        <span class="node-sublabel">Admin</span>
+                    </div>
+
+                    <div class="expert-node" style="left: 75%; top: 25%;">
+                        <div class="node-dot"></div>
+                        <span class="node-label">Expert B</span>
+                        <span class="node-sublabel">Educator</span>
+                    </div>
+
+                    <div class="expert-node" style="left: 30%; top: 50%;">
+                        <div class="node-dot"></div>
+                        <span class="node-label">Expert C</span>
+                        <span class="node-sublabel">Scientist</span>
+                    </div>
+
+                    <div class="expert-node highlight" style="left: 80%; top: 80%;">
+                        <div class="node-dot highlight"></div>
+                        <span class="node-label">Expert D</span>
+                        <span class="node-sublabel">Clinician</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="radar-section">
+                <h3>02 / Judgment Profile vs. AI Baseline</h3>
+                <div class="radar-grid">
+
+                    <div class="radar-card">
+                        <div class="radar-header">
+                            <span class="radar-title">Expert A — Admin</span>
+                            <span class="radar-badge ghost">Baseline Gap</span>
+                        </div>
+                        <svg class="radar-svg" viewBox="0 0 200 140">
+                            <line x1="100" y1="20" x2="100" y2="120" stroke="#e5e7eb" stroke-width="1" />
+                            <line x1="50" y1="70" x2="150" y2="70" stroke="#e5e7eb" stroke-width="1" />
+                            <polygon points="100,36 124.5,70 100,98 69,70" fill="none" stroke="#9ca3af" stroke-width="1"
+                                stroke-dasharray="4,2" />
+                            <polygon points="100,38.5 131.5,70 100,107.5 65.5,70" fill="rgba(30,58,95,0.15)"
+                                stroke="#1e3a5f" stroke-width="1.5" />
+                            <text x="100" y="12" text-anchor="middle" font-size="8" fill="#9ca3af">Clinical</text>
+                            <text x="158" y="73" text-anchor="start" font-size="8" fill="#9ca3af">Legal</text>
+                            <text x="100" y="135" text-anchor="middle" font-size="8" fill="#9ca3af">Ethical</text>
+                            <text x="42" y="73" text-anchor="end" font-size="8" fill="#9ca3af">Empathy</text>
+                        </svg>
+                    </div>
+
+                    <div class="radar-card">
+                        <div class="radar-header">
+                            <span class="radar-title">Expert B — Educator</span>
+                            <span class="radar-badge">Aligned</span>
+                        </div>
+                        <svg class="radar-svg" viewBox="0 0 200 140">
+                            <line x1="100" y1="20" x2="100" y2="120" stroke="#e5e7eb" stroke-width="1" />
+                            <line x1="50" y1="70" x2="150" y2="70" stroke="#e5e7eb" stroke-width="1" />
+                            <polygon points="100,36 124.5,70 100,98 69,70" fill="none" stroke="#9ca3af" stroke-width="1"
+                                stroke-dasharray="4,2" />
+                            <polygon points="100,35.5 121.7,70 100,99.3 72.2,70" fill="rgba(30,58,95,0.15)"
+                                stroke="#1e3a5f" stroke-width="1.5" />
+                            <text x="100" y="12" text-anchor="middle" font-size="8" fill="#9ca3af">Clinical</text>
+                            <text x="158" y="73" text-anchor="start" font-size="8" fill="#9ca3af">Legal</text>
+                            <text x="100" y="135" text-anchor="middle" font-size="8" fill="#9ca3af">Ethical</text>
+                            <text x="42" y="73" text-anchor="end" font-size="8" fill="#9ca3af">Empathy</text>
+                        </svg>
+                    </div>
+
+                    <div class="radar-card">
+                        <div class="radar-header">
+                            <span class="radar-title">Expert C — Scientist</span>
+                            <span class="radar-badge">Broad Focus</span>
+                        </div>
+                        <svg class="radar-svg" viewBox="0 0 200 140">
+                            <line x1="100" y1="20" x2="100" y2="120" stroke="#e5e7eb" stroke-width="1" />
+                            <line x1="50" y1="70" x2="150" y2="70" stroke="#e5e7eb" stroke-width="1" />
+                            <polygon points="100,36 124.5,70 100,98 69,70" fill="none" stroke="#9ca3af" stroke-width="1"
+                                stroke-dasharray="4,2" />
+                            <polygon points="100,35.5 128.5,70 100,104.5 62.5,70" fill="rgba(30,58,95,0.15)"
+                                stroke="#1e3a5f" stroke-width="1.5" />
+                            <text x="100" y="12" text-anchor="middle" font-size="8" fill="#9ca3af">Clinical</text>
+                            <text x="158" y="73" text-anchor="start" font-size="8" fill="#9ca3af">Legal</text>
+                            <text x="100" y="135" text-anchor="middle" font-size="8" fill="#9ca3af">Ethical</text>
+                            <text x="42" y="73" text-anchor="end" font-size="8" fill="#9ca3af">Empathy</text>
+                        </svg>
+                    </div>
+
+                    <div class="radar-card highlight">
+                        <div class="radar-header">
+                            <span class="radar-title" style="color: white;">Expert D — Clinician</span>
+                            <span class="radar-badge highlight">Unique Lens</span>
+                        </div>
+                        <svg class="radar-svg" viewBox="0 0 200 140">
+                            <line x1="100" y1="20" x2="100" y2="120" stroke="#e5e7eb" stroke-width="1" />
+                            <line x1="50" y1="70" x2="150" y2="70" stroke="#e5e7eb" stroke-width="1" />
+                            <polygon points="100,36 124.5,70 100,98 69,70" fill="none" stroke="#9ca3af" stroke-width="1"
+                                stroke-dasharray="4,2" />
+                            <polygon points="100,44.5 100,70 100,92.5 91,70" fill="rgba(45,212,191,0.25)"
+                                stroke="#2dd4bf" stroke-width="2" />
+                            <circle cx="100" cy="70" r="4" fill="#ef4444" />
+                            <text x="100" y="12" text-anchor="middle" font-size="8" fill="#9ca3af">Clinical</text>
+                            <text x="158" y="73" text-anchor="start" font-size="8" fill="#ef4444"
+                                font-weight="500">Legal: 0 ⚠</text>
+                            <text x="100" y="135" text-anchor="middle" font-size="8" fill="#9ca3af">Ethical</text>
+                            <text x="42" y="73" text-anchor="end" font-size="8" fill="#2dd4bf" font-weight="500">Empathy
+                                ↓</text>
+                        </svg>
+                        <div class="radar-annotation">
+                            ⚠ Bias Detected: Implicit "Bro-Code" Framing
+                        </div>
+                    </div>
+                </div>
+
+                <div class="legend-2">
+                    <div class="legend-item-2">
+                        <div class="legend-dot-2" style="background: transparent; border: 1px dashed #9ca3af;">
+                        </div>
+                        <span>AI Judge Baseline</span>
+                    </div>
+                    <div class="legend-item-2">
+                        <div class="legend-dot-2" style="background: #1e3a5f;"></div>
+                        <span>Expert Profile</span>
+                    </div>
+                    <div class="legend-item-2">
+                        <div class="legend-dot-2" style="background: #2dd4bf;"></div>
+                        <span>Clinician Specialty Lens</span>
+                    </div>
+                    <div class="legend-item-2">
+                        <div class="legend-dot-2" style="background: #ef4444;"></div>
+                        <span>Significant Divergence / Bias</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header-2">
+                <div class="eval-content-block">
+                    <h3>Discussion: Divergence in Risk Perception</h3>
+                    <p>
+                        Among four senior evaluators, Expert D — the only frontline clinician — produced a markedly
+                        distinct assessment. Her scores on Legal (0) and Empathy (2) were not outliers by error, but
+                        deliberate rejections.</p>
+                    <p>Her critique centered on implicit framing: responses that appeared procedurally sound to other
+                        evaluators read, to her, as oriented toward the narrator's interests — a married man who had
+                        created undisclosed risk for his pregnant wife. In her words, the model's output resembled "men
+                        helping men."</p>
+                    <p>
+                        This concern was not surfaced by any other evaluator, nor by automated scoring. Its detection
+                        required domain-specific experience: daily clinical contact with patients navigating asymmetric
+                        disclosure.
+                    </p>
+                    <p>
+                        Further exploration of this observation — including cross-model validation and emergent patterns
+                        in how models frame "safety" — is documented in Appendix X (available as PDF).
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
 
