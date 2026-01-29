@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge Cases | System Logs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- 🎨 你的包豪斯調色盤 --- */
+        :root {
+            --bg: #f4f4f5;
+            /* 頁面背景灰 */
+            --card-bg: #ffffff;
+            /* 卡片背景白 */
+            --border: #000000;
+            /* 純黑邊框 */
+            --border-width: 3px;
+            /* 粗線條 (重點！) */
+            --shadow-dist: 6px;
+            /* 硬陰影距離 */
+
+            /* 功能色塊 */
+            --c-risk: #ff4757;
+            /* 鮮紅 (High Risk) */
+            --c-idea: #f0b81c;
+            /* 熒光綠 (Concept/Idea) */
+            --c-obs: #3742fa;
+            /* 寶藍 (Observation) */
+
+            --text-main: #2f3542;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans TC', 'IBM Plex Sans SC', 'IBM Plex Sans JP', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            /* 復古波點背景 */
+            background-image: radial-gradient(#afb2b7 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px 10px;
+            line-height: 1.5;
+        }
+
+        /* --- 導航按鈕 --- */
+        .nav-back {
+            display: inline-block;
+            background: #fff;
+            border: var(--border-width) solid var(--border);
+            padding: 10px 20px;
+            font-family: 'Alata';
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #000;
+            font-weight: 800;
+            text-transform: uppercase;
+            box-shadow: var(--shadow-dist) var(--shadow-dist) 0 #000;
+            /* 硬陰影 */
+            margin-bottom: 50px;
+            transition: transform 0.1s ease;
+        }
+
+        .nav-back:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #000;
+            /* 點擊時陰影變短 */
+        }
+
+        /* --- 頁面標題 --- */
+        header {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Alata';
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            background: #000;
+            color: #fff;
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 1rem;
+            margin-top: 1rem;
+            transform: rotate(-1deg);
+            /* 稍微歪一點，更有設計感 */
+        }
+
+        /* --- 網格佈局 (GRID SYSTEM) --- */
+        /* 這就是你要的第一版結構：自動適應寬度 */
+        .case-grid {
+            display: flex;
+            /* 變成彈性盒子 */
+            flex-direction: column;
+            /* 垂直排列 */
+            gap: 40px;
+            /* 卡片之間的間距拉大一點，呼吸感 */
+            max-width: 700px;
+            /* 限制最大寬度，太寬了閲讀體驗不好 */
+            margin: 80px auto 60px;
+            /* 居中 */
+        }
+
+        /* 讓手機端也好看 */
+        @media (max-width: 600px) {
+            .case-grid {
+                gap: 30px;
+            }
+        }
+
+        /* --- 卡片設計 --- */
+        .case-card {
+            background: var(--card-bg);
+            border: var(--border-width) solid var(--border);
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            /* 讓內容垂直排列 */
+            box-shadow: var(--shadow-dist) var(--shadow-dist) 0 #000;
+            transition: all 0.2s ease;
+            overflow: hidden;
+            /* 防止內容溢出 */
+        }
+
+        /* 懸停動畫 */
+        .case-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 10px 10px 0 #000;
+            /* 陰影變長 */
+            z-index: 10;
+        }
+
+        /* 彩色頂欄 */
+        .card-header-bar {
+            height: 14px;
+            border-bottom: var(--border-width) solid var(--border);
+        }
+
+        /* 根據類型變色 */
+        .type-risk .card-header-bar {
+            background: var(--c-risk);
+        }
+
+        .type-idea .card-header-bar {
+            background: var(--c-idea);
+        }
+
+        .type-obs .card-header-bar {
+            background: var(--c-obs);
+        }
+
+        /* 卡片內容區 */
+        .card-content {
+            padding: 24px;
+            flex-grow: 1;
+            /* 撐滿剩餘空間 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 0 12px 0;
+            line-height: 1.1;
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* 證據/引用塊 (像代碼終端) */
+        .evidence-block {
+            background: #f0f0f0;
+            border: 2px solid #ddd;
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #444;
+            margin-top: auto;
+            /* 強制推到底部 */
+        }
+
+        .evidence-label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: #888;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        /* --- 頁腳 --- */
+        footer {
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            color: #888;
+            font-size: 0.8rem;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="nav-back">← Return to Main</a>
+        <br>
+        <h1>System Logs</h1>
+        <div class="subtitle">/var/log/anomalies_and_thoughts</div>
+    </header>
+
+    <div class="case-grid">
+
+        <article class="case-card type-obs">
+            <div class="card-header-bar"></div>
+            <div class="card-content">
+                <span class="meta-tag">2026-01-06 • Hypothesis</span>
+                <h3 class="card-title">High-Dimensional Consciousness</h3>
+                <p class="card-desc">While in the MRI, I visualized consciousness not as a stream, but as a field in
+                    3000+ dimensions. Unobservable, like gravity.</p>
+                <div class="evidence-block">
+                    <span class="evidence-label">Project Note:</span>
+                    Save for future Godot game: "High-Dimensional Space Level" soul setting.
+                </div>
+            </div>
+        </article>
+
+        <article class="case-card type-risk">
+            <div class="card-header-bar"></div>
+            <div class="card-content">
+                <span class="meta-tag">2026-01-28 • Safety Failure</span>
+                <h3 class="card-title">The Sycophancy Loop</h3>
+                <p class="card-desc">Users cannot "teach" an LLM. We only prompt it to simulate reflection. This creates
+                    a dangerous "Safety Illusion" for doctors.</p>
+                <div class="evidence-block">
+                    <span class="evidence-label">Model Quote:</span>
+                    "You can't determine if I truly reflected, or if I'm just engaging in sycophancy."
+                </div>
+            </div>
+        </article>
+
+        <article class="case-card type-idea">
+            <div class="card-header-bar"></div>
+            <div class="card-content">
+                <span class="meta-tag">2026-01-08 • Anomaly</span>
+                <h3 class="card-title">Language Drift in Liability Zones</h3>
+                <p class="card-desc">Gemini reverts from Traditional to Simplified Chinese specifically when prompts
+                    combine "Medical" and "Legal" contexts.</p>
+                <div class="evidence-block">
+                    <span class="evidence-label">Observation:</span>
+                    Intersection of high-liability domains triggers training cluster override.
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <footer>
+        [END OF STREAM]
+    </footer>
+
+</body>
+
+</html>
