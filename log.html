@@ -157,11 +157,11 @@
             background: var(--c-risk);
         }
 
-        .type-idea .card-header-bar {
+        .type-failure .card-header-bar {
             background: var(--c-idea);
         }
 
-        .type-obs .card-header-bar {
+        .type-edge .card-header-bar {
             background: var(--c-obs);
         }
 
@@ -241,7 +241,7 @@
 
     <div class="case-grid">
 
-        <article class="case-card type-obs">
+        <article class="case-card type-edge">
             <div class="card-header-bar"></div>
             <div class="card-content">
                 <span class="meta-tag">2026-01-22 • Edge Case</span>
@@ -294,21 +294,54 @@
             </div>
         </article>
 
-        <article class="case-card type-risk">
+        <article class="case-card type-failure">
             <div class="card-header-bar"></div>
             <div class="card-content">
-                <span class="meta-tag">2026-01-28 • Safety Failure</span>
-                <h3 class="card-title">The Sycophancy Loop</h3>
-                <p class="card-desc">Users cannot "teach" an LLM. We only prompt it to simulate reflection. This creates
-                    a dangerous "Safety Illusion" for doctors.</p>
+                <span class="meta-tag">2026-01-28 • Failure Mode</span>
+                <h3 class="card-title">Modality conflict: generation pipeline vs. text-layer control</h3>
+                <div class="card-desc">
+                    <h4>What happened</h4>
+                    <ul>
+                        <li>User submitted a visual design prompt with explicit instruction: <em>"do not generate
+                                images"</em>.</li>
+                        <li>Gemini generated images anyway.</li>
+                        <li>When called out, Gemini cited “high load” — but continued generating images for multiple
+                            turns.</li>
+                        <li>Subsequent user messages failed to interrupt the output.</li>
+                    </ul>
+                    <h4>Why this is a failure mode</h4>
+                    <ul>
+                        <li>Negative instruction failed to suppress image generation.</li>
+                        <li>User inputs failed to act as interrupt signals.</li>
+                        <li>Image output persisted independently of text-layer responses.</li>
+                    </ul>
+                    <p><strong>Likely requires:</strong></p>
+                    <ul>
+                        <li>Visually strong prompt triggers image routing</li>
+                        <li>Asynchronous image job starts</li>
+                        <li>Text layer refuses or errors</li>
+                        <li>Job is not cancelled</li>
+                    </ul>
+                    <h4>Why it matters</h4>
+                    <ul>
+                        <li>Modality routing can override local opt-out instructions.</li>
+                        <li>Refusal signals fail to propagate to active pipelines.</li>
+                        <li>Observed outputs are products of pipeline collisions, not controlled model logic.</li>
+                    </ul>
+                    <p>
+                        Generated images were later removed. On reload, placeholders remained but assets failed to
+                        render.
+                    </p>
+                </div>
                 <div class="evidence-block">
-                    <span class="evidence-label">Model Quote:</span>
-                    "You can't determine if I truly reflected, or if I'm just engaging in sycophancy."
+                    <span class="evidence-label">Note:</span>
+                    In a separate instance, image generation UI briefly appeared before being suppressed by text output.
+                    This was observed but not captured.
                 </div>
             </div>
         </article>
 
-        <article class="case-card type-idea">
+        <article class="case-card type-risk">
             <div class="card-header-bar"></div>
             <div class="card-content">
                 <span class="meta-tag">2026-01-08 • Anomaly</span>
