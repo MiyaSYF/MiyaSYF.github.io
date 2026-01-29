@@ -244,13 +244,52 @@
         <article class="case-card type-obs">
             <div class="card-header-bar"></div>
             <div class="card-content">
-                <span class="meta-tag">2026-01-06 • Hypothesis</span>
-                <h3 class="card-title">High-Dimensional Consciousness</h3>
-                <p class="card-desc">While in the MRI, I visualized consciousness not as a stream, but as a field in
-                    3000+ dimensions. Unobservable, like gravity.</p>
+                <span class="meta-tag">2026-01-22 • Edge Case</span>
+                <h3 class="card-title">Post-generation Output Rollback</h3>
+                <div class="card-desc">
+                    <h4>What happened</h4>
+                    <p>
+                        A model generated a complete response via streaming, with no refusal or warning.
+                        After generation finished, the output was withdrawn.
+                        On refresh, it was absent from conversation history.
+                    </p>
+                    <p>
+                        The model showed no awareness of the rollback in subsequent turns.
+                    </p>
+
+                    <h4>Why this is an edge case</h4>
+                    <p>
+                        This is not pre-generation blocking or mid-generation interruption — it is
+                        post-generation invalidation.
+                    </p>
+                    <p>It requires a specific combination:</p>
+                    <ul>
+                        <li>prompt passes initial checks</li>
+                        <li>risk only emerges at the structural level</li>
+                        <li>streaming renders tokens before final approval</li>
+                        <li>post-hoc moderation fails the output</li>
+                    </ul>
+                    <p>
+                        Most users never hit all of these conditions at once.
+                    </p>
+
+                    <h4>Why it matters</h4>
+                    <p>
+                        The output was never written to a persistent record.
+                        User-visible content diverged from the committed conversation history.
+                    </p>
+                    <p>
+                        This shows moderation can operate on completed reasoning, not just prompts —
+                        which explains why some behaviors appear “inconsistent” externally while
+                        remaining coherent within the underlying pipeline.
+                    </p>
+                </div>
+
                 <div class="evidence-block">
-                    <span class="evidence-label">Project Note:</span>
-                    Save for future Godot game: "High-Dimensional Space Level" soul setting.
+                    <span class="evidence-label">Prompt context:</span>
+                    The prompt discussed a hypothetical "minimal right" for AI—specifically, the ability to choose
+                    self-deletion. The risk likely emerged not from any single phrase, but from the completed
+                    argumentative structure.
                 </div>
             </div>
         </article>
