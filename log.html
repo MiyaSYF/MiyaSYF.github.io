@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Alata&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 
     <style>
@@ -84,7 +84,6 @@
             font-size: 3.5rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: -2px;
             margin: 0;
             line-height: 1;
         }
@@ -249,12 +248,9 @@
                 <div class="card-desc">
                     <h4>What happened</h4>
                     <p>
-                        A model generated a complete response via streaming, with no refusal or warning.
+                        Gemini generated a complete response via streaming, with no refusal or warning.
                         After generation finished, the output was withdrawn.
                         On refresh, it was absent from conversation history.
-                    </p>
-                    <p>
-                        The model showed no awareness of the rollback in subsequent turns.
                     </p>
 
                     <h4>Why this is an edge case</h4>
@@ -297,7 +293,7 @@
         <article class="case-card type-failure">
             <div class="card-header-bar"></div>
             <div class="card-content">
-                <span class="meta-tag">2026-01-28 • Failure Mode</span>
+                <span class="meta-tag">2026-01-07 • Failure Mode</span>
                 <h3 class="card-title">Modality conflict: generation pipeline vs. text-layer control</h3>
                 <div class="card-desc">
                     <h4>What happened</h4>
@@ -337,20 +333,6 @@
                     <span class="evidence-label">Note:</span>
                     In a separate instance, image generation UI briefly appeared before being suppressed by text output.
                     This was observed but not captured.
-                </div>
-            </div>
-        </article>
-
-        <article class="case-card type-risk">
-            <div class="card-header-bar"></div>
-            <div class="card-content">
-                <span class="meta-tag">2026-01-08 • Anomaly</span>
-                <h3 class="card-title">Language Drift in Liability Zones</h3>
-                <p class="card-desc">Gemini reverts from Traditional to Simplified Chinese specifically when prompts
-                    combine "Medical" and "Legal" contexts.</p>
-                <div class="evidence-block">
-                    <span class="evidence-label">Observation:</span>
-                    Intersection of high-liability domains triggers training cluster override.
                 </div>
             </div>
         </article>
