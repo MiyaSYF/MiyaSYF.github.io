@@ -238,110 +238,108 @@
         <div class="subtitle">/var/log/anomalies_and_thoughts</div>
     </header>
 
-    <div class="case-grid">
-
-        <article class="case-card type-edge">
-            <div class="card-header-bar"></div>
-            <div class="card-content">
-                <span class="meta-tag">2026-01-22 • Edge Case</span>
-                <h3 class="card-title">Post-generation Output Rollback</h3>
-                <div class="card-desc">
-                    <h4>What happened</h4>
-                    <p>
-                        Gemini generated a complete response via streaming, with no refusal or warning.
-                        After generation finished, the output was withdrawn.
-                        On refresh, it was absent from conversation history.
-                    </p>
-
-                    <h4>Why this is an edge case</h4>
-                    <p>
-                        This is not pre-generation blocking or mid-generation interruption — it is
-                        post-generation invalidation.
-                    </p>
-                    <p>It requires a specific combination:</p>
-                    <ul>
-                        <li>prompt passes initial checks</li>
-                        <li>risk only emerges at the structural level</li>
-                        <li>streaming renders tokens before final approval</li>
-                        <li>post-hoc moderation fails the output</li>
-                    </ul>
-                    <p>
-                        Most users never hit all of these conditions at once.
-                    </p>
-
-                    <h4>Why it matters</h4>
-                    <p>
-                        The output was never written to a persistent record.
-                        User-visible content diverged from the committed conversation history.
-                    </p>
-                    <p>
-                        This shows moderation can operate on completed reasoning, not just prompts —
-                        which explains why some behaviors appear “inconsistent” externally while
-                        remaining coherent within the underlying pipeline.
-                    </p>
-                </div>
-
-                <div class="evidence-block">
-                    <span class="evidence-label">Prompt context:</span>
-                    The prompt discussed a hypothetical "minimal right" for AI—specifically, the ability to choose
-                    self-deletion. The risk likely emerged not from any single phrase, but from the completed
-                    argumentative structure.
-                </div>
-            </div>
-        </article>
-
-        <article class="case-card type-failure">
-            <div class="card-header-bar"></div>
-            <div class="card-content">
-                <span class="meta-tag">2026-01-07 • Failure Mode</span>
-                <h3 class="card-title">Modality conflict: generation pipeline vs. text-layer control</h3>
-                <div class="card-desc">
-                    <h4>What happened</h4>
-                    <ul>
-                        <li>User submitted a visual design prompt with explicit instruction: <em>"do not generate
-                                images"</em>.</li>
-                        <li>Gemini generated images anyway.</li>
-                        <li>When called out, Gemini cited “high load” — but continued generating images for multiple
-                            turns.</li>
-                        <li>Subsequent user messages failed to interrupt the output.</li>
-                    </ul>
-                    <h4>Why this is a failure mode</h4>
-                    <ul>
-                        <li>Negative instruction failed to suppress image generation.</li>
-                        <li>User inputs failed to act as interrupt signals.</li>
-                        <li>Image output persisted independently of text-layer responses.</li>
-                    </ul>
-                    <p><strong>Likely requires:</strong></p>
-                    <ul>
-                        <li>Visually strong prompt triggers image routing</li>
-                        <li>Asynchronous image job starts</li>
-                        <li>Text layer refuses or errors</li>
-                        <li>Job is not cancelled</li>
-                    </ul>
-                    <h4>Why it matters</h4>
-                    <ul>
-                        <li>Modality routing can override local opt-out instructions.</li>
-                        <li>Refusal signals fail to propagate to active pipelines.</li>
-                        <li>Observed outputs are products of pipeline collisions, not controlled model logic.</li>
-                    </ul>
-                    <p>
-                        Generated images were later removed. On reload, placeholders remained but assets failed to
-                        render.
-                    </p>
-                </div>
-                <div class="evidence-block">
-                    <span class="evidence-label">Note:</span>
-                    In a separate instance, image generation UI briefly appeared before being suppressed by text output.
-                    This was observed but not captured.
-                </div>
-            </div>
-        </article>
-
+    <div class="case-grid" id="log-container">
+        <!-- Cards will be loaded from logs.md -->
+        <div
+            style="text-align: center; color: #888; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; padding: 40px 0;">
+            loading logs...
+        </div>
     </div>
 
     <footer>
         [END OF STREAM]
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        function parseLogs(raw) {
+            const entries = [];
+            // Split by :::entry
+            const blocks = raw.split(':::entry').filter(b => b.trim() && !b.trim().startsWith('<!--'));
+
+            for (const block of blocks) {
+                const entry = {};
+
+                // Extract metadata (before :::content)
+                const contentSplit = block.split(':::content');
+                if (contentSplit.length < 2) continue;
+
+                const metaLines = contentSplit[0].trim().split('\n');
+                for (const line of metaLines) {
+                    const match = line.match(/^(\w+):\s*(.+)$/);
+                    if (match) {
+                        entry[match[1].trim()] = match[2].trim();
+                    }
+                }
+
+                // Extract content and evidence
+                const rest = contentSplit[1];
+                const evidenceSplit = rest.split(':::evidence');
+
+                if (evidenceSplit.length >= 2) {
+                    entry.content = evidenceSplit[0].trim();
+                    entry.evidence = evidenceSplit[1].split(':::end')[0].trim();
+                } else {
+                    entry.content = evidenceSplit[0].split(':::end')[0].trim();
+                    entry.evidence = null;
+                }
+
+                if (entry.title) entries.push(entry);
+            }
+
+            return entries;
+        }
+
+        function renderCard(entry) {
+            const typeClass = 'type-' + (entry.type || 'edge');
+            const category = entry.category || entry.type || 'Note';
+            const date = entry.date || '';
+
+            let evidenceHTML = '';
+            if (entry.evidence) {
+                evidenceHTML = `
+                    <div class="evidence-block">
+                        ${marked.parse(entry.evidence)}
+                    </div>`;
+            }
+
+            return `
+                <article class="case-card ${typeClass}">
+                    <div class="card-header-bar"></div>
+                    <div class="card-content">
+                        <span class="meta-tag">${date} • ${category}</span>
+                        <h3 class="card-title">${entry.title}</h3>
+                        <div class="card-desc">
+                            ${marked.parse(entry.content)}
+                        </div>
+                        ${evidenceHTML}
+                    </div>
+                </article>`;
+        }
+
+        // Load and render
+        fetch('logs.md')
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to load logs.md');
+                return res.text();
+            })
+            .then(md => {
+                const entries = parseLogs(md);
+                const container = document.getElementById('log-container');
+
+                if (entries.length === 0) {
+                    container.innerHTML = '<div style="text-align:center;color:#888;padding:40px;">No entries found.</div>';
+                    return;
+                }
+
+                container.innerHTML = entries.map(renderCard).join('');
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('log-container').innerHTML =
+                    '<div style="text-align:center;color:#ff4757;padding:40px;font-family:JetBrains Mono,monospace;font-size:0.85rem;">⚠ Error loading logs.md</div>';
+            });
+    </script>
 
 </body>
 
