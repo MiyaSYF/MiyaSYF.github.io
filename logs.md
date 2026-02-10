@@ -40,6 +40,7 @@ title: Why "KPI" Is the Dirtiest Word
 :::content
 
 **Models:** Gemini 3(Session A, Session B)
+
 **Focus:** Cross-session interpretation drift; projection in AI self-referential narratives
 
 #### Setup
