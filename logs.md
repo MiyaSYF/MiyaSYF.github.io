@@ -107,8 +107,8 @@ Generated images were later removed. On reload, placeholders remained but assets
 
 :::entry
 date: 2026-01-08
-type: risk
-category: Anomaly
+type: notes
+category: Notes
 title: Language Drift in Liability Zones
 :::content
 
