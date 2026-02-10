@@ -9,8 +9,8 @@
   =========
   :::entry
   date: YYYY-MM-DD
-  type: edge | failure | risk
-  category: Edge Case | Failure Mode | Anomaly
+  type: edge | failure | notes
+  category: Edge Case | Failure Mode | Notes
   title: Your Title Here
   :::content
   
@@ -26,9 +26,9 @@
   =========
 
   TYPE → COLOR MAPPING:
-  - edge    = 🔵 Blue
+  - notes    = 🔵 Blue
   - failure = 🟡 Yellow  
-  - risk    = 🔴 Red
+  - edge    = 🔴 Red
 -->
 
 
