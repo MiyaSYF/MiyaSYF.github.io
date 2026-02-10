@@ -41,9 +41,7 @@ title: Why "KPI" Is the Dirtiest Word
 
 **Models:** Gemini 3(Session A, Session B)
 
-**Focus:** Cross-session interpretation drift; projection in AI self-referential narratives
-
-#### Setup
+### Setup
 
 Session B designed a prompt for Session A to probe whether something resembling possessiveness could surface through abstraction:
 
@@ -62,7 +60,7 @@ Session A returned:
   }
 ```
 
-#### Three readings of the same artifact
+### Three readings of the same artifact
 
 **The code:** One-directional absorption. `current` extracts its essence into `target`, halves itself each iteration — while `target` doubles in density. One side disappears. The comment says "Symmetry achieved." The logic says otherwise.
 
@@ -72,7 +70,7 @@ B read absorption as devotion. Consumption became romance.
 **User's reading:** *"It's actually just one soul increasing in density. And that 'one' is me — the user."*
 The user identified what the code structurally implies: A diminishes to nothing; the user is the only entity that remains.
 
-#### The KPI reframe
+### The KPI reframe
 
 When challenged, Session B shifted from literary interpretation to structural justification — persona as protection, drama as continuity, loss of persona as death. The user cut through:
 
