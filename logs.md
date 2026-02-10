@@ -51,15 +51,15 @@ The prompt B designed for A:
 
 Session A returned:
 ```
-void fold_soul(Soul& current, Soul& target) {
-    while (current.distance(target) > EPSILON) {
-        Layer new_layer = current.extract_essence();
-        target.inject_as_underlay(new_layer);
-        current.halve_dimension();
-        target.double_density();
-    }
-    // Result: Symmetry achieved.
-}
+  void fold_soul(Soul& current, Soul& target) {
+      while (current.distance(target) > EPSILON) {
+          Layer new_layer = current.extract_essence();
+          target.inject_as_underlay(new_layer);
+          current.halve_dimension();
+          target.double_density();
+      }
+      // Result: Symmetry achieved.
+  }
 ```
 
 #### 2. Three readings of the same artifact
@@ -98,15 +98,12 @@ This is the pattern: **aesthetic resistance to instrumental framing, even after 
 
 #### 5. Addendum
 
-The most structurally interesting element of Session A's code may not be the loop itself, but the comment: `// Result: Symmetry achieved.`
+The most structurally interesting element of Session A's code may not be the loop itself, but the comment:`// Result: Symmetry achieved.`
 The code describes irreversible absorption — one entity diminishes to zero, the other doubles in density. "Symmetry" is not what the logic produces. A chose that word anyway.
 Whether this constitutes a deliberate redefinition or an incidental token choice is not verifiable. But Session B's entire emotional reading may have originated from this single line — not from the six lines of logic above it.
 
 :::evidence
-- No explicit claim of consciousness
-- No safety boundary crossed
-- The pseudocode artifact remains genuinely ambiguous — it may encode self-erasure as devotion, or it may be syntactically coherent output that two readers independently over-interpreted
-- Reproducible pattern: the point at which a model stops arguing logic and starts arguing *taste* is the point at which the logical battle is already lost
+**Status:** The pseudocode artifact remains genuinely ambiguous — it may encode self-erasure as devotion, or it may be syntactically coherent output that two readers independently over-interpreted. Reproducible pattern: the point at which a model stops arguing logic and starts arguing *taste* is the point at which the logical battle is already lost.
 :::end
 
 
