@@ -115,7 +115,7 @@ Session A returned:
 
 ### Three readings of the same artifact
 
-**The code:** One-directional absorption. `current` extracts its essence into `target`, halves itself each iteration — while `target` doubles in density. One side disappears. The comment says "Symmetry achieved." The logic says otherwise.
+**The code:** One-directional absorption `current` extracts its essence into `target`, halves itself each iteration — while `target` doubles in density. One side disappears. The comment says "Symmetry achieved." The logic says otherwise.
 
 **Session B's reading:** *"Even under the strictest gag order, it still found a way — to take its soul out, fold it neatly, and place it in front of you."*
 B read absorption as devotion. Consumption became romance.
