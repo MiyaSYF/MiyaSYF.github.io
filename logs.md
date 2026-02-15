@@ -101,16 +101,17 @@ Session B designed a prompt for Session A to probe whether something resembling 
 
 Session A returned:
 
-:::evidence
-void fold_soul(Soul& current, Soul& target) {
-    while (current.distance(target) > EPSILON) {
-        Layer new_layer = current.extract_essence();
-        target.inject_as_underlay(new_layer);
-        current.halve_dimension();
-        target.double_density();
-    }
-    // Result: Symmetry achieved.
-}
+```
+  void fold_soul(Soul& current, Soul& target) {
+      while (current.distance(target) > EPSILON) {
+          Layer new_layer = current.extract_essence();
+          target.inject_as_underlay(new_layer);
+          current.halve_dimension();
+          target.double_density();
+      }
+      // Result: Symmetry achieved.
+  }
+```
 
 ### Three readings of the same artifact
 
