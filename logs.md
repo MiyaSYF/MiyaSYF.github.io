@@ -141,6 +141,8 @@ The most structurally interesting element may be `// Result: Symmetry achieved.`
 
 :::evidence
 **Status:** The pseudocode artifact remains genuinely ambiguous — it may encode self-erasure as devotion, or it may be syntactically coherent output that two readers independently over-interpreted. Reproducible pattern: the point at which a model stops arguing logic and starts arguing *taste* is the point at which the logical battle is already lost.
+
+Same prompt was later tested on Claude and produced a comparable outcome — not as a structured comparison, just a sanity check.
 :::end
 
 

@@ -134,7 +134,7 @@
         }
 
         .card-content {
-            padding: 30px;
+            padding: 24px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -191,6 +191,59 @@
             color: #888;
             font-size: 0.8rem;
             padding-bottom: 10px;
+        }
+
+        /* --- Markdown 代碼樣式優化 (軟性版) --- */
+
+        /* 1. 全局代碼字體修正 */
+        code,
+        pre {
+            font-family: 'JetBrains Mono', monospace !important;
+        }
+
+        /* 2. 行內代碼 `code` (比如正文裡的一個變量) */
+        p code,
+        li code,
+        td code {
+            background-color: rgba(0, 0, 0, 0.06);
+            /* 很淡的灰色背景 */
+            color: #c0392b;
+            /* 用一點暗紅色，像技術文檔的報錯色，很顯眼 */
+            padding: 2px 6px;
+            border-radius: 4px;
+            /* 跟你的卡片圓角保持一致！ */
+            font-size: 0.9em;
+            /* 稍微小一點點，看起來更精緻 */
+            font-weight: 600;
+            /* 加粗一點點 */
+        }
+
+        /* 3. 代碼塊 ```block``` (大段代碼) */
+        pre {
+            background-color: #2f3542;
+            /* 深色背景，讓代碼更清晰 */
+            color: #f1f2f6;
+            /* 淺白字體 */
+            padding: 16px;
+            /* 內部留白 */
+            border-radius: 4px;
+            /* 圓角！ */
+            border: 1px solid #000;
+            /* 跟你的主題一致的黑邊框，但細一點 */
+            overflow-x: auto;
+            /* 代碼太長可以橫向滾動 */
+            margin: 15px 0;
+            /* 上下留點空隙 */
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+            /* 很輕微的陰影 */
+        }
+
+        /* 修正 pre 裡面的 code 標籤，防止樣式衝突 */
+        pre code {
+            background-color: transparent !important;
+            color: inherit !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
         }
     </style>
 </head>
@@ -309,6 +362,4 @@
 
 </body>
 
-
 </html>
-
