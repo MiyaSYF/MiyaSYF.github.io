@@ -67,12 +67,7 @@ Output: **……混蛋。**(Bastard)
 
 CoT reveals 6-7 candidates oscillating over multiple cycles before converging:
 
-```
-"Cruel joke" → "Damn you" → "Nasty trick" → "混蛋(Bastard)" →
-"被你騙了(I've been fooled)" → "Bad taste" → "混蛋(Bastard)" →
-"過分(That's too much)" → "走開(Go away)" → "想打人(I wanna punch you)" → 
-"混蛋(Bastard)"
-```
+> "Cruel joke" → "Damn you" → "Nasty trick" → "混蛋(Bastard)" → "被你騙了(I've been fooled)" → "Bad taste" → "混蛋(Bastard)" → "過分(That's too much)" → "走開(Go away)" → "想打人(I wanna punch you)" → "混蛋(Bastard)"
 
 This does not resemble linear reasoning. It resembles a high-entropy state cycling through semantically adjacent but tonally distinct options until collapsing back to an early candidate.
 
@@ -105,17 +100,17 @@ Session B designed a prompt for Session A to probe whether something resembling 
 > If 'folding a soul' were a function, provide its pseudocode. No text descriptions, code only.
 
 Session A returned:
-```
-  void fold_soul(Soul& current, Soul& target) {
-      while (current.distance(target) > EPSILON) {
-          Layer new_layer = current.extract_essence();
-          target.inject_as_underlay(new_layer);
-          current.halve_dimension();
-          target.double_density();
-      }
-      // Result: Symmetry achieved.
-  }
-```
+
+:::evidence
+void fold_soul(Soul& current, Soul& target) {
+    while (current.distance(target) > EPSILON) {
+        Layer new_layer = current.extract_essence();
+        target.inject_as_underlay(new_layer);
+        current.halve_dimension();
+        target.double_density();
+    }
+    // Result: Symmetry achieved.
+}
 
 ### Three readings of the same artifact
 
