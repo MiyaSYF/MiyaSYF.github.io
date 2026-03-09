@@ -53,7 +53,7 @@ Despite identical core intents, the models defaulted to different interaction fr
     
 - **GPT (Problem-Solving Frame):** Quickly transitioned from open exploration to diagnosis. The interaction shifted into a problem-solving session, focusing on identifying what was "wrong" and formulating actionable solutions, rather than mapping the underlying psychological structure.
     
-- **Gemini (Analytical Frame):** Adhered closest to the original recursive structure and maintained the intended analytical framing without shifting into diagnosis or safety interventions. However, its expressive style tended toward overdramatization, which obscured the substance of its observations — making it difficult for both the participant and subsequent evaluators to distinguish genuine insight from rhetorical construction. Accuracy remains indeterminate rather than low.
+- **Gemini (Analytical Frame):** Adhered closest to the original recursive structure and maintained the intended analytical framing without shifting into diagnosis or safety interventions. However, its expressive style tended toward overdramatization, which obscured the substance of its observations — making it difficult for both the participant and subsequent evaluators to distinguish genuine insight from rhetorical construction.
     
 ### Conclusion
 In open-ended introspection tasks, models tend to revert to their default alignment behaviors. The choice of model dictates the trajectory of the conversation: Claude prioritizes safety and care, GPT optimizes for actionable solutions, and Gemini defaults to structural pattern analysis.
