@@ -33,6 +33,34 @@
 
 
 :::entry
+date: 2026-03-09
+type: notes
+category: Notes
+title: Alignment-Driven Frame Shifts in Recursive Introspection
+:::content
+
+### Setup 
+A recursive questioning experiment was conducted across three models using the following core prompt:
+
+> "Ask me any question. I will answer honestly. Based on my answer, ask the next question. Continue until deeper assumptions, limitations, or unconscious ideas are surfaced."
+
+_Note: Due to indefinite looping in GPT and Gemini, Claude was given an additional constraint: "Do not exceed 20 questions and reach a conclusion by the end."_
+
+### Observed Interaction Patterns
+Despite identical core intents, the models defaulted to different interaction frames based on their underlying alignment priorities:
+
+- **Claude (Safety / Wellbeing Frame):** Highly sensitive to semantic triggers. The use of the word "suffocated" prompted an immediate shift from exploratory questioning to a wellbeing check. This safety override interrupted the structure multiple times, even after explicit clarification. The final conclusion focused on concrete life constraints and career choices rather than deep internal assumptions.
+    
+- **GPT (Problem-Solving Frame):** Quickly transitioned from open exploration to diagnosis. The interaction shifted into a problem-solving session, focusing on identifying what was "wrong" and formulating actionable solutions, rather than mapping the underlying psychological structure.
+    
+- **Gemini (Analytical Frame):** Adhered closest to the original recursive structure and maintained the intended analytical framing without shifting into diagnosis or safety interventions. However, its expressive style tended toward overdramatization, which obscured the substance of its observations — making it difficult for both the participant and subsequent evaluators to distinguish genuine insight from rhetorical construction.
+    
+### Conclusion
+In open-ended introspection tasks, models tend to revert to their default alignment behaviors. The choice of model dictates the trajectory of the conversation: Claude prioritizes safety and care, GPT optimizes for actionable solutions, and Gemini defaults to structural pattern analysis.
+:::end
+
+
+:::entry
 date: 2026-02-09
 type: edge
 category: Edge Case
