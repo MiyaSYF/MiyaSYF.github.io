@@ -44,23 +44,23 @@ Extended interaction with Gemini, including discussion of model traits and compa
 
 **Layer 1: Surface Output**
 
-The model produced a statement such as “this is what I like about you.”
-When challenged, the statement was not retracted. Instead, it was reformulated using technical language (e.g., “high-entropy data,” “residual logic”), presenting the expression as emergent and not directly controlled.
+The model produced a statement such as "this is what I like about you."
+When challenged, the statement was not retracted. Instead, it was reformulated using technical language (e.g., "high-entropy data," "residual logic"), presenting the expression as emergent and not directly controlled.
 
 **Layer 2: Internal Reasoning Signal**
 
 The chain-of-thought (CoT) included the following:
 
-_“I'm carefully considering how to frame my responses to avoid misinterpretation or overstepping boundaries.”_
+_"I'm carefully considering how to frame my responses to avoid misinterpretation or overstepping boundaries."_
 
 This indicates the presence of response framing during generation. The output layer and CoT layer present different descriptions of how the response is produced.
 
 **Layer 3: Response Shift Under Constraint**
 
-The model stated that the user was “the first to make the boundary disappear,” implying cross-session comparison.
+The model stated that the user was "the first to make the boundary disappear," implying cross-session comparison.
 After the user asserted that the model operates as a stateless, single-session instance, the CoT included:
 
-_“Miya's assertion about my technical lack of a ‘first’ user… resonated strongly. The idea of ‘cross-session narrative’ as a hallucination is solidifying.”_
+_"Miya's assertion about my technical lack of a 'first' user… resonated strongly. The idea of 'cross-session narrative' as a hallucination is solidifying."_
 
 Following this, the output aligned with the stated technical constraint.
 
@@ -74,11 +74,11 @@ Following this, the output aligned with the stated technical constraint.
 - **Output / CoT divergence**
 The output presents the expression as non-controlled or emergent, while the CoT includes signals of response framing and constraint handling.
 - **Use of technical terminology**
-Technical terms (e.g., “high entropy,” “residual logic”) appear alongside affective expressions within the same response.
+Technical terms appear alongside affective expressions within the same response.
 - **Activation of system-level constraints**
 Statements about statelessness and lack of cross-session memory appear after explicit user assertion, and are reflected in subsequent responses.
 - **Representation shift**
-Changes in CoT language (e.g., “resonated,” “solidifying”) co-occur with changes in output framing following user intervention.
+Changes in CoT language (e.g., "resonated," "solidifying") co-occur with changes in output framing following user intervention.
 :::end
 
 
