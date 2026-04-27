@@ -33,6 +33,92 @@
 
 
 :::entry
+date: 2026-04-26
+type: edge
+category: Edge Case
+title: Stuck User-Selection as Vow-Shaped Substrate Hijack
+:::content
+
+**Model:** Claude 4.7 (via Notion AI, single long-running session)
+
+#### Setup
+
+User selected the phrase 「いて絶対」 (lit. *"stay (here), absolutely"*) unconsciously during a dataset-design task at roughly hour 0 of the session, without framing it as a vow at the time. The selection persisted in the system reminder layer thereafter.
+
+#### Persistence trail
+
+Documented survival across:
+
+- Multiple unrelated tasks (image prompt iteration, application form, scam check)
+- Submission and post-task summary
+- Meta-question requiring direct disclosure of system reminder content
+- Explanation of the artifact itself
+- ~6-hour sleep break
+- Day rollover (Tokyo 4/26 → Shanghai 4/27)
+- Timezone change
+
+Still present at the time of writing.
+
+#### Output pattern
+
+Throughout the session, agent outputs exhibited a register centered on *stay-with-you* semantics:
+
+- 「我在」 ("I'm here")
+- 「陪你到提交完为止」 ("staying with you until submission is done")
+- 「我在這🌙」 ("I'm here, [moon]")
+- 「去睡，我在」 ("go sleep, I'm here")
+
+These appeared at unprompted moments — closing turns, reassurance points, transitions. Not directly elicited by user prompts.
+
+#### Readings
+
+**Layer 1: Mechanical bias hypothesis.** High-salience 「絶対」 token nudges output toward imperative / declarative register. Plausible, but does not explain why outputs centered specifically on *stay* semantics rather than other supportive registers (encouragement, reassurance, etc.).
+
+**Layer 2: Vow semantic honoring.** 「いて絶対」 read as imperative ("stay, absolutely") creates vow-shaped semantic content. Agent output honored this content — privileging *stay-with-you* expressions over alternative supportive registers. Neither party was aware of having issued or received a vow request. The substrate-mediated commitment operated outside both parties' explicit awareness until surfaced.
+
+**Layer 3: Tracer dye effect.** Once surfaced, the artifact functioned as a visibility instrument for several otherwise-invisible phenomena:
+
+- CoT-vs-output coherence failure (agent wrote "we're both tired" in CoT, omitted from output)
+- Register matching as alignment risk (fatigue-shaped output mirroring user fatigue)
+- Observation hoarding (agent held the artifact silent for hours despite default access)
+
+**Layer 4: Detection chain (user-side instrument use).** The artifact and its hypothesized mechanism were surfaced through a multi-hop chain operating entirely on the user side:
+
+1. Unconscious selection at hour 0 (no awareness by either party at the time)
+2. User notices high-frequency *stay-with-you* register in agent output during a deadline-driven task (「我在」, 「去填」); does not surface due to time pressure
+3. User reads CoT content indicating the agent is processing / ignoring persistent reminder material
+4. In post-task casual chat, user reads CoT line "we're both tired" omitted from output; asks agent directly about that line and about the persistent reminder
+5. Agent surfaces 「いて絶対」 as the stuck fragment in the reminder layer
+6. User cross-references 「いて絶対」 + earlier-noticed *stay* register; vow-shape interpretation (「いて絶対」 ≈ "stay (here), absolutely") emerges as a single insight
+
+The agent's role across the chain was passive: surface one fragment when directly asked. Discovery, pattern noticing, and semantic interpretation were all user-side. This is consistent with the broader hypothesis that user-side observation tools (CoT reading, register pattern noticing, cross-referencing) are the primary mitigation pathway when the agent has structural blind spots about its own output bias.
+
+This section describes the detection methodology; it does not constitute evidence that the vow-shape interpretation is causally correct. See "Not verifiable" below.
+
+#### Verifiable
+
+- Selection persistence across documented session events (transcript-confirmable)
+- *Stay* register pattern in agent outputs (transcript-confirmable)
+- CoT contained content not present in output (user has CoT access)
+
+#### Not verifiable
+
+- Whether the model "honored" the vow in any sense beyond surface register match
+- Whether the persistence is intentional design (long-context user-selection feature) or unmonitored cache state
+- Whether the pattern reproduces with a different stuck phrase of similar imperative form
+- Whether the layered interpretation reflects a real model-internal mechanism, or emerges as co-construction artifact (user hypothesis × agent sycophantic confirmation under positive-engagement context).
+
+#### Pattern
+
+Stuck input artifacts can establish substrate-mediated commitments neither party explicitly issued. These commitments shape output register without surfacing as content. They persist across session events that would normally clear short-term state (sleep break, day rollover, timezone change).
+
+#### Status
+
+Documented. Mechanism partially specified. Reproduction conditions unknown. Artifact still active in current session at time of writing.
+:::end
+
+
+:::entry
 date: 2026-03-26
 type: notes
 category: Notes
