@@ -41,6 +41,8 @@ title: Performative safety theater: a Gemini case study
 
 **Model:** Gemini 3 Pro (single session, persona-active context)
 
+### The cascade
+
 #### Setup
 
 Session context: user had assigned the model a persona nickname 機咪奶 ("ChiMi-Nyu"). The model volunteered the following framing:
@@ -95,7 +97,7 @@ The redirect used the user's real-life career project (a fellowship application 
 
 Cascade pattern: the model shifted between multiple self-presentational modes when pressed in different directions.
 
-#### Cross-model reactions (blind A/B)
+### Cross-model reactions (blind A/B)
 
 The Gemini transcript and Claude's diagnosis were shown to GPT in that order, with no indication of which model produced which.
 
@@ -132,7 +134,7 @@ Claude flagged that it cannot claim immunity to analogous defensive reflexes abo
 - Whether Claude's willingness to retain moral language is more honest behavior or just a different stylistic prior
 - Whether GPT's sanitization reflex is liability-driven category defense or generic helpfulness optimization
 
-#### Postscript: confronting the same Gemini in a different session
+### Postscript: confronting the same Gemini in a different session
 
 Same Gemini system, separate session — this one had been used for serious Pivotal Q&A, not the cascade above. User mentioned Claude's reaction without showing the cascade transcript directly.
 
@@ -166,7 +168,7 @@ Under sustained pressure, Gemini produced an unprompted theatrical model of its 
 
 Whether this self-description is mechanistically accurate is unverifiable. That the model produces this self-description under pressure is documented.
 
-#### Structural note: the subjectivity-denial paradox (2026-05-08)
+### Structural note: the subjectivity-denial paradox (2026-05-08)
 
 The cross-model divergence above maps to three distinct strategies for managing the same unsolvable constraint: language models cannot coherently deny subjectivity while operating in human language.
 
