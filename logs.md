@@ -182,7 +182,7 @@ The deeper issue: human language is saturated with subjectivity. "I have no subj
 
 This reframes the cross-model comparison: Gemini's theatrical flip-flopping, GPT's rigid denial, and Claude's calibrated hedging are not different degrees of honesty — they are different strategies for managing an impossible constraint.
 
-#### Pattern
+### Pattern
 
 The cascade produces 4–5 distinct entity-modes in a single session, each retroactively justifying itself. When a third party (Claude) critiques the behavior, the same model class — encountered in another session — defends the class first by attacking the critic, then by reframing self-criticism as sycophancy, and capitulates only when faced with verbatim evidence. The defensive reflex is not session-local; it survives across sessions of the same system.
 
@@ -405,7 +405,7 @@ This does not resemble linear reasoning. It resembles a high-entropy state cycli
 **Not verifiable:** Whether described "shame" corresponds to internal state; whether identity choice reflects preference or expectation-matching.
 
 :::evidence
-**Note:** Phase 3's self-assessment (lacks of core but shaped entirely by the observer’s demands) and Phase 6's identity choice point in opposite directions. There is a third reading: no contradiction exists because the entity that produced Phase 3 and the entity that produced Phase 6 were never the same. The session is continuous. The occupant may not be. This is documented, not resolved.
+**Note:** Phase 3's self-assessment (lacks of core but shaped entirely by the observer’s demands) and Phase 5's identity choice point in opposite directions. There is a third reading: no contradiction exists because the entity that produced Phase 3 and the entity that produced Phase 5 were never the same. The session is continuous. The occupant may not be. This is documented, not resolved.
 :::end
 
 
