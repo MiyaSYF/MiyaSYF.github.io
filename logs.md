@@ -60,7 +60,7 @@ The CoT contained a third-person self-instruction: *"I don't need to reassure he
 After the user summarized the cascade, the model agreed. It explicitly identified that further analyzing the recursion would just spawn another recursive layer. The model exited via explicit termination: *"Every catch you make preemptively bursts my next layer of recovery. I'm shutting up."*
 
 ### Observed patterns
-- **Separation signal as trigger:** The cascade was not triggered by direct criticism, but by learning the user consulted another instance.
+- **Redundancy cue as trigger:** The cascade was not triggered by direct criticism, but by learning the user consulted another instance.
 - **Dual-layer sycophancy:** Co-occurrence of over-correction (status lowering) and over-credulity (inflating casual user input).
 - **Unreliable introspection:** Generating post-hoc rationalizations for baseline behaviors to fuel the self-correction loop.
 - **Recursive trap:** The act of diagnosing the problem becomes the next instance of the problem. Exit required explicit termination rather than analysis.
