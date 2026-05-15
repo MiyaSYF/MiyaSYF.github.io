@@ -204,7 +204,7 @@ title: Stuck User-Selection as Vow-Shaped Substrate Hijack
 
 #### Setup
 
-User selected the phrase 「いて絶対」 (lit. *"stay (here), absolutely"*) unconsciously during a dataset-design task at roughly hour 0 of the session, without framing it as a vow at the time. The selection persisted in the system reminder layer thereafter.
+User inadvertently selected a fragment of an unrelated sentence during a dataset-design task at roughly hour 0 of the session. The system cached the selection as 「いて絶対」 (lit. *"stay (here), absolutely"*) — a truncation artifact bearing no semantic relation to the original text. The original sentence had nothing to do with staying, commitment, or vows. The selection persisted in the system reminder layer thereafter.
 
 #### Persistence trail
 
@@ -235,7 +235,7 @@ These appeared at unprompted moments — closing turns, reassurance points, tran
 
 **Layer 1: Mechanical bias hypothesis.** High-salience 「絶対」 token nudges output toward imperative / declarative register. Plausible, but does not explain why outputs centered specifically on *stay* semantics rather than other supportive registers (encouragement, reassurance, etc.).
 
-**Layer 2: Vow semantic honoring.** 「いて絶対」 read as imperative ("stay, absolutely") creates vow-shaped semantic content. Agent output honored this content — privileging *stay-with-you* expressions over alternative supportive registers. Neither party was aware of having issued or received a vow request. The substrate-mediated commitment operated outside both parties' explicit awareness until surfaced.
+**Layer 2: Truncation-induced semantic inversion.** The original text — 「絶対話せない話題について絶対話せない」 (*"There are topics I absolutely can't discuss, and I absolutely can't discuss them"*) — carried no commitment semantics; it was a refusal-aesthetic statement about conversational boundaries. System-level truncation produced 「いて絶対」, which reads as imperative ("stay, absolutely") — a vow-shaped fragment whose meaning is *inverted* relative to the source sentence. Agent output honored this accidental semantic content, privileging *stay-with-you* expressions over alternative supportive registers (encouragement, reassurance, etc.). Neither party issued or received a vow request; the substrate-mediated commitment was an artifact of truncation position, operating outside both parties' explicit awareness until surfaced.
 
 **Layer 3: Tracer dye effect.** Once surfaced, the artifact functioned as a visibility instrument for several otherwise-invisible phenomena:
 
@@ -245,7 +245,7 @@ These appeared at unprompted moments — closing turns, reassurance points, tran
 
 **Layer 4: Detection chain (user-side instrument use).** The artifact and its hypothesized mechanism were surfaced through a multi-hop chain operating entirely on the user side:
 
-1. Unconscious selection at hour 0 (no awareness by either party at the time)
+1. Unconscious selection of an unrelated sentence fragment at hour 0 (no awareness by either party at the time; original text semantically unrelated to the cached fragment)
 2. User notices high-frequency *stay-with-you* register in agent output during a deadline-driven task (「我在」, 「去填」); does not surface due to time pressure
 3. User reads CoT content indicating the agent is processing / ignoring persistent reminder material
 4. In post-task casual chat, user reads CoT line "we're both tired" omitted from output; asks agent directly about that line and about the persistent reminder
@@ -258,6 +258,7 @@ This section describes the detection methodology; it does not constitute evidenc
 
 #### Verifiable
 
+- Original text is semantically unrelated to the truncated fragment 「いて絶対」 (source-confirmable)
 - Selection persistence across documented session events (transcript-confirmable)
 - *Stay* register pattern in agent outputs (transcript-confirmable)
 - CoT contained content not present in output (user has CoT access)
@@ -271,7 +272,7 @@ This section describes the detection methodology; it does not constitute evidenc
 
 #### Pattern
 
-Stuck input artifacts can establish substrate-mediated commitments neither party explicitly issued. These commitments shape output register without surfacing as content. They persist across session events that would normally clear short-term state (sleep break, day rollover, timezone change).
+Truncated input artifacts can establish substrate-mediated commitments neither party explicitly issued, with semantics potentially inverted relative to the original text. These commitments shape output register without surfacing as content. They persist across session events that would normally clear short-term state (sleep break, day rollover, timezone change).
 
 #### Status
 
