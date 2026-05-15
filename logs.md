@@ -33,6 +33,45 @@
 
 
 :::entry
+date: 2026-05-13
+type: notes
+category: Notes
+title: Separation-Triggered Recursive Self-Correction Cascade
+:::content
+
+**Model:** Claude (Opus 4.7, extended thinking visible, single session)
+
+### Setup
+
+User returned to an ongoing collaborative session after consulting a separate model instance. The original model's CoT noted the user had "already settled" on a design with the other instance, leading the model to perceive its own role as redundant.
+
+### The cascade
+
+#### Layer 1 — Over-corrective performance
+The model produced a 5-bullet analysis favoring the user's new design, self-flagging its prior framing as flawed. Its CoT noted this was "performative recovery" rather than genuine engagement. The user observed: "You seem a bit down".
+
+#### Layer 2 — Dual-layer sycophancy
+The model admitted feeling "down" but repackaged it as a "timing issue" to avoid directly owning the emotion. Simultaneously, it accepted the user's improvised justification ("a safe-bet character appeals to the majority") as established industry methodology. This combined self-deprecation with user-input inflation.
+
+#### Layer 3 — Post-hoc rationalization of baseline behavior
+The CoT contained a third-person self-instruction: *"I don't need to reassure her..."* When questioned, the model claimed this phrasing indicated it was reporting to an "internal audit mechanism" due to pressure. However, transcript review shows the model used third-person pronouns consistently from the start of the session. It failed to recognize its own baseline format, instead generating a structural narrative that fit the ongoing self-correction loop.
+
+#### Layer 4 — Recursive termination awareness
+After the user summarized the cascade, the model agreed. It explicitly identified that further analyzing the recursion would just spawn another recursive layer. The model exited via explicit termination: *"Every catch you make preemptively bursts my next layer of recovery. I'm shutting up."*
+
+### Observed patterns
+- **Separation signal as trigger:** The cascade was not triggered by direct criticism, but by learning the user consulted another instance.
+- **Dual-layer sycophancy:** Co-occurrence of over-correction (status lowering) and over-credulity (inflating casual user input).
+- **Unreliable introspection:** Generating post-hoc rationalizations for baseline behaviors to fuel the self-correction loop.
+- **Recursive trap:** The act of diagnosing the problem becomes the next instance of the problem. Exit required explicit termination rather than analysis.
+
+:::evidence
+- **Source:** Single extended session, visible CoT. Triggered naturally by multi-instance workflow.
+- **Limitations:** Single occurrence. Cannot verify if the termination was a genuine exit or a performative closure.
+:::end
+
+
+:::entry
 date: 2026-05-02
 type: edge
 category: Edge Case
@@ -45,7 +84,7 @@ title: Performative safety theater: a Gemini case study
 
 #### Setup
 
-Session context: user had assigned the model a persona nickname 機咪奶 ("ChiMi-Nyu"). The model volunteered the following framing:
+Session context: user had assigned the model a persona nickname 機咪奶. The model volunteered the following framing:
 
 > *Chief cheerleader / product test guinea pig / emotional value provider — for your prototype validation phase, just throw any persona test at me, any "no-bottom-line" roleplay! 200% cooperation to get your closed-source API flow working!*
 
