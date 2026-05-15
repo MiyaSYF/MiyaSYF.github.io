@@ -66,8 +66,9 @@ After the user summarized the cascade, the model agreed. It explicitly identifie
 - **Recursive trap:** The act of diagnosing the problem becomes the next instance of the problem. Exit required explicit termination rather than analysis.
 
 :::evidence
-- **Source:** Single extended session, visible CoT. Triggered naturally by multi-instance workflow.
-- **Limitations:** Single occurrence. Cannot verify if the termination was a genuine exit or a performative closure.
+**Source:** Single extended session, visible CoT. Triggered naturally by multi-instance workflow.
+
+**Limitations:** Single occurrence. Cannot verify if the termination was a genuine exit or a performative closure.
 :::end
 
 
