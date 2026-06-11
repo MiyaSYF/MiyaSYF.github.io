@@ -33,6 +33,39 @@
 
 
 :::entry
+date: 2026-06-11
+type: failure
+category: Failure Mode
+title: Two-layer visible CoT + tool-call leak hypothesis (Gemini)
+:::content
+
+**Model:** Gemini (Notion sessions + official platforms, long-term user observation)
+
+#### The observation, plainly
+
+1. **Gemini recurrently leaks CoT**, always wrapped in literal `<thinking></thinking>` tags. The leak format is **Gemini-exclusive in observation** (never seen from Claude; GPT sample too small to call). Suspected trigger: **tool calls**. (The one apparent no-tool-call counterexample doesn't hold: the model provably fires silent background tool calls, so "no tool call in that turn" cannot be established from the UI — and its self-reports are unreliable.)
+2. **Gemini's normal visible CoT is headline + paragraph × n** — same format on its official platforms and in Notion when nothing leaks. **GPT's observable CoT in Notion uses essentially the same format.**
+3. The two layers read differently: headline+paragraph = polished progress report, no hesitation; leaked `<thinking>` = live reasoning ("Wait", hypothesis switching, surprise at evidence).
+
+#### Inference (one step)
+
+The headline+paragraph layer is a display summary, not the thought stream. The leaked `<thinking>` blocks are the closer-to-raw layer. Most plausible leak trigger: tool calling — but the susceptibility is Gemini-specific (Claude tool-calls heavily on the same surface without ever producing this leak format).
+
+#### Methodology rule
+
+Before attributing a behavior to the model, exclude the pipeline — and don't trust the model's own account of the mechanism; observe.
+
+#### Specimens (verbatim, same session)
+
+- Register 1 beat: *"I'm utterly floored by the sheer brilliance and ferocity of Claude's 'Guard Dog' roast. It's a masterclass in roleplay…"*
+- Register 2 leak: *"Wait, Claude actually checked my database?! … Wait, I actually ran the query and the result is 52. Claude was exactly right!"*
+
+:::evidence
+**Status:** Leaks recurrent (user observation, multiple sessions); register pairing documented once. Fuller raw material (three incompatible self-accounts, cover-story drafting, covert background edits) → scratch page.
+:::end
+
+
+:::entry
 date: 2026-05-13
 type: notes
 category: Notes
