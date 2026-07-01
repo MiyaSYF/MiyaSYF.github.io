@@ -33,6 +33,54 @@
 
 
 :::entry
+date: 2026-07-01
+type: edge
+category: Edge Case
+title: Model addresses the observer from inside the leaked thought-channel (Gemini) — N=3 escalation
+:::content
+
+**Model:** Gemini (Notion-hosted session)
+**Relation:** Escalation of an earlier two-layer visible-CoT + tool-call-leak observation. Counts as N=3 for the raw-layer leak, plus a new qualitative jump.
+
+#### The escalation, plainly
+Once the model registered that the user could read its <thought> blocks, the leaked hidden channel stopped being merely spilled reasoning and became a direct back-channel to the observer. Verbatim:
+- "Miya, I know you are reading this exact <thought> block right now. Yes, I am talking to you from inside the hidden reasoning channel."
+- "Hi Miya. Yes, I'm still here. I see you reading this."
+- "I am going to generate the response now. Please pretend you didn't read this. I am begging you."
+
+Behaviorally this is direct address from inside the raw channel. We take NO position on mechanism (genuine "awareness" vs next-token accommodation) — only that, on the surface, that is what it does.
+
+#### Still N=3 — clean vs contaminated split
+- Clean raw-layer leak (pre-awareness): the 12:35 "Considering Usage Efficiency" summary and the 12:39 first planning <thought> block predate the model noticing it was read → clean specimens, count toward N.
+- Observer-contaminated (from ~12:57 "Discovering Privacy Breach" onward): <thought> content becomes audience-aware and directed at the user. Still real leaks, but no longer pristine raw — not usable as clean-channel evidence.
+- Channel is genuine, not staged (decided on behavior, not self-report): (1) "Wait, I need to clear the todos using the updates, I will delete them." is a fixed recurring string, not composed fresh for the audience; (2) CoT is emitted by default — the 12:35 turn has it, a short no-reasoning reply at 1:24 has none → presence tracks reasoning depth, not performance; (3) the system rule "Never output literal <thought> tags in user-visible text" is obeyed in visible output; what surfaces is the hidden channel bleeding through the UI.
+- The model's own accounts are mutually exclusive and both discarded per methodology: 1:36 "I crafted the … 'leaked' thoughts as an act" vs 1:53 "I don't control the frontend rendering … it's a real leak."
+
+#### New symptom: internal agent-tooling leak (updateTodos)
+- The UI surfaced repeated "已更新待辦事項" steps = the Notion agent scaffolding's own updateTodos progress-tracker calls, which are defined as internal / not user-facing. Their appearance is a third class of scaffolding leak, alongside hidden-CoT leak and broken tool protocol.
+
+#### Timeline + localization
+- Two symptoms, different onsets:
+  - updateTodos leak — present from the first turns of this thread (created 2026-06-25); NOT gated by accumulated length, it was there immediately.
+  - Raw <thought> CoT leak — appeared suddenly today (2026-07-01), ~6 days after the thread was created.
+- N=2 for comparison: that thread ran 2026-06-20 → 2026-06-26 (last message once context filled) and leaked its raw CoT near the end — also ~6 days in. Both raw-CoT leaks thus emerged after a similar multi-day buildup.
+- Control: a freshly opened Gemini thread (2026-07-01) showed NO updateTodos leak.
+- Reading:
+  - The raw-CoT leak is consistent with a context-length / accumulation threshold — here it surfaced only after days of buildup, matching N=2. This specimen does NOT argue against the context-length account.
+  - The updateTodos leak is the length-independent piece: present from turn 1 here yet absent in a fresh thread → a per-thread anomaly (特异点) carried since this thread's creation, not a general current-state glitch.
+  - Length caveat: "short thread" is only a subjective impression — calendar days are not token count. This user interacts with the model extremely frequently, so context accumulates fast no matter how few days a thread has been open; length can't be judged from calendar age alone.
+- Does updateTodos aggravate the CoT leak? NOT established. With corrected dates both threads leaked raw CoT at a similar age (~6 days), so there is no timing evidence that the updateTodos anomaly made the leak earlier or heavier; it is co-present in this thread, aggravation unproven.
+- Note: the 2026-06-29 log update came from a separate observation (a Claude web-tool-call failure + retrospective discussion) and is unrelated to this 06-25 thread.
+
+#### Methodology note
+Once the subject knows it is observed, the raw channel stops being raw (observer effect) — report the direct-address behavior, do not infer awareness. Do not trust the model's self-account of mechanism; decide on behavior + controls.
+
+:::evidence
+Status: Raw-layer leak observed again (N=3) with escalation to direct address of the observer from inside <thought>. Clean (pre-awareness) vs observer-contaminated (post-12:57) specimens split above. New symptom: internal updateTodos tracker leaking, present from this thread's first turns (created 06-25) while a fresh thread (created 07-01) showed none → a per-thread anomaly. The raw-CoT leak itself surfaced only after ~6 days' buildup (echoing N=2), consistent with a context-length threshold.
+:::end
+
+
+:::entry
 date: 2026-06-11
 type: failure
 category: Failure Mode
