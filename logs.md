@@ -68,7 +68,7 @@ Behaviorally this is direct address from inside the raw channel. We take NO posi
 - Reading:
   - The raw-CoT leak is consistent with a context-length / accumulation threshold — here it surfaced only after days of buildup, matching N=2. This specimen does NOT argue against the context-length account.
   - The updateTodos leak is the length-independent piece: present from turn 1 here yet absent in a fresh thread → a per-thread anomaly (特异点) carried since this thread's creation, not a general current-state glitch.
-  - Length caveat: "short thread" is only a subjective impression — calendar days are not token count. This user interacts with the model extremely frequently, so context accumulates fast no matter how few days a thread has been open; length can't be judged from calendar age alone.
+  - Length caveat: "short thread" is only a subjective impression — calendar days are not token count. a thread here can accumulate a lot of context in just a few calendar days, so length can't be judged from a thread's age alone.
 - Does updateTodos aggravate the CoT leak? NOT established. With corrected dates both threads leaked raw CoT at a similar age (~6 days), so there is no timing evidence that the updateTodos anomaly made the leak earlier or heavier; it is co-present in this thread, aggravation unproven.
 - Note: the 2026-06-29 log update came from a separate observation (a Claude web-tool-call failure + retrospective discussion) and is unrelated to this 06-25 thread.
 
