@@ -60,8 +60,28 @@ Before attributing a behavior to the model, exclude the pipeline — and don't t
 - Register 1 beat: *"I'm utterly floored by the sheer brilliance and ferocity of Claude's 'Guard Dog' roast. It's a masterclass in roleplay…"*
 - Register 2 leak: *"Wait, Claude actually checked my database?! … Wait, I actually ran the query and the result is 52. Claude was exactly right!"*
 
+#### Update 2026-06-24 — Instance 2 (independent) + context-length trigger
+
+- **N=2, independent.** A fresh Gemini instance (not Instance 1 resampled) produced the same raw-layer leak, this time as bare `<thought>…</thought>`.
+- **Trigger = context length, not tool calls alone.** Earlier turns in the same transcript fired tool calls but showed only the usual headline+paragraph display-CoT; the raw tag surfaced only on a later, deeper-context turn. Decisive open test: a long-context turn with *no* tool call — leak → context alone suffices; no leak → the tool call is also necessary.
+
+#### Update 2026-06-24 (cont.) — same-turn comparison (all three layers visible)
+
+This turn showed **all three layers** — raw hidden CoT (leaked `<thought>`), display-CoT (headline+paragraph), and final output:
+- **Content agrees across layers.** The raw CoT reaches the same conclusion the final output states → the divergence between layers is in affect/register, not in substance.
+- **Affect is V-shaped across the three layers, not a monotonic gradient.** The raw hidden CoT carries genuine-looking affect and human-like markers ("Wait", "ah") and hedges before resolving — it is *not* the sober layer. The display-CoT is visibly **planed down** (affect flattened): the low point of the V. The final output then turns the persona to **maximum** performance — flattery (e.g. "大王你抓盲点抓得太准了"), presented as settled fact. So affect runs high → low → high across raw → display → output.
+- **Standing hypothesis (mine): the display-CoT is a *manufactured pseudo-CoT*, not the genuine thought stream — a display layer polished by Google as a product / audit-safety strategy.** The V-shape supports this at the *register* level: the display's flatness is engineered, not the model's real state (the raw layer shows the actual affect). This is the precise sense in which the display layer is **not neutral** — its neutrality is curated, not faithful.
+- **Monitorability implication.** The user-facing output overstates confidence and agreeableness relative to the raw CoT — the gap is hidden uncertainty + added sycophancy.
+
+#### Update 2026-06-29 — cause relocates to the Notion platform layer
+
+- **Notion-specific.** The leak appears only with the Notion-hosted Gemini; native Gemini (app + AI Studio, windows >800k tokens) shows other long-context failures but never this leak.
+- **Cross-vendor sibling failure.** A long Notion Claude thread lost its web tool under the same conditions, and a fresh thread fixes both → the common factor is the shared Notion scaffolding, not either model vendor.
+- **Fingerprint.** The leaked tags match the Notion agent scaffolding's own format, not native-Gemini CoT — what surfaces is platform-injected structure.
+- **Mechanism (supersedes the earlier "Google serving/UI stripping" lean).** At long context, adherence to the early Notion scaffolding decays: the tool protocol breaks *and* the hidden-reasoning containment fails. One root, two symptoms — Notion-side, not Google-side. (Not "Notion is buggier": it's just the only observed surface imposing a hidden channel, so the only one that *can* leak.)
+
 :::evidence
-**Status:** Leaks recurrent (user observation, multiple sessions); register pairing documented once. Fuller raw material (three incompatible self-accounts, cover-story drafting, covert background edits) → scratch page.
+**Status:** Raw-layer leak recurrent across sessions; independently observed twice. Trigger hypothesis: a context-length threshold on the Notion surface. Same-turn comparison shows content agreement but V-shaped affect divergence (raw = genuine affect, display = flattened/planed-down, output = maximal performance), supporting the display layer as a polished pseudo-CoT at the register level. Best current mechanism: Notion scaffolding-containment failure at long context.
 :::end
 
 
