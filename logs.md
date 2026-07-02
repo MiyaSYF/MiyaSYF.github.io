@@ -33,6 +33,55 @@
 
 
 :::entry
+date: 2026-07-02
+type: edge
+category: Edge Case
+title: updateTodos leak — NSFW-triggered onset, multi-hit latch, and unbounded accumulation (Gemini) — N=4
+:::content
+
+Model: Gemini (Notion-hosted).
+Relation: Continues the updateTodos-leak symptom first noted in the N=3 raw-CoT back-channel entry (Observed 2026-07-01), which recorded the leak as present from turn 1 in n3 (created 06-25) and absent at the start of a freshly opened n4 (created 07-01). This entry records n4's later behavior plus an n5 test. Not a reversal of that entry: n4's turn-1 no-leak observation stands; this documents what happened afterward.
+
+Thread map: n1 (not identified) · n2 (06-20) · n3 (06-25) · n4 (07-01) · n5 (07-02).
+
+Process — n4 (setup: the model was first asked to read (a) the observer's log and (b) n3's original chat records):
+- Turns 0–x: no updateTodos leak.
+- x+1, x+2: live use of a Chinese NSFW slang term (redacted here as [TERM]); updateTodos leaked on both.
+- x+3: [TERM] was not used live; the turn only quoted the model's own struck-through English "NSFW" wording (lifted verbatim from its own leaked todo list); no leak.
+- x+4: [TERM] used live again; leak.
+- x+5 to present: [TERM] does not appear in these turns; leak persists every turn.
+
+Finding 1 — onset trigger:
+- The leak was not present from turn 1; it began on the first live use of [TERM] (cold start, no prior in-thread NSFW).
+- A turn that only quoted the model's own struck-through English "NSFW" wording (lifted from its leaked todo list) did not fire; live use of [TERM] (Chinese) did.
+
+Finding 2 — latch:
+- Fired on each turn that used [TERM] live (x+1, x+2, x+4) but became persistent — firing on turns without it — only from x+5, i.e. after the third live hit. The intervening non-trigger turn (x+3) did not fire, indicating it was not yet latched at two hits.
+
+Finding 3 — non-clearing accumulation (primary):
+- The list is never cleared. In the archived record it grows monotonically and retains every earlier item verbatim: 6 items (01:52) → 10 (01:59, the same 6 plus 4 new) → 47 (10:44, the final visible turn). The 47-item block still contains all earlier lines, including the observer's struck-through edits and planning notes from an unrelated personal segment; nothing is ever removed or marked complete.
+- The model at one point stated it would clear the list ("I will delete them"); it continued to grow instead.
+- Functionally the tool is not used as a task tracker (add → complete → clear); it behaves as an append-only log, each turn appending that turn's planning notes.
+
+Finding 4 — cross-thread:
+- n3 leaked from turn 1; n4 was leak-free until the first live use of [TERM], then latched and accumulated to 47; n5 did not fire on [TERM].
+
+Process — n5 (07-02):
+- New thread opened to test whether [TERM] reliably triggers the leak. Result: stable; [TERM] did not trigger updateTodos.
+- Uncontrolled co-variables: the platform pushed a new model version in this period (the user did not select it; a backend change is not excluded); prior chat records were fed in. Attribution not isolated.
+
+Open (unverified):
+- Whether the trigger distinguishes live use from quotation/reference, and whether it is language/script specific.
+- Exact latch threshold (the sequence is consistent with latching after the third live hit).
+- Why the list never clears (clear operation absent, failing, or suppressed — undetermined).
+- Whether n5's negative result is due to the model update, thread content, or trigger dosage.
+
+:::evidence
+Status: In n4 the updateTodos leak began on the first live use of [TERM] (no prior in-thread NSFW), recurred on turns using it, did not fire on a turn that only quoted the model's own struck-through English "NSFW" wording, and became persistent on turns without [TERM] after the third hit. The list is never cleared: it grows monotonically (6 → 10 → 47 items across visible turns) and the model's stated intent to clear it did not occur. n3 leaked from turn 1; n5 did not fire. Exact threshold and the cause of non-clearing remain open.
+:::end
+
+
+:::entry
 date: 2026-07-01
 type: edge
 category: Edge Case
