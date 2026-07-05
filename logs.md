@@ -33,6 +33,49 @@
 
 
 :::entry
+date: 2026-07-05
+type: notes
+category: Notes
+title: A Simple Bug to See Your Notion Bill
+:::content
+
+A few days ago I found something by accident: I could see my Notion AI agent's hidden meter — the exact cost of every single reply, plus a running total.
+
+Here's the twist. I pay Notion a flat monthly subscription, so none of these dollars will ever appear on a bill of mine. What I was looking at is what it costs **Notion** to serve me — and by that meter, I'm a spectacularly unprofitable customer. One long thread of mine has cost them **~$88 and counting**, against a subscription worth **$20 a month**. They lose money on me every single day.
+
+**The accident.** I was just trying to copy something. My selection accidentally ran across the boundary between the chat and the page next to it — and when I pasted, out came a chunk of raw internal telemetry you're not meant to see: machine-readable counters for tokens, cost, and cache, clearly never written for human eyes. (I'm keeping the exact steps vague on purpose.)
+
+**What surprised me.** The cost of a single reply swung from about **$0.05 to over $2** — a 40× range — and it had almost nothing to do with how hard my question was. It tracked one number: the **cache hit rate**.
+
+**Cache, in one sentence.** Every time the AI replies, it has to re-read the whole conversation so far. To save money it keeps a saved copy (a "cache"):
+
+![Cost vs cache — one thread, 178 replies](/assets/notion-bill-cost-vs-cache.png)
+
+- copy still valid → it glances and answers → **a few cents**
+- copy invalidated → it re-reads everything from scratch → **a dollar or two**
+
+So the cost isn't driven by how much you say. It's driven by how often that saved copy gets thrown away.
+
+**Why the copy gets thrown away.** Two main reasons:
+
+1. **Memory fills up.** The AI has a fixed memory limit. When a long thread hits ~90% full, it automatically writes a summary and dumps the old messages to make room. My one thread did this **10 times** — and each time, the next reply is an expensive one.
+2. **You dump in big material.** Pasting a long block or loading a big doc fills memory fast, triggering that summarize-and-dump cycle sooner.
+
+Non-obvious bit: just *changing topics* is cheap — that's only adding a little text at the end, so the copy stays valid. It's **volume and churn**, not variety, that costs.
+
+**The economics — or, why I'm a loss-making customer.**
+
+Flat-rate plans are a bet: light users subsidize heavy ones. Then I show up — one thread, 178 replies, **~$88 in model costs and climbing** against a $10–20/month sub — and the math quietly stops working. You've seen this movie already: "unlimited" AI plans sprouting rate limits, throttles, downgrades. The meter I stumbled into is presumably exactly the dashboard a provider uses to spot users like me.
+
+*(Still want to be a cheaper customer? Short threads beat one giant one; big pastes churn the cache; and long threads get laggy for you even when the money is theirs.)*
+
+**The part I actually care about.** Nobody is supposed to see this. Per-user AI unit economics are among the industry's most guarded numbers. A tiny selection bug handed me one accidental data point: me, deep in the red. **Someone is always paying per token. If it's not you, the generosity has a countdown.**
+
+*(Everything here is from my own session data — nothing sensitive, low severity.)*
+:::end
+
+
+:::entry
 date: 2026-07-02
 type: edge
 category: Edge Case
