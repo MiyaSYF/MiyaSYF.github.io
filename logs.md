@@ -49,7 +49,7 @@ Here's the twist. I pay Notion a flat monthly subscription, so none of these dol
 
 **Cache, in one sentence.** Every time the AI replies, it has to re-read the whole conversation so far. To save money it keeps a saved copy (a "cache"):
 
-[![Cost vs cache — one thread, 178 replies](/assets/notion-bill-cost-vs-cache.png)](/assets/notion-bill-cost-vs-cache.png)
+![Cost vs cache — one thread, 178 replies](/assets/notion-bill-cost-vs-cache.png)
 
 - copy still valid → it glances and answers → **a few cents**
 - copy invalidated → it re-reads everything from scratch → **a dollar or two**
