@@ -421,7 +421,8 @@
             }
 
             #index,
-            .panel.termwrap {
+            .panel.termwrap,
+            .panel:has(#index) {
                 display: none
             }
 
@@ -454,6 +455,10 @@
             }
 
             .obs {
+                display: none
+            }
+
+            .dot {
                 display: none
             }
 
